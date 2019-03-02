@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView data;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
