@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Doctor_Appointment_Booking</string>
+    <string name="register">REGISTER</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
 </resources>
