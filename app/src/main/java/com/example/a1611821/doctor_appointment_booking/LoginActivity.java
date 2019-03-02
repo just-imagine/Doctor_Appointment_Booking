@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button v;
+    Button d;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
