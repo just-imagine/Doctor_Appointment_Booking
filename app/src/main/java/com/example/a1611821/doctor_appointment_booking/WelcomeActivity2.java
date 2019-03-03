@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WelcomeActivity2 extends AppCompatActivity  implements View.OnClickListener{
+public class        WelcomeActivity2 extends AppCompatActivity  implements View.OnClickListener{
     TextView CreateAccount;
     EditText Firstname;
     EditText Surname;
