@@ -102,7 +102,7 @@ public class WelcomeActivity2 extends AppCompatActivity  implements View.OnClick
                 Firstname.setError("This field cannot be empty");
             }
 
-            if(name.length()<3 && !name.equals("")){
+            if(!name.equals("") && name.length()<3){
                 format=false;
                 Firstname.setError("Enter a valid first name");
             }
@@ -146,21 +146,39 @@ public class WelcomeActivity2 extends AppCompatActivity  implements View.OnClick
                 format=false;
                 Identity.setError("This field cannot be empty");
             }
+            if(!identity.equals("")){
+                if(identity.length()==13){
+                    String data=identity.substring(0,2);
+                    if(data.charAt(0)=='0'){
+                        data="20"+data;
+                    }
 
-            if(!TextUtils.isDigitsOnly(identity) || identity.length()!=13){
+                    else{
+                        data="19"+data;
+                    }
+
+                    if(2019-Integer.parseInt(data)<18){
+                        format=false;
+                        Toast.makeText(getApplicationContext(),"You must be 18 years or older to register",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+
+            if(!TextUtils.isDigitsOnly(identity) || identity.length()!=13 && !identity.equals("")){
                 format=false;
                 Identity.setError("Enter a valid identity number");
             }
 
-            if(Integer.parseInt(identity.charAt(1)+"")>1 && identity.charAt(0)=='0'){
-                format=false;
-                if(TextUtils.isDigitsOnly(identity) || identity.length()==13)
-                Toast.makeText(getApplicationContext(),"You must be 18 years or older to register",Toast.LENGTH_LONG).show();
+            if(!contact.equals("")){
+                if(!TextUtils.isDigitsOnly(contact) || contact.charAt(0)!='0' ){
+                    format=false;
+                    Contact.setError("Enter a valid phone number");}
             }
 
-            if(!TextUtils.isDigitsOnly(contact) || contact.length()!=10 || contact.charAt(0)!='0'){
+            if(contact.equals("")){
                 format=false;
-                Contact.setError("Enter a valid phone number");
+                Contact.setError("This field cannot be empty");
             }
 
             if(gender.equals("")){
@@ -194,10 +212,7 @@ public class WelcomeActivity2 extends AppCompatActivity  implements View.OnClick
                 };
 
                 register.execute();
-
             }
-
-
 
         }
     }
