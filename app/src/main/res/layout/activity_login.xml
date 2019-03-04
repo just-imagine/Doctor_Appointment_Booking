@@ -14,9 +14,10 @@
     <EditText
         android:id="@+id/username"
         android:layout_width="246dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-
+        android:maxLines="1"
+        android:singleLine="true"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -34,13 +35,13 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="247dp"
-        android:layout_height="63dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/lock"
-        android:drawableRight="@drawable/ic_password"
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,10 +82,11 @@
         android:text="forgot password?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544" />
+        app:layout_constraintVertical_bias="0.526" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,10 +97,10 @@
         android:text="@string/not_registered"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709"
+        app:layout_constraintVertical_bias="0.705"
         tools:layout_conversion_absoluteHeight="35dp"
         tools:layout_conversion_absoluteWidth="99dp" />
 
@@ -115,7 +117,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.771"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.707"
