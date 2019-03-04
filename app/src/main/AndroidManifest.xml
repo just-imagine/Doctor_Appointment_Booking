@@ -21,8 +21,9 @@
         <activity
             android:name=".WelcomeActivity2"
             android:parentActivityName=".LoginActivity" />
-        <activity android:name=".HomeActivity"
-            android:parentActivityName=".LoginActivity"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:parentActivityName=".LoginActivity" />
     </application>
 
 </manifest>
