@@ -2,6 +2,7 @@
 <LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="com.example.a1611821.doctor_appointment_booking.Viewings"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scrollbars="vertical"
     android:orientation="vertical"
@@ -13,14 +14,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            android:text="Month"
-            android:padding="20dp"
-            android:textSize="30sp"
+            android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:padding="20dp"
+            android:text="Month"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -41,6 +42,7 @@
             />
 
         <ImageButton
+
             android:id="@+id/NavigateForwad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +58,7 @@
             app:layout_constraintEnd_toStartOf="@id/NavigateForwad"
             android:textSize="30sp"
             android:text="Week"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -263,7 +266,192 @@
 
             <TextView
 
+                android:id="@+id/M1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/M2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/M3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/M4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/M5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/M6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/M7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/M8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+
+                android:id="@+id/A1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
                 android:id="@+id/D1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/E1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/A2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
@@ -281,7 +469,155 @@
                 android:textSize="20sp"></TextView>
 
             <TextView
+                android:id="@+id/E2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/A3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
                 android:id="@+id/D3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/E3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+
+                android:id="@+id/A4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
@@ -299,7 +635,156 @@
                 android:textSize="20sp"></TextView>
 
             <TextView
+                android:id="@+id/E4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+
+                android:id="@+id/A5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
                 android:id="@+id/D5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/E5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+
+                android:id="@+id/A6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
@@ -317,685 +802,207 @@
                 android:textSize="20sp"></TextView>
 
             <TextView
+                android:id="@+id/E6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+
+                android:id="@+id/A7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
                 android:id="@+id/D7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20sp"
                 android:padding="8dp"
+                android:text="TextView"
                 android:textColor="#000"
-                android:text="TextView">
-            </TextView>
+                android:textSize="20sp"></TextView>
 
+            <TextView
+                android:id="@+id/E7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/F7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/H7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+
+            <TextView
+                android:id="@+id/G7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+        </TableRow>
+
+
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:showDividers="middle"
+            android:divider="@color/colorPrimaryDark">
+
+            <TextView
+
+                android:id="@+id/A8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/B8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/C8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
 
             <TextView
                 android:id="@+id/D8"
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
-
-
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
                 android:text="TextView"
-                android:textColor="#000">
-            </TextView>
-        </TableRow>
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
 
-
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
             <TextView
-
+                android:id="@+id/E8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:textSize="20sp"
                 android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
                 android:textColor="#000"
-                android:text="TextView">
-            </TextView>
+                android:textSize="20sp"></TextView>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
+                android:id="@+id/F8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:textColor="#000"
                 android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
 
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
             <TextView
-
+                android:id="@+id/H8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:textSize="20sp"
                 android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
                 android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
+                android:textSize="20sp"></TextView>
 
 
             <TextView
-                android:textSize="20sp"
+                android:id="@+id/G8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:textColor="#000"
                 android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
-
-
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
                 android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
-
-
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
-
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView"
-                >
-            </TextView>
-        </TableRow>
-
-
-
-        <TableRow
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:showDividers="middle"
-            android:divider="@color/colorPrimaryDark">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textSize="20sp"
-                android:text="TextView"
-                android:textColor="#000"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView"
-                >
-            </TextView>
+                android:textSize="20sp"></TextView>
         </TableRow>
 
     </TableLayout>
