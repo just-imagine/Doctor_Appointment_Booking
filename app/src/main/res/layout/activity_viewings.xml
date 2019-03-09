@@ -260,16 +260,64 @@
             android:layout_height="50dp"
             android:showDividers="middle|end"
             android:divider="@color/colorPrimaryDark">
+
             <TextView
 
+                android:id="@+id/D1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                android:textSize="20sp"
                 android:text="TextView"
-                android:textColor="#000"></TextView>
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
 
             <TextView
+                android:id="@+id/D2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/D3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/D4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/D5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/D6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/D7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
@@ -278,53 +326,9 @@
                 android:text="TextView">
             </TextView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:padding="8dp"
-                android:textColor="#000"
-                android:text="TextView">
-            </TextView>
-
-
-            <TextView
+                android:id="@+id/D8"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -993,17 +997,6 @@
                 >
             </TextView>
         </TableRow>
-
-
-
-
-
-
-
-
-
-
-
 
     </TableLayout>
     </HorizontalScrollView>
