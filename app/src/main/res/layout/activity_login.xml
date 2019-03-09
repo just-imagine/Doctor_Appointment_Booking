@@ -7,7 +7,7 @@
     tools:context="com.example.a1611821.doctor_appointment_booking.LoginActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#1C528d"
+    android:background="#6495ed"
     android:id="@+id/linearLayout2">
 
 
