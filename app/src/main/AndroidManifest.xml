@@ -43,7 +43,8 @@
             android:name=".ChatActivity"
             android:label="CHAT FORUM"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".Viewings"></activity>
     </application>
 
 </manifest>

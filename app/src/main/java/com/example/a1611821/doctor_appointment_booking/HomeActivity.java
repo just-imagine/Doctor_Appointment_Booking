@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startCalendar(View view){
-        startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+        startActivity(new Intent(getApplicationContext(), Viewings.class));
 
     }
 
