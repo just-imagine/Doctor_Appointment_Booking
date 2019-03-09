@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:label="@string/login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +22,28 @@
         </activity>
         <activity
             android:name=".WelcomeActivity2"
+            android:label="CREATE ACCOUNT"
             android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".HomeActivity"
-            android:parentActivityName=".LoginActivity" />
+            android:label="HOME" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="MY PROFILE"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".CalendarActivity"
+            android:label="CALENDAR"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".PrescriptionActivity"
+            android:label="REQUEST PRESCRIPTION"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".ChatActivity"
+            android:label="CHAT FORUM"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".ContactActivity"></activity>
     </application>
 
 </manifest>
