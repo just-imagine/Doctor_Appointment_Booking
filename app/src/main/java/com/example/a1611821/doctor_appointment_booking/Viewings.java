@@ -1,6 +1,7 @@
 package com.example.a1611821.doctor_appointment_booking;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.res.Resources;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +63,61 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
         diag.setContentView(R.layout.dialog_view);
 
 
+        BlockSlots();
+
+    }
+
+    public void BlockSlots(){
+        String releventDate[]=new String[8];
+        int lowerDate=Integer.parseInt(Days[0].getText().toString().split("\\s")[1]);
+        int UpperDate=Integer.parseInt(Days[Days.length-1].getText().toString().split("\\s")[1]);
+        String dateOne;
+        String dateTwo;
+        int monthvalue=getMonthValue();
+
+        if(lowerDate<UpperDate){
+            if(monthvalue<10){
+            dateOne="2019"+"0"+monthvalue+""+lowerDate;
+            dateTwo="2019"+"0"+monthvalue+""+UpperDate;}
+
+            else{
+                dateOne="2019"+""+monthvalue+""+lowerDate;
+                dateTwo="2019"+""+monthvalue+""+UpperDate;
+            }
+        }
+
+        else{
+            if(monthvalue<10){
+            dateOne="20190"+""+monthvalue+""+lowerDate;
+            dateTwo="20190"+""+(monthvalue+1)+""+UpperDate;}
+
+            else{
+                dateOne="2019"+""+monthvalue+""+lowerDate;
+                dateTwo="2019"+""+(monthvalue+1)+""+UpperDate;
+            }
+        }
+
+        ContentValues Params=new ContentValues();
+        Params.put("lower",dateOne);
+        Params.put("Upper",dateTwo);
+
+        AsyncHTTPPost Blocks=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Block.php",Params) {
+            @Override
+            protected void onPostExecute(String output) {
+                System.out.println(output);
+                System.out.println(10);
+                try {
+                    JSONArray results=new JSONArray(output);
+                    System.out.println(output);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        Blocks.execute();
+
+
     }
 
     public void InitializeDays(){
@@ -94,13 +153,13 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
 
 
     public  void InitializeSlots(){
-        Slots=new TextView[64];
+        Slots=new TextView[88];
         Resources r = getResources();
         String name = getPackageName();
         char Letters[] ={'A','B','C','D','E','F','G','H'};
         int counter=0;
         for(int j=0;j<8;++j){
-            for(int i = 1; i <=8; i++) {
+            for(int i = 1; i <=11; i++) {
                 Slots[counter]=(TextView)findViewById(r.getIdentifier(Letters[j]+"" + i, "id", name));
                 ++counter;
             }
@@ -114,6 +173,10 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
                 "December"};
         String month = monthName[calendar.get(Calendar.MONTH)];
         Month.setText(month);
+    }
+
+    public int getMonthValue(){
+        return calendar.get(Calendar.MONTH)+1;
     }
 
 
