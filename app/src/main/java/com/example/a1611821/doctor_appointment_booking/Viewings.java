@@ -19,9 +19,12 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
     TextView Days[];
     TextView Slots[];
     TextView WeekNumbers;
+    TextView Month;
     ImageButton NavigateForwad;
+    ImageButton NavigateBackwards;
     int current,nextdate;
-    int week;
+    int week,currentWeek;
+    int maxdays;
     Dialog diag;
     ArrayList<TextView>ClickableSlots;
 
@@ -30,16 +33,22 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewings);
-
+        Month=(TextView)findViewById(R.id.month);
+        getMonth();
         InitializeSlots();
         InitializeDays();
         current=calendar.get(Calendar.DAY_OF_MONTH);
-        week = calendar.get(Calendar.WEEK_OF_MONTH);
+        week = calendar.get(Calendar.WEEK_OF_MONTH)+1;
+        currentWeek=week;
         nextdate=current;
         NavigateForwad=(ImageButton)findViewById(R.id.NavigateForwad);
+        NavigateBackwards=(ImageButton)findViewById(R.id.NavigateBckwards);
+        NavigateBackwards.setOnClickListener(this);
         NavigateForwad.setOnClickListener(this);
+
+
         WeekNumbers=(TextView)findViewById(R.id.WeekNumber);
-        WeekNumbers.append(" "+calendar.get(Calendar.WEEK_OF_MONTH));
+        WeekNumbers.append(" "+(week));
         for(int i=0;i<Slots.length;++i){
             Slots[i].setText("-");
             Slots[i].setOnClickListener(this);
@@ -59,8 +68,11 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
         String WeekDays[]={"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
         int p =calendar.get(Calendar.DAY_OF_WEEK);
         int d = calendar.get(Calendar.DAY_OF_MONTH);
-        int counter=1;
+
         for(int i=1;i<=8;++i){
+            if(d>calendar.getActualMaximum(Calendar.DAY_OF_MONTH)){
+                d=1;
+            }
             Days[i-1]=(TextView)findViewById(r.getIdentifier("M" + i, "id", name));
 
             if(p==7){
@@ -80,6 +92,7 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
 
     }
 
+
     public  void InitializeSlots(){
         Slots=new TextView[64];
         Resources r = getResources();
@@ -94,33 +107,39 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
         }
     }
 
+    public void getMonth(){
+        String[] monthName = {"January", "February",
+                "March", "April", "May", "June", "July",
+                "August", "September", "October", "November",
+                "December"};
+        String month = monthName[calendar.get(Calendar.MONTH)];
+        Month.setText(month);
+    }
+
 
 
     @Override
     public void onClick(View v) {
         if(v.equals(NavigateForwad)){
-
-
             String WeekDays[]={"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
             int p =calendar.get(Calendar.DAY_OF_WEEK);
-            week++;
-            WeekNumbers.setText("Week " + week);
 
-            if(week>4){
-                WeekNumbers.setText("Week " + (week-1));
-                NavigateForwad.setClickable(false);
-            }
+
+
+            if( week<5){
+                week++;
+                WeekNumbers.setText("Week " + (week));
+
             nextdate=nextdate+7;
             int temp=nextdate;
             if(nextdate>calendar.getActualMaximum(Calendar.DAY_OF_MONTH)){
                 nextdate=1;
-
+                temp=1;
             }
 
             for(int i = 1; i <= 8;i++){
                 if(temp>calendar.getActualMaximum(Calendar.DAY_OF_MONTH)){
                     temp=1;
-
                 }
                 if(p==7){
                     Days[i-1].setText(WeekDays[p-1] + " "+ temp);
@@ -132,12 +151,45 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
                     Days[i-1].setText(WeekDays[p-1] + " " + temp);
                     temp++;
                     ++p;
+                }}
+
+
+            }}
+
+
+
+    else if(v.equals(NavigateBackwards)){
+            String WeekDays[]={"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
+            int p =calendar.get(Calendar.DAY_OF_WEEK);
+
+            if(week>calendar.get(Calendar.WEEK_OF_MONTH)+1){
+                --week;
+                WeekNumbers.setText("Week " + (week));
+                nextdate=nextdate-7;
+                int temp=nextdate;
+                if(nextdate>calendar.getActualMaximum(Calendar.DAY_OF_MONTH)){
+                    nextdate=1;
                 }
+                for(int i = 1; i <= 8;i++){
+                    if(temp>calendar.getActualMaximum(Calendar.DAY_OF_MONTH)){
+                        temp=1;
+                    }
+                    if(p==7){
+                        Days[i-1].setText(WeekDays[p-1] + " "+ temp);
+                        p=1;
+                        ++temp;
+                    }
 
+                    else{
+                        Days[i-1].setText(WeekDays[p-1] + " " + temp);
+                        temp++;
+                        ++p;
+                    }
 
+                }
             }
 
-    }
+            }
 
     else if(ClickableSlots.contains(v)){
             diag.show();

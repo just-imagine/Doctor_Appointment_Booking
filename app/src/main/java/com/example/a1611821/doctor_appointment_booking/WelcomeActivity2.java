@@ -202,6 +202,7 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
                     protected void onPostExecute(String output) {
                         String d="";
                         if(output.equals("success")){
+                            Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                         else if(output.equals("Account already exist")){

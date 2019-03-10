@@ -5,10 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.a1611821.doctor_appointment_booking.HomeActivity"
-    android:background="#1C528d"
+
     android:orientation="vertical"
     android:gravity="center_vertical">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -25,12 +32,13 @@
             <LinearLayout
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="#fff"
+
                 android:padding="7dp"
                 android:orientation="vertical"
                 android:onClick="startProfile">
 
                 <ImageView
+                    android:padding="10dp"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
@@ -55,7 +63,7 @@
             <LinearLayout
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="#fff"
+
                 android:padding="7dp"
                 android:orientation="vertical"
                 android:onClick="startCalendar">
@@ -70,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CALENDAR"
+                    android:text="BOOKINGS"
                     android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
@@ -92,7 +100,7 @@
             <LinearLayout
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="#fff"
+
                 android:padding="7dp"
                 android:orientation="vertical"
                 android:onClick="startPrescriptions">
@@ -122,10 +130,10 @@
             <LinearLayout
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="#fff"
+
                 android:padding="7dp"
                 android:orientation="vertical"
-                android:onClick="startChat">
+                >
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -137,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FORUM"
+                    android:text="NOTIFICATIONS"
                     android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
@@ -159,10 +167,10 @@
             <LinearLayout
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="#fff"
+
                 android:padding="7dp"
                 android:orientation="vertical"
-                android:onClick="startProfile">
+                >
 
                 <ImageView
                     android:layout_width="100dp"
@@ -189,10 +197,9 @@
             <LinearLayout
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="#fff"
                 android:padding="7dp"
                 android:orientation="vertical"
-                android:onClick="startCalendar">
+                >
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -209,14 +216,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:onClick="startLogout"/>
+
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>
