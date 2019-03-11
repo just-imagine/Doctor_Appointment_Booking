@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Doctor_Appointment_Booking</string>
+    <string name="register">REGISTER</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/t"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="What would you like to do?"
+
+        />
+
+    <Button
+        android:id="@+id/book"
+        android:text="Book Slot"
+        app:layout_constraintTop_toBottomOf="@id/t"
+        app:layout_constraintRight_toLeftOf="@id/cancel"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:text="Cancel Booking"
+        app:layout_constraintTop_toBottomOf="@id/t"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/book"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+</android.support.constraint.ConstraintLayout>
