@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.res.Resources;
 
+import android.graphics.Color;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,9 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -31,6 +35,8 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
     int maxdays;
     Dialog diag;
     ArrayList<TextView>ClickableSlots;
+    ArrayList<TextView>UnClickableSlots;
+
 
     Calendar calendar = Calendar.getInstance();
     @Override
@@ -49,12 +55,12 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
         NavigateBackwards=(ImageButton)findViewById(R.id.NavigateBckwards);
         NavigateBackwards.setOnClickListener(this);
         NavigateForwad.setOnClickListener(this);
-
+        UnClickableSlots=new ArrayList<>();
 
         WeekNumbers=(TextView)findViewById(R.id.WeekNumber);
         WeekNumbers.append(" "+(week));
+        int time=8;
         for(int i=0;i<Slots.length;++i){
-            Slots[i].setText("-");
             Slots[i].setOnClickListener(this);
         }
 
@@ -62,7 +68,8 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
         diag = new Dialog(this);
         diag.setContentView(R.layout.dialog_view);
 
-
+        AdvancedSlots t=new AdvancedSlots(Days,Slots);
+        t.Assign();
         BlockSlots();
 
     }
@@ -105,13 +112,46 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
             @Override
             protected void onPostExecute(String output) {
                 System.out.println(output);
-                System.out.println(10);
+                ArrayList<String>Indexes=new ArrayList<>();
                 try {
                     JSONArray results=new JSONArray(output);
-                    System.out.println(output);
+                    for(int i=0;i<results.length();++i){
+
+                        JSONObject obj=results.getJSONObject(i);
+                        String date=obj.get("DATE").toString().split("-")[2];
+                        String time=obj.get("TIME").toString().split(":")[0];
+                        String data="";
+
+                        if(time.charAt(0)=='0'){
+                            time=""+time.charAt(1);
+                        }
+
+                        data=date+time;
+                        Indexes.add(data);
+
+                    }
+
+                    for(int i=0;i<Slots.length;++i){
+                        if(Slots[i].getText().toString().contains(",")){
+                        System.out.println(Slots[i].getText().toString());
+                        String Form=Slots[i].getText().toString().split(",")[1];
+                        if(Indexes.contains(Form)){
+                            Slots[i].setBackgroundColor(Color.CYAN);
+                            Slots[i].setText("Unavailable");
+                            UnClickableSlots.add(Slots[i]);
+                            ClickableSlots.remove(Slots[i]);
+                        }
+
+                        else{
+                            Slots[i].setText("Available");
+                        }}
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
 
             }
         };
@@ -214,7 +254,15 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
                     Days[i-1].setText(WeekDays[p-1] + " " + temp);
                     temp++;
                     ++p;
-                }}
+                }
+
+              /*  AdvancedSlots t=new AdvancedSlots(Days,Slots);
+                t.Assign();
+                BlockSlots();*/
+
+
+            }
+
 
 
             }}
@@ -248,6 +296,10 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
                         temp++;
                         ++p;
                     }
+
+                    AdvancedSlots t=new AdvancedSlots(Days,Slots);
+                    t.Assign();
+                    BlockSlots();
 
                 }
             }
