@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.Toast;
-=======
->>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startCalendar(View view){
-<<<<<<< HEAD
+
 
         Intent Bookings=(new Intent(getApplicationContext(), Viewings.class));
         String username=getIntent().getStringExtra("Username");
@@ -31,9 +29,9 @@ public class HomeActivity extends AppCompatActivity {
         Bookings.putExtra("Username",username);
         Bookings.putExtra("Identity",Identity);
         startActivity(Bookings);
-=======
+
         startActivity(new Intent(getApplicationContext(), Viewings.class));
->>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
+
 
     }
 
