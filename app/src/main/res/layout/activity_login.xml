@@ -114,6 +114,7 @@
         android:onClick="_register"
         android:paddingLeft="3dp"
         android:text="@string/register"
+        android:id="@+id/Registration"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
