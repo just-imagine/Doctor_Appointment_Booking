@@ -10,12 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
 
     Button Login;
     EditText Username;
     EditText Password;
-    String h="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username=Username.getText().toString();
+                final String username=Username.getText().toString();
                 String password=Password.getText().toString();
                 ContentValues Params=new ContentValues();
                 Params.put("USERNAME",username);
@@ -36,13 +39,32 @@ public class LoginActivity extends AppCompatActivity {
                 AsyncHTTPPost SignIn=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Login.php",Params) {
                     @Override
                     protected void onPostExecute(String output) {
-                        if(output.equals("success")){
-                            Intent HomeActivity=new Intent(getApplicationContext(),HomeActivity.class);
-                            startActivity(HomeActivity);
-                        }
+                        String form[]=output.split(",");
+                        String identity="";
+                        try {
+                            JSONArray result=new JSONArray(output);
+                            for(int i=0;i<result.length();++i){
+                                JSONObject obj=result.getJSONObject(i);
+                                identity=obj.getString("ID_NUMBER");
+                            }
 
-                        else if(output.equals("unsuccessful")){
-                            Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();
+                            if(!identity.equals("")){
+                                Intent HomeActivity=new Intent(getApplicationContext(),HomeActivity.class);
+                                HomeActivity.putExtra("Username",username);
+                                HomeActivity.putExtra("Identity",identity);
+                                startActivity(HomeActivity);
+                            }
+                        } catch (JSONException e) {
+                             if(output.equals("unsuccessful")){
+                                Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();}
+
+                              else if(output.equals("")){
+                                     Toast.makeText(getApplicationContext(),"connection error, check your internet connection",Toast.LENGTH_SHORT).show();
+                                 }
+                                  e.printStackTrace();
+
+
+
                         }
 
                     }

@@ -2,12 +2,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="wrap_content"
+=======
+    android:layout_height="match_parent"
+>>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
     android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:textStyle="bold"
         android:id="@+id/t"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
@@ -15,15 +18,23 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
         android:layout_marginRight="8dp"
         android:layout_marginBottom="156dp"
         android:text="What would you like to do?"
         android:textSize="20dp"
+<<<<<<< HEAD
         android:textColor="#000"
+=======
+>>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
          />
 
 
@@ -43,9 +54,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.673" />
+=======
+        app:layout_constraintVertical_bias="0.053" />
+>>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
 
     <Button
-        android:paddingTop="10dp"
         android:id="@+id/book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +67,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="216dp"
         android:layout_marginRight="216dp"
+<<<<<<< HEAD
         android:layout_marginBottom="8dp"
         android:text="Book Slot"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,13 +75,23 @@
         app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.497" />
+=======
+        android:layout_marginBottom="512dp"
+        android:text="Book Slot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.785" />
+>>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
 
     <Button
-        android:paddingTop="10dp"
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -78,28 +102,26 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintHorizontal_bias="0.874"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
-
-    <TextView
-        android:id="@+id/details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        app:layout_constraintVertical_bias="0.497" />
+=======
+        android:layout_marginStart="184dp"
+        android:layout_marginLeft="184dp"
         android:layout_marginTop="8dp"
+
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="19sp"
-        android:textColor="#000"
+        android:layout_marginBottom="352dp"
+        android:text="Cancel Booking"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintLeft_toRightOf="@id/book"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443" />
+        app:layout_constraintVertical_bias="0.352" />
+>>>>>>> 18523281a9e135acc8ec2d4b45cf212b34d74a81
 
 </android.support.constraint.ConstraintLayout>
