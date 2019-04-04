@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -410,6 +411,22 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
             String instruction=clicked.getText().toString();
 
             if(instruction.equals("Available")){
+
+
+                TextView Details=(TextView)Book.findViewById(R.id.details);
+                Date date1=new Date();
+                try {
+                     date1=new SimpleDateFormat("yyyyMMdd").parse(highlightDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String form=""+date1;
+                if(Integer.parseInt(globalTime.substring(0,2))<12)
+                Details.setText("\n"+"TIME - "+globalTime.substring(0,2)+":00 AM"+"\n\n"+"DATE - "+form.substring(0,10));
+
+                else{
+                    Details.setText("\n"+"TIME - "+globalTime.substring(0,2)+":00 PM"+"\n\n"+"DATE - "+form.substring(0,10));
+                }
                 Book.show();
             }
 
@@ -424,12 +441,26 @@ public class Viewings extends AppCompatActivity implements  View.OnClickListener
             Params.put("TIME",globalTime);
             Params.put("DATE",highlightDate);
 
+
+
             AsyncHTTPPost booking=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/BookSlot.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
+                    String h="";
                     if(output.equals("success")){
                         Toast.makeText(getApplicationContext(),"Booking successfull",Toast.LENGTH_SHORT).show();
                         AssigntimeSlots(highlightDate);
+                        Book.dismiss();
+                    }
+
+                    else if(output.equals("already booked")){
+                        Toast.makeText(getApplicationContext(),"unsuccesfull,you already have an appointment for today",Toast.LENGTH_SHORT).show();
+                        Book.dismiss();
+                    }
+
+                    else if(output.equals("taken")){
+                        AssigntimeSlots(highlightDate);
+                        Toast.makeText(getApplicationContext(),"unsuccesfull,slot taken",Toast.LENGTH_SHORT).show();
                         Book.dismiss();
                     }
 

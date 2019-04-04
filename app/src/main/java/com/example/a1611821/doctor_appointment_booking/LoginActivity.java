@@ -55,13 +55,13 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(HomeActivity);
                             }
                         } catch (JSONException e) {
-                            if(output.equals("unsuccessful")){
+                             if(output.equals("unsuccessful")){
                                 Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();}
 
-                            else if(output.equals("")){
-                                Toast.makeText(getApplicationContext(),"connection error, check your internet connection",Toast.LENGTH_SHORT).show();
-                            }
-                            e.printStackTrace();
+                              else if(output.equals("")){
+                                     Toast.makeText(getApplicationContext(),"connection error, check your internet connection",Toast.LENGTH_SHORT).show();
+                                 }
+                                  e.printStackTrace();
 
 
 
@@ -78,5 +78,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), WelcomeActivity2.class));
 
     }
-
+   
 }

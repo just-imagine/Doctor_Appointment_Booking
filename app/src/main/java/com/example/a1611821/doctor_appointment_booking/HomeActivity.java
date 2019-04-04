@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -22,16 +21,12 @@ public class HomeActivity extends AppCompatActivity {
 
     public void startCalendar(View view){
 
-
         Intent Bookings=(new Intent(getApplicationContext(), Viewings.class));
         String username=getIntent().getStringExtra("Username");
         String Identity=getIntent().getStringExtra("Identity");
         Bookings.putExtra("Username",username);
         Bookings.putExtra("Identity",Identity);
         startActivity(Bookings);
-
-        startActivity(new Intent(getApplicationContext(), Viewings.class));
-
 
     }
 
