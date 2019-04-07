@@ -58,6 +58,7 @@ public class DailyView extends AppCompatActivity
     String clickedtime="";
     LinearLayout Master;
     int currentX,currentY;
+    String IDentity;
 
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -116,7 +117,7 @@ public class DailyView extends AppCompatActivity
         setTitle(MonthOfYear+" "+checked_date.substring(0,4));
         TimeSlots=new ArrayList<>();
         PopulateView();
-        DailySchedule(current_date);
+        DailySchedule(checked_date);
         booking=new Dialog(this);
         booking.setContentView(R.layout.dialog_booking);
 
@@ -134,6 +135,8 @@ public class DailyView extends AppCompatActivity
         });
         currentX=UpdateData.getScrollX();
         currentY=UpdateData.getScrollY();
+
+        IDentity=getIntent().getStringExtra("Identity");
     }
 
     @Override
@@ -445,7 +448,7 @@ public class DailyView extends AppCompatActivity
         ContentValues Params=new ContentValues();
         Params.put("DATE",date);
 
-        if(current_val-checked_val<=0){
+        if(true){
         AsyncHTTPPost Schedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationSearch.php",Params) {
             @Override
             protected void onPostExecute(String output) {
@@ -462,7 +465,7 @@ public class DailyView extends AppCompatActivity
                         String Time=obj.getString("TIME").substring(0,5);
                         int State=obj.getInt("STATE");
                         Booking temp=new Booking(Name,Surname,Identity,Contact,Email,Date,Time,State);
-                        temp.setCurrentUser("9802155302086");
+                        temp.setCurrentUser(IDentity);
                         Bookings.add(temp);
                     }
 
@@ -563,7 +566,7 @@ public class DailyView extends AppCompatActivity
         ContentValues Params=new ContentValues();
         Params.put("DATE",checked_date);
         Params.put("TIME",clickedtime);
-        Params.put("ID_NUMBER","9802155302086");
+        Params.put("ID_NUMBER",IDentity);
 
         AsyncHTTPPost bookslot=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
             @Override

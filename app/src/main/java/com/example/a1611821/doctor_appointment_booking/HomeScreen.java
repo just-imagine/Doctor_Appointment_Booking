@@ -46,6 +46,7 @@ public class HomeScreen extends AppCompatActivity
     String MonthOfYear;
     String globalDate;
     String globalDateDay;
+    String Identity;
     ImageView display;
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -124,6 +125,7 @@ public class HomeScreen extends AppCompatActivity
                 DailyView.putExtra("Month",Long.substring(4,8).trim());
                 DailyView.putExtra("Current",current_date);
                 DailyView.putExtra("Checked",checked_date);
+                DailyView.putExtra("Identity",Identity);
                 startActivity(DailyView);
             }
         });
@@ -155,6 +157,7 @@ public class HomeScreen extends AppCompatActivity
         });
         toolbar.setTitleTextColor(Color.BLACK);
         setTitle(Index(MonthOfYear)+" "+checked_date.substring(0,4));
+        Identity=getIntent().getStringExtra("Identity");
     }
 
     @Override
@@ -204,6 +207,7 @@ public class HomeScreen extends AppCompatActivity
             DailyView.putExtra("Month",MonthOfYear);
             DailyView.putExtra("Current",current_date);
             DailyView.putExtra("Checked",checked_date);
+            DailyView.putExtra("Identity",Identity);
             startActivity(DailyView);
 
 
