@@ -31,7 +31,7 @@
 
         </activity>
 
-        
+
         <activity
             android:name=".WelcomeActivity2"
             android:label="CREATE ACCOUNT"

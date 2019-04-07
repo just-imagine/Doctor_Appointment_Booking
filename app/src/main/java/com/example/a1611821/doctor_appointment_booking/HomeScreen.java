@@ -148,7 +148,9 @@ public class HomeScreen extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-               // Calendar.setDate(rebase);
+                Calendar.setSelectedDate(FirstHighlight);
+                Calendar.setCurrentDate(FirstHighlight);
+                checked_date=current_date;
             }
         });
         toolbar.setTitleTextColor(Color.BLACK);
