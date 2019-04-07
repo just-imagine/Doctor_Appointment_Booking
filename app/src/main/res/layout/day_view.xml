@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/master"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:background="@drawable/circle"
+                    android:layout_marginTop="59dp"
+                    android:layout_marginLeft="18.25dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:text="FRI\n5"
+                    android:id="@+id/weekDay"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <FrameLayout
+                    android:layout_marginLeft="12dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"/>
+
+                <ImageView
+                    android:id="@+id/dayDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleX="2.1"/>
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        />
+
+
+    <ScrollView
+        android:id="@+id/Update"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/col"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/sample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                app:cardCornerRadius="2dp"
+                >
+
+
+
+                <LinearLayout
+                    android:id="@+id/l"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+
+                        android:textAlignment="center"
+                        android:id="@+id/slotOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="08:00 AM"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
+
+                    <FrameLayout
+                        android:id="@+id/verticaldiv"
+                        android:layout_marginLeft="12dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:onClick="PopUp"
+                        android:id="@+id/g"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="6dp"
+                        android:padding="12dp"
+                        android:text="Slot"
+
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toEndOf="@id/slotOne" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@android:color/darker_gray"
+                    />
+
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+</LinearLayout>

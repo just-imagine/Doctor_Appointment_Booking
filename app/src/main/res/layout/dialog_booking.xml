@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+
+
+                android:drawableLeft="@mipmap/ic_event"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:text="CONSULTATION"
+                android:id="@+id/weekDay"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:id="@+id/timedetails"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@mipmap/ic_account"
+                    android:textSize="18sp"
+                    android:id="@+id/doc"
+                    android:textColor="#000"
+                    android:text="Doctor. F. Made"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:text="dr.f.made@gmail.com"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@mipmap/ic_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="@android:color/darker_gray"
+                    />
+                <LinearLayout
+                    android:id="@+id/pop"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:drawableLeft="@mipmap/ic_checkout"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:text="Book Slot"
+                        android:onClick="BookSlot"
+                        android:id="@+id/bookslot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                    <FrameLayout
+                        android:id="@+id/verticaldiv"
+                        android:layout_marginLeft="12dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent"/>
+
+                    <TextView
+                        android:id="@+id/cancel"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:drawableLeft="@mipmap/ic_cancel"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        android:text="Cancel"
+                        android:onClick="CancelSlot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>
+

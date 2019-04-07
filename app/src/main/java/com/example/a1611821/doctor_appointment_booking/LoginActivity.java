@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             if(!identity.equals("")){
-                                Intent HomeActivity=new Intent(getApplicationContext(),HomeActivity.class);
+                                Intent HomeActivity=new Intent(getApplicationContext(),HomeScreen.class);
                                 HomeActivity.putExtra("Username",username);
                                 HomeActivity.putExtra("Identity",identity);
                                 startActivity(HomeActivity);

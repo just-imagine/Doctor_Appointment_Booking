@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+
+        <LinearLayout
+            android:id="@+id/viewOne"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:elevation="0dp"
+                app:layout_constraintBottom_toTopOf="@id/thing"
+                app:layout_constraintHorizontal_bias="0.33"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleX="1.6"
+                    android:src="@drawable/april"
+                    android:id="@+id/display"
+                    />
+
+
+
+            </android.support.v7.widget.CardView>
+            <LinearLayout
+                android:id="@+id/Linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/thing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mcv_showOtherDates="all"
+                    app:mcv_tileHeight="50dp"
+                    app:mcv_selectionColor="@color/colorAccent"
+                    />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
