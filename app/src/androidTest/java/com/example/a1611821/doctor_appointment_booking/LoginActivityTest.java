@@ -43,7 +43,8 @@ public class LoginActivityTest {
         assertNotNull(passwordView);
 
     }
-    @Test
+
+    //@Test
     public void Login(){
         //input login details
         onView(withId(R.id.username)).perform(typeText("nkambule773@gmail.com"));
