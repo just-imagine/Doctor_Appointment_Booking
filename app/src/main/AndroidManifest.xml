@@ -9,48 +9,35 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Just Imagine Client"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/login">
+            android:label="Just Imagine Client">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".DailyView"
+            android:label="@string/title_activity_daily_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".HomeScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
         <activity
             android:name=".WelcomeActivity2"
             android:label="CREATE ACCOUNT"
             android:parentActivityName=".LoginActivity" />
-        <activity
-            android:name=".HomeActivity"
-            android:label="HOME"
-            android:launchMode="singleTop"
-            />
-        <activity
-            android:name=".ProfileActivity"
-            android:label="MY PROFILE"
-            android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".CalendarActivity"
-            android:label="CALENDAR"
-            android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".PrescriptionActivity"
-            android:label="REQUEST PRESCRIPTION"
-            android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".ChatActivity"
-            android:label="CHAT FORUM"
-            android:parentActivityName=".HomeActivity" />
-        <activity android:name=".ContactActivity" />
-        <activity android:name=".Viewings"
-            android:label="Bookings"
-            android:parentActivityName=".HomeActivity"></activity>
     </application>
 
 </manifest>

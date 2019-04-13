@@ -25,13 +25,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertNotNull;
 public class LoginActivityTest {
     @Rule
-    public ActivityTestRule<LoginActivity>mActivityTestRule= new ActivityTestRule<LoginActivity>(LoginActivity.class);
+    public ActivityTestRule<LoginActivity> mActivityTestRule= new ActivityTestRule<LoginActivity>(LoginActivity.class);
 
     private LoginActivity mActivity= null;
-    Instrumentation.ActivityMonitor monitor= getInstrumentation().addMonitor(HomeActivity.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor= getInstrumentation().addMonitor(HomeScreen.class.getName(),null,false);
     Instrumentation.ActivityMonitor monitorReg= getInstrumentation().addMonitor(WelcomeActivity2.class.getName(),null,false);
 
     @Before
@@ -53,18 +53,19 @@ public class LoginActivityTest {
     }
     @Test
     public void login(){
+
         //input login details
-        onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
+        onView(withId(R.id.username)).perform(typeText("nkambule773@gmail.com"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.password)).perform(typeText("afterlife"));
+        onView(withId(R.id.password)).perform(typeText("123456"));
         //close keyboard
         Espresso.closeSoftKeyboard();
         //perform button click
         onView(withId(R.id.login)).perform(click());
-        Activity HomeActivity =getInstrumentation().waitForMonitorWithTimeout(monitor,5000);
-        assertNotNull(HomeActivity);
-        HomeActivity.finish();
+        Activity HomeActivit =getInstrumentation().waitForMonitorWithTimeout(monitor,5000);
+        assertNotNull(HomeActivit);
+        HomeActivit.finish();
 
     }
     @Test
