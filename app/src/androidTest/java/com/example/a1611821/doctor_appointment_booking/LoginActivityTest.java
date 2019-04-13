@@ -2,10 +2,13 @@ package com.example.a1611821.doctor_appointment_booking;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,7 +18,11 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 public class LoginActivityTest {
@@ -44,7 +51,7 @@ public class LoginActivityTest {
 
     }
     @Test
-    public void Login(){
+    public void login(){
         //input login details
         onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
         //close keyboard
@@ -58,6 +65,42 @@ public class LoginActivityTest {
         assertNotNull(HomeActivity);
         HomeActivity.finish();
 
+    }
+    @Test
+    public void testForIncorrentUSer(){
+        onView(withId(R.id.username)).perform(typeText("tyfvedfhvjhv"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.password)).perform(typeText("rfjrfgikgf"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        //perform button click
+        onView(withId(R.id.login)).perform(click());
+        LoginActivity activity = mActivityTestRule.getActivity();
+        onView(withText("Check your username and password")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
+
+    }
+    @Test
+    public void testInternetConnectivity(){
+        WifiManager wifi = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
+        wifi.setWifiEnabled(false);
+        onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.password)).perform(typeText("afterlife"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        //perform button click
+        onView(withId(R.id.login)).perform(click());
+        LoginActivity activity = mActivityTestRule.getActivity();
+        onView(withText("connection error, check your internet connection")).
+                inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
+        wifi.setWifiEnabled(true);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     public void RegisterPage(){
