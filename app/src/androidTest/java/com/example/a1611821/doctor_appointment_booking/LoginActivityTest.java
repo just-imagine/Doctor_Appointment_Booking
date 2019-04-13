@@ -3,6 +3,7 @@ package com.example.a1611821.doctor_appointment_booking;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
@@ -80,10 +81,11 @@ public class LoginActivityTest {
         onView(withText("Check your username and password")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
-    @Test
+    //@Test
     public void testInternetConnectivity(){
         WifiManager wifi = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(false);
+
         onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
         //close keyboard
         Espresso.closeSoftKeyboard();
