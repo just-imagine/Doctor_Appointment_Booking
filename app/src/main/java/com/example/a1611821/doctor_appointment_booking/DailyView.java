@@ -443,8 +443,6 @@ public class DailyView extends AppCompatActivity
     public void DailySchedule(String date){
 
         Bookings.clear();
-        int current_val= Integer.parseInt(current_date);
-        int checked_val=Integer.parseInt(checked_date);
         ContentValues Params=new ContentValues();
         Params.put("DATE",date);
 
