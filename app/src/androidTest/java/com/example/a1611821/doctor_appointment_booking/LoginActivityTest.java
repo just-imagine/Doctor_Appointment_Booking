@@ -1,5 +1,6 @@
 package com.example.a1611821.doctor_appointment_booking;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
@@ -8,6 +9,9 @@ import android.net.wifi.WifiManager;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
+
+import com.linkedin.android.testbutler.TestButler;
+
 
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
@@ -86,7 +90,6 @@ public class LoginActivityTest {
     public void testInternetConnectivity(){
         WifiManager wifi = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(false);
-
         onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
         //close keyboard
         Espresso.closeSoftKeyboard();
@@ -99,6 +102,7 @@ public class LoginActivityTest {
         onView(withText("connection error, check your internet connection")).
                 inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
         wifi.setWifiEnabled(true);
+        TestButler.setGsmState(true);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
