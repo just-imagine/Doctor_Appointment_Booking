@@ -2,6 +2,7 @@ package com.example.a1611821.doctor_appointment_booking;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,11 +34,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class DailyView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     Intent m;
     LinearLayout Items;
     TextView time;
@@ -59,7 +63,8 @@ public class DailyView extends AppCompatActivity
     LinearLayout Master;
     int currentX,currentY;
     String IDentity;
-
+    ProgressDialog dialog;
+    boolean state=false;
 
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -125,18 +130,21 @@ public class DailyView extends AppCompatActivity
         Cancel =(TextView)booking.findViewById(R.id.cancel);
         UpdateData =(ScrollView)findViewById(R.id.Update);
 
+
         UpdateData.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 currentX=scrollX;
                 currentY=scrollY;
-                DailySchedule(checked_date);
+
+                    DailySchedule(checked_date);
             }
         });
         currentX=UpdateData.getScrollX();
         currentY=UpdateData.getScrollY();
 
         IDentity=getIntent().getStringExtra("Identity");
+        dialog = new ProgressDialog(this);
     }
 
     @Override
@@ -158,12 +166,9 @@ public class DailyView extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -171,10 +176,11 @@ public class DailyView extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_schedule) {
@@ -192,14 +198,15 @@ public class DailyView extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
-    public void  Display(String input){
+    public void  Display(String Month){
 
-        if(!input.equals("")){
+        //this method is used to get the relevant picture to  the imageview in the calendar
 
-            String Month=input;
+        if(!Month.equals("")){
 
             if(Month.equals("Apr")){
                 display.setImageResource(R.drawable.april);
@@ -247,7 +254,6 @@ public class DailyView extends AppCompatActivity
 
             else{
                 display.setImageResource(R.drawable.december);}
-
 
         }
     }
@@ -298,7 +304,8 @@ public class DailyView extends AppCompatActivity
                 Time=Time+" PM";
             }
 
-            //have one version of cardview with textview then duplicate its layout
+            //this method uses the existing cardview in the xml that has only one time slot
+            //the existing timeslot attributes and are copied and used to create new timeslots
 
             CardView cardView=new CardView(this);
             LinearLayout temp=new LinearLayout(this);
@@ -335,12 +342,10 @@ public class DailyView extends AppCompatActivity
 
             //note setting hint is used as way of keeping track of which textview belongs to which time
 
-            //more than a week ago old data pointless
 
             View c=new View(this);
             c.setLayoutParams(Divider.getLayoutParams());
             c.setBackgroundColor(Color.LTGRAY);
-
 
             FrameLayout d=new FrameLayout(this);
             d.setBackgroundColor(Color.LTGRAY);
@@ -353,7 +358,8 @@ public class DailyView extends AppCompatActivity
             cardView.addView(temp);
             Items.addView(cardView);
             value=value+15;
-            //set onclicklistener for all the textviews
+
+            //set onclicklistener for all the textviews that will appear
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -365,8 +371,8 @@ public class DailyView extends AppCompatActivity
         }
 
         if(Slot.getText().toString().equals("")){
-         Slot.setText("Free");
-         Slot.setBackgroundColor(Color.parseColor("#008577"));
+            Slot.setText("Free");
+            Slot.setBackgroundColor(Color.parseColor("#008577"));
         }
 
         Slot.setHintTextColor(Color.TRANSPARENT);
@@ -393,7 +399,7 @@ public class DailyView extends AppCompatActivity
     public  int Index(String x){
 
         if(x.equals("Apr")){
-           return  3;
+            return  3;
         }
 
         else if(x.equals("Mar")){
@@ -443,46 +449,53 @@ public class DailyView extends AppCompatActivity
     public void DailySchedule(String date){
 
         Bookings.clear();
-        int current_val= Integer.parseInt(current_date);
-        int checked_val=Integer.parseInt(checked_date);
+
+
         ContentValues Params=new ContentValues();
         Params.put("DATE",date);
 
         if(true){
-        AsyncHTTPPost Schedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationSearch.php",Params) {
-            @Override
-            protected void onPostExecute(String output) {
-                try {
-                    JSONArray results=new JSONArray(output);
-                    for(int i=0;i<results.length();++i){
-                        JSONObject obj=results.getJSONObject(i);
-                        String Name=obj.getString("NAME");
-                        String Surname=obj.getString("SURNAME");
-                        String Identity=obj.getString("ID_NUMBER");
-                        String Email=obj.getString("EMAIL_ADDRESS");
-                        String Contact=obj.getString("CONTACT_NO");
-                        String Date=obj.getString("DATE");
-                        String Time=obj.getString("TIME").substring(0,5);
-                        int State=obj.getInt("STATE");
-                        Booking temp=new Booking(Name,Surname,Identity,Contact,Email,Date,Time,State);
-                        temp.setCurrentUser(IDentity);
-                        Bookings.add(temp);
+            AsyncHTTPPost Schedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationSearch.php",Params) {
+                @Override
+                protected void onPostExecute(String output) {
+                    try {
+                        JSONArray results=new JSONArray(output);
+                        for(int i=0;i<results.length();++i){
+                            JSONObject obj=results.getJSONObject(i);
+                            String Name=obj.getString("NAME");
+                            String Surname=obj.getString("SURNAME");
+                            String Identity=obj.getString("ID_NUMBER");
+                            String Email=obj.getString("EMAIL_ADDRESS");
+                            String Contact=obj.getString("CONTACT_NO");
+                            String Date=obj.getString("DATE");
+                            String Time=obj.getString("TIME").substring(0,5);
+                            int State=obj.getInt("STATE");
+                            Booking temp=new Booking(Name,Surname,Identity,Contact,Email,Date,Time,State);
+                            temp.setCurrentUser(IDentity);
+                            Bookings.add(temp);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    for(int i=0;i<TimeSlots.size();++i){
+                        TextView s=TimeSlots.get(i);
+                        s.setBackgroundColor(Color.parseColor("#008577"));
+                        s.setText("Free");
+                        s.setTextColor(Color.WHITE);
                     }
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    for(int j=0;j<Bookings.size();++j){
+                        Bookings.get(j).OccupySlots(TimeSlots);
+                    }
+
                 }
+            };
 
-
-                for(int j=0;j<Bookings.size();++j){
-                    Bookings.get(j).OccupySlots(TimeSlots);
-                }
-
-            }
-        };
-
-        Schedule.execute();}
+            Schedule.execute();}
 
     }
 
@@ -493,9 +506,7 @@ public class DailyView extends AppCompatActivity
         TextView DoctorEmail=(TextView)booking.findViewById(R.id.email);
         clickedtime=((TextView) V).getHint().toString();
         int value=Integer.parseInt(clickedtime.substring(3,5))+15;
-
         timeDetails.setText(DayOfWeek+" , "+DayOfMonth+" "+MonthOfYear+"\n\nDuration "+clickedtime+"-"+clickedtime.substring(0,3)+""+value);
-
         if(((TextView) V).getText().toString().equals("Appointment")){
             String time=clickedtime;
             Booking viewing=FindBooking(time);
@@ -562,11 +573,13 @@ public class DailyView extends AppCompatActivity
 
     public void BookSlot(final View v){
 
-        final String time=Format(clickedtime);
+
         ContentValues Params=new ContentValues();
         Params.put("DATE",checked_date);
         Params.put("TIME",clickedtime);
         Params.put("ID_NUMBER",IDentity);
+
+
 
         AsyncHTTPPost bookslot=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
             @Override
@@ -574,7 +587,7 @@ public class DailyView extends AppCompatActivity
                 TextView  change=FindSlot(clickedtime);
                 if(output.equals("success")){
 
-                   Snackbar.make(Master, "Booking Successful", Snackbar.LENGTH_LONG)
+                    Snackbar.make(Master, "Booking Successful", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                     change.setText("Appointment");
@@ -582,37 +595,63 @@ public class DailyView extends AppCompatActivity
 
                     UpdateData.scrollTo(currentX,currentY+1);
                     booking.dismiss();
+                    dialog.dismiss();
                 }
 
                 else if(output.equals("occupied")){
                     Snackbar.make(Master, "Booking unsuccessful", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
+                    UpdateData.scrollTo(currentX,currentY+1);
                     booking.dismiss();
+                    dialog.dismiss();
                 }
 
+
+
+                else if (output.contains("html")){
+
+                    Snackbar snackbar = Snackbar.make(Master, "failed to make booking check your internet connection", Snackbar.LENGTH_LONG);
+                    View view = snackbar.getView();
+                    view.setBackgroundColor(Color.RED);
+                    snackbar.show();
+                    booking.dismiss();
+                    dialog.dismiss();
+                }
+
+                else {
+                    Snackbar snackbar = Snackbar.make(Master, "failed to make booking check your internet connection", Snackbar.LENGTH_LONG);
+                    View view = snackbar.getView();
+                    view.setBackgroundColor(Color.RED);
+                    snackbar.show();
+                    booking.dismiss();
+                    dialog.dismiss();
+                }
+                DailySchedule(checked_date);
             }
+
+
         };
+
+        dialog = ProgressDialog.show(DailyView.this, "",
+                "Loading. Please wait...", true);
 
         bookslot.execute();
 
 
-        }
+    }
 
-     public void CancelSlot(final View v){
-         final String time=Format(clickedtime);
-         ContentValues Params=new ContentValues();
-         Params.put("DATE",checked_date);
-         Params.put("TIME",clickedtime);
-         Params.put("ID_NUMBER","9802155302086");
+    public void CancelSlot(final View v){
+        ContentValues Params=new ContentValues();
+        Params.put("DATE",checked_date);
+        Params.put("TIME",clickedtime);
+        Params.put("ID_NUMBER",IDentity);
 
-         AsyncHTTPPost cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
-             @Override
-             protected void onPostExecute(String output) {
-                 TextView  change=FindSlot(clickedtime);
+        AsyncHTTPPost cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
+            @Override
+            protected void onPostExecute(String output) {
+                TextView  change=FindSlot(clickedtime);
                 if(output.equals("success")){
-
-
 
                     Snackbar snackbar = Snackbar.make(Master, "Succesfully cancelled booking ", Snackbar.LENGTH_LONG);
                     View view = snackbar.getView();
@@ -624,20 +663,49 @@ public class DailyView extends AppCompatActivity
                     change.setBackgroundColor(Color.parseColor("#008577"));
                     UpdateData.scrollTo(currentX,currentY+1);
                     booking.dismiss();
+                    dialog.dismiss();
 
 
                 }
-             }
-         };
 
-         cancel.execute();
-     }
 
-     public  String Format(String time){
+                else if(output.contains("!html")){
 
-        String Time=time.substring(0,2)+time.substring(3,5)+"00";
+                    Snackbar snackbar = Snackbar.make(Master, "failed to cancel booking check your internet ", Snackbar.LENGTH_LONG);
+                    View view = snackbar.getView();
+                    view.setBackgroundColor(Color.RED);
+                    CoordinatorLayout.LayoutParams params=(CoordinatorLayout.LayoutParams)view.getLayoutParams();
+                    params.gravity = Gravity.TOP;
+                    view.setLayoutParams(params);
+                    snackbar.show();
+                    booking.dismiss();
+                    dialog.dismiss();
 
-        return  Time;
-     }
+                }
 
+                else {
+                    Snackbar snackbar = Snackbar.make(Master, "failed to cancel booking check your internet ", Snackbar.LENGTH_LONG);
+                    View view = snackbar.getView();
+                    view.setBackgroundColor(Color.RED);
+                    CoordinatorLayout.LayoutParams params=(CoordinatorLayout.LayoutParams)view.getLayoutParams();
+                    params.gravity = Gravity.TOP;
+                    view.setLayoutParams(params);
+                    snackbar.show();
+                    booking.dismiss();
+                    dialog.dismiss();
+                }
+            }
+
+
+
+        };
+
+        dialog = ProgressDialog.show(DailyView.this, "",
+                "Loading. Please wait...", true);
+
+        cancel.execute();
     }
+
+
+
+}
