@@ -106,7 +106,8 @@ public class BookingTest {
     @Test
     public void occupySlots() {
     }
+*/
     @After
     public void tearDown() throws Exception {
-    } */
+    }
 }
