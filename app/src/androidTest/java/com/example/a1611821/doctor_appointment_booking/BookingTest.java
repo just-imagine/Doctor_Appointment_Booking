@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BookingTest {
-    /*
+
     Booking temp;
     @Before
     public void setUp() throws Exception {
@@ -106,7 +106,7 @@ public class BookingTest {
     @Test
     public void occupySlots() {
     }
-*/
+
     @After
     public void tearDown() throws Exception {
     }
