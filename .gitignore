@@ -3,6 +3,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/.idea/caches/gradle_models.ser
 .DS_Store
 /build
 /captures
