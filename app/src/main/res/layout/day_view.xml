@@ -27,7 +27,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-
                     android:background="@drawable/circle"
                     android:layout_marginTop="59dp"
                     android:layout_marginLeft="18.25dp"
@@ -51,10 +50,8 @@
                     android:id="@+id/dayDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:scaleX="2.1"/>
-
-
-
+                    android:scaleX="1.8"/>
+                
             </LinearLayout>
 
 
