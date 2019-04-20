@@ -78,22 +78,25 @@ public class BookingTest {
     public void empty() {
         temp=  new Booking("Tshifhiwa","Mavhona","","0659545378","tmavhona@gmail.com","2019-04-19","08:15",0);
         assertTrue(temp.Empty());
+        temp=  new Booking("Tshifhiwa","Mavhona","Admin","0659545378","tmavhona@gmail.com","2019-04-19","08:15",0);
+        assertFalse(temp.Empty());
     }
 
     @Test
     public void blocked() {
         temp=  new Booking("Tshifhiwa","Mavhona","Admin","0659545378","tmavhona@gmail.com","2019-04-19","08:15",0);
         assertTrue(temp.Blocked());
+        temp=  new Booking("Tshifhiwa","Mavhona","","0659545378","tmavhona@gmail.com","2019-04-19","08:15",0);
+        assertFalse(temp.Blocked());
     }
 
     @Test
     public void booked() {
         temp=  new Booking("Tshifhiwa","Mavhona","9812176232089","0659545378","tmavhona@gmail.com","2019-04-19","08:15",0);
-        String currentUserId="9907126232089";
-        assertNotEquals("Admin",temp.getIdentity());
-        assertNotEquals("null",temp.getIdentity());
-        assertNotEquals("",temp.getIdentity());
-        assertNotEquals(currentUserId,temp.getIdentity());
+        temp.setCurrentUser("9907126232089");
+        assertTrue(temp.Booked());
+        temp.setCurrentUser("9812176232089");
+        assertFalse(temp.Booked());
 
     }
 
@@ -101,6 +104,8 @@ public class BookingTest {
     public void completed() {
         temp=  new Booking("Tshifhiwa","Mavhona","","0659545378","tmavhona@gmail.com","2019-04-19","08:15",1);
         assertTrue(temp.Completed());
+        temp=  new Booking("Tshifhiwa","Mavhona","","0659545378","tmavhona@gmail.com","2019-04-19","08:15",0);
+        assertFalse(temp.Completed());
     }
 
     @Test
