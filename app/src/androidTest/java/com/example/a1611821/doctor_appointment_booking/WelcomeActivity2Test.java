@@ -67,7 +67,7 @@ public class WelcomeActivity2Test {
 
     }
 
-    @Test
+    /*@Test
     public void EditTextHintsTest(){
         onView(withId(R.id.fullnames)).check(matches(withHint("Enter first name")));
         onView(withId(R.id.Surname)).check(matches(withHint("Enter surname")));
@@ -77,7 +77,7 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.password)).check(matches(withHint("Enter password")));
         onView(withId(R.id.confirmation)).check(matches(withHint("confirm password")));
 
-    }
+    }*/
     @Test
     public void radioTestFeMaleChecked(){
         onView(withId(R.id.female)).perform(click());
@@ -106,7 +106,6 @@ public class WelcomeActivity2Test {
     @Test
     public void TextViewTest(){
         assertNotNull(mActivity.findViewById(R.id.createAccount));
-        //onView(withId((R.id.createAccount))).perform(click());
 
     }
 
@@ -148,7 +147,7 @@ public class WelcomeActivity2Test {
 
 
     }
-
+    /*
     @Test
     public void CreateAccountTest(){
 
@@ -412,9 +411,43 @@ public class WelcomeActivity2Test {
 
     }
 
-    //code does not work for the id for older people and the password six characters
+    //checkcode for
 
+    @Test
+    public void checkPasswordMinIdOlder(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.mobile)).perform(typeText("0862198754"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("0902035598082"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
 
+        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).check(matches(isChecked()));
+
+        onView(withId(R.id.password)).perform(typeText("1234"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.confirmation)).perform(typeText("1234"));
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.createAccount)).perform(click());
+        onView(withId(R.id.password)).check(matches(hasErrorText("Password must at least be 6 characters")));
+
+        WelcomeActivity2 activity = mActivityTestRule.getActivity();
+        onView(withText("You must be 18 years or older to register")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
+
+    }*/
 
 
 

@@ -83,7 +83,7 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
         }
 
         if(v.equals(CreateAccount)){
-            String name,surname,emailaddress,password,confirmpassword,identity,contact;
+            final String name,surname,emailaddress,password,confirmpassword,identity,contact;
             name=Firstname.getText().toString();
             surname=Surname.getText().toString();
             emailaddress=Email.getText().toString();
@@ -203,7 +203,10 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
                         String d="";
                         if(output.equals("success")){
                             Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_SHORT).show();
-                            finish();
+                            Intent HomeActivity=new Intent(getApplicationContext(),HomeScreen.class);
+                            HomeActivity.putExtra("Username",emailaddress);
+                            HomeActivity.putExtra("Identity",identity);
+                            startActivity(HomeActivity);
                         }
                         else if(output.equals("Account already exist")){
                             Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
