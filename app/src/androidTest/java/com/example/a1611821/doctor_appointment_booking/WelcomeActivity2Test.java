@@ -20,11 +20,14 @@ import java.util.Random;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -80,7 +83,7 @@ public class WelcomeActivity2Test {
     }*/
     @Test
     public void radioTestFeMaleChecked(){
-        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
         onView(withId(R.id.male)).check(matches(not(isChecked())));
         onView(withId(R.id.other)).check(matches(not(isChecked())));
@@ -88,7 +91,7 @@ public class WelcomeActivity2Test {
 
     @Test
     public void radioTestMaleChecked(){
-        onView(withId(R.id.male)).perform(click());
+        onView(withId(R.id.male)).perform(scrollTo(),click());
         onView(withId(R.id.male)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.other)).check(matches(not(isChecked())));
@@ -96,7 +99,7 @@ public class WelcomeActivity2Test {
 
     @Test
     public void radioTestOtherChecked(){
-        onView(withId(R.id.other)).perform(click());
+        onView(withId(R.id.other)).perform(scrollTo(),click());
         onView(withId(R.id.other)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.male)).check(matches(not(isChecked())));
@@ -106,6 +109,9 @@ public class WelcomeActivity2Test {
     @Test
     public void TextViewTest(){
         assertNotNull(mActivity.findViewById(R.id.createAccount));
+        onView(withId(R.id.createAccount)).perform(scrollTo()).check(matches(isCompletelyDisplayed()));
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
+
 
     }
 
@@ -113,33 +119,33 @@ public class WelcomeActivity2Test {
 
     @Test
     public void ExistingAccountTest(){
-        onView(withId(R.id.fullnames)).perform(typeText("Julia"));
+        //onView(withId(R.id.fullnames)).perform(typeText("Julia"));
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"), closeSoftKeyboard());
         //close keyboard
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.Surname)).perform(typeText("Matthews"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"));
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"), closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.mobile)).perform(typeText("0862198754"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.identity_no)).perform(typeText("9005125698085"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("9005125698085"), closeSoftKeyboard());
 
-        onView(withId(R.id.female)).perform(click());
+
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
-        onView(withId(R.id.password)).perform(typeText("@Batman131410"));
+        onView(withId(R.id.mobile)).perform(scrollTo(), typeText("0862198754"),closeSoftKeyboard());
+
+
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("@Batman131410"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.confirmation)).perform(typeText("@Batman131410"));
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("@Batman131410"));
         //close keyboard
         Espresso.closeSoftKeyboard();
 
-        onView(withId(R.id.createAccount)).perform(click());
+        //onView(withId(R.id.createAccount)).perform(click());
+        onView(withId(R.id.createAccount)).perform(scrollTo(), click());
 
         WelcomeActivity2 activity = mActivityTestRule.getActivity();
         //change String
@@ -148,6 +154,10 @@ public class WelcomeActivity2Test {
 
     }
     /*
+    get around the button problem 90% visible problem
+       onView(withId(R.id.wv_login)).check(matches(isCompletelyDisplayed()));//check if completely visible;
+
+    onView(withId(R.id.wv_login)).perform(scrollTo(), click());
     @Test
     public void CreateAccountTest(){
 
