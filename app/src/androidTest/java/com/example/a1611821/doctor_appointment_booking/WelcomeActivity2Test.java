@@ -151,7 +151,7 @@ public class WelcomeActivity2Test {
 
     }
 
-    @Test
+    //@Test
     public void radioTestOtherChecked(){
         onView(withId(R.id.other)).perform(click());
         onView(withId(R.id.other)).check(matches(isChecked()));
