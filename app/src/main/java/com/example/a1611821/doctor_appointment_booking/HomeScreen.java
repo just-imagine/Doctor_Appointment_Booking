@@ -212,6 +212,13 @@ public class HomeScreen extends AppCompatActivity
 
 
         } else if (id == R.id.nav_week) {
+            Intent weekView=new Intent(getApplicationContext(),WeekView.class);
+            weekView.putExtra("Month",MonthOfYear);
+            weekView.putExtra("CurrentDate",current_date);
+            weekView.putExtra("CheckedDate",checked_date);
+            weekView.putExtra("LongCurrentDate",""+Calendar.getSelectedDate().getDate());
+            weekView.putExtra("Identity",Identity);
+            startActivity(weekView);
 
         } else if (id == R.id.nav_month) {
 
