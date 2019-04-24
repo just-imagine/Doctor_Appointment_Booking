@@ -10,9 +10,6 @@ import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import com.linkedin.android.testbutler.TestButler;
-
-
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
@@ -102,7 +99,7 @@ public class LoginActivityTest {
         onView(withText("connection error, check your internet connection")).
                 inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
         wifi.setWifiEnabled(true);
-        TestButler.setGsmState(true);
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

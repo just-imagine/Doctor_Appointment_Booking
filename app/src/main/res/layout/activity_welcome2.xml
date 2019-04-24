@@ -259,10 +259,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#dfdfdf"
                 android:padding="5dp"
-                android:selectAllOnFocus="true"
                 android:textSize="50px"
-                android:focusable="true"
-                android:screenReaderFocusable="true"
                 android:text="Create Account"
                 android:clickable="true"/>
         </LinearLayout>

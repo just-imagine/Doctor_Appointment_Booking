@@ -19,6 +19,7 @@ import java.util.Random;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
@@ -87,22 +88,25 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.female)).check(matches(isChecked()));
         onView(withId(R.id.male)).check(matches(not(isChecked())));
         onView(withId(R.id.other)).check(matches(not(isChecked())));
+        //pressBack();
     }
 
-    @Test
+ //   @Test
     public void radioTestMaleChecked(){
         onView(withId(R.id.male)).perform(scrollTo(),click());
         onView(withId(R.id.male)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.other)).check(matches(not(isChecked())));
+        pressBack();
     }
 
-    @Test
+    //@Test
     public void radioTestOtherChecked(){
-        onView(withId(R.id.other)).perform(scrollTo(),click());
+        onView(withId(R.id.other)).perform(click());
         onView(withId(R.id.other)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.male)).check(matches(not(isChecked())));
+        pressBack();
     }
 
 
