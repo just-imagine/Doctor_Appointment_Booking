@@ -259,6 +259,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#dfdfdf"
                 android:padding="5dp"
+                android:focusable="true"
+                android:screenReaderFocusable="true"
                 android:textSize="50px"
                 android:text="Create Account"
                 android:clickable="true"/>
