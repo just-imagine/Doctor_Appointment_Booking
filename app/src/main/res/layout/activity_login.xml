@@ -32,10 +32,13 @@
                 android:layout_width="316dp"
                 android:layout_height="138dp"
                 android:src="@drawable/profyle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.214"
-                tools:layout_editor_absoluteX="31dp" />
+                tools:layout_editor_absoluteX="31dp"
+                />
 
 
             <EditText
@@ -71,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="14dp"
-                android:background="@drawable/button_drawable"
+                android:background="#a1a1a1"
                 android:padding="10dp"
                 android:text="Login"
                 android:textColor="#FFF"
