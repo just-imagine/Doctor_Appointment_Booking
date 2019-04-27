@@ -160,7 +160,7 @@
                 <RadioButton
                     android:id="@+id/other"
                     android:textColor="#fff"
-                    android:text="other"
+                    android:text="Other"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
             </RadioGroup>

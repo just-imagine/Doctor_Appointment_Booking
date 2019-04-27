@@ -73,16 +73,16 @@ public class WelcomeActivity2Test {
 
     /*@Test
     public void EditTextHintsTest(){
-        onView(withId(R.id.fullnames)).check(matches(withHint("Enter first name")));
-        onView(withId(R.id.Surname)).check(matches(withHint("Enter surname")));
-        onView(withId(R.id.email)).check(matches(withHint("Enter email address")));
-        onView(withId(R.id.mobile)).check(matches(withHint("Enter cellphone numbers")));
-        onView(withId(R.id.identity_no)).check(matches(withHint("Enter identity or passport number")));
-        onView(withId(R.id.password)).check(matches(withHint("Enter password")));
-        onView(withId(R.id.confirmation)).check(matches(withHint("confirm password")));
+        onView(withId(R.id.fullnames)).check(matches(withHint("Firstname)));
+        onView(withId(R.id.Surname)).check(matches(withHint("Surname")));
+        onView(withId(R.id.email)).check(matches(withHint("Email")));
+        onView(withId(R.id.mobile)).check(matches(withHint("Mobile")));
+        onView(withId(R.id.identity_no)).check(matches(withHint("Identity Number")));
+        onView(withId(R.id.password)).check(matches(withHint("Password")));
+        onView(withId(R.id.confirmation)).check(matches(withHint("Confirm Password")));
 
     }*/
-    @Test
+    //@Test
     public void radioTestFeMaleChecked(){
         onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
@@ -91,14 +91,6 @@ public class WelcomeActivity2Test {
         //pressBack();
     }
 
- //   @Test
-    public void radioTestMaleChecked(){
-        onView(withId(R.id.male)).perform(scrollTo(),click());
-        onView(withId(R.id.male)).check(matches(isChecked()));
-        onView(withId(R.id.female)).check(matches(not(isChecked())));
-        onView(withId(R.id.other)).check(matches(not(isChecked())));
-        pressBack();
-    }
 
 
 
@@ -151,12 +143,13 @@ public class WelcomeActivity2Test {
 
     }
 
-    //@Test
+   // @Test
     public void radioTestOtherChecked(){
         onView(withId(R.id.other)).perform(click());
-        onView(withId(R.id.other)).check(matches(isChecked()));
+       // onView(withId(R.id.other)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.male)).check(matches(not(isChecked())));
+        onView(withId(R.id.other)).check(matches(withText("Other"))).check(matches(isChecked()));
         //pressBack();
     }
     /*
@@ -165,7 +158,7 @@ public class WelcomeActivity2Test {
 
     onView(withId(R.id.wv_login)).perform(scrollTo(), click());*/
 
-    @Test
+   // @Test
     public void CreateAccountTest(){
 
         Random rand = new Random();
@@ -189,7 +182,7 @@ public class WelcomeActivity2Test {
 
         int rightLimit = 122; // letter 'z'
 
-        int targetStringLength = rand.nextInt(9)+6;
+        int targetStringLength = rand.nextInt(2)+4;
 
 
         StringBuilder buffer = new StringBuilder(targetStringLength);
@@ -230,10 +223,12 @@ public class WelcomeActivity2Test {
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.email)).perform(typeText(firstName+Surname+"@gmail.com"),closeSoftKeyboard());
         //close keyboard
+
         //generate the first six numbers
         onView(withId(R.id.identity_no)).perform(scrollTo(),typeText(yearBorn+"0420"+lastSevenDigitsString),closeSoftKeyboard());
-        onView(withId(R.id.other)).perform(scrollTo(),click());
-        onView(withId(R.id.other)).check(matches(isChecked()));
+
+        onView(withId(R.id.female)).perform(scrollTo(),click());
+        //onView(withId(R.id.female)).check(matches(isChecked()));
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0"+contactInFo),closeSoftKeyboard());
 
         onView(withId(R.id.password)).perform(scrollTo(),typeText(PasswordGen),closeSoftKeyboard());
@@ -247,10 +242,12 @@ public class WelcomeActivity2Test {
 
 
 
-        onView(withText("You have been registered")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
         Activity LoginActivity =getInstrumentation().waitForMonitorWithTimeout(monitorLogIn,5000);
         assertNotNull(LoginActivity);
+
+        onView(withText("You have been registered")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
+
         LoginActivity.finish();
 
     }
@@ -311,7 +308,7 @@ public class WelcomeActivity2Test {
     }
 
     @Test
-    public void checkEmptyFirstNameSurnameMobileEmail(){
+    public void checkEmptyFields(){
         onView(withId(R.id.identity_no)).perform(scrollTo(),typeText(""));
         //close keyboard
         Espresso.closeSoftKeyboard();
@@ -334,6 +331,15 @@ public class WelcomeActivity2Test {
 
 
 
+    }
+
+   // @Test
+    public void radioTestMaleChecked(){
+        onView(withId(R.id.male)).perform(scrollTo(),click());
+        onView(withId(R.id.male)).check(matches(isChecked()));
+        onView(withId(R.id.female)).check(matches(not(isChecked())));
+        onView(withId(R.id.other)).check(matches(not(isChecked())));
+        pressBack();
     }
 
    // @Test

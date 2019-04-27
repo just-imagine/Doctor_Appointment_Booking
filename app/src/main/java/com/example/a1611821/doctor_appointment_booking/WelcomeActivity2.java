@@ -62,12 +62,20 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
             if(male.isChecked()){
                 male.setChecked(false);
             }
+            if(other.isChecked()){
+                other.setChecked(false);
+            }
+
+
         }
 
         if(v.equals(male)){
             gender="Male";
             if(female.isChecked()){
                 female.setChecked(false);
+            }
+            if(other.isChecked()){
+                other.setChecked(false);
             }
         }
 
@@ -195,7 +203,7 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
                 Params.put("NAME", name);
                 Params.put("SURNAME", surname);
                 Params.put("CONTACT_NO",Integer.parseInt(contact));
-                Params.put("GENDER","male");
+                Params.put("GENDER",gender);
                 Params.put("PASSWORD",password);
                 AsyncHTTPPost register=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CreateAccount.php",Params) {
                     @Override
