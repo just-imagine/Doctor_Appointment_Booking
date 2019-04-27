@@ -106,7 +106,7 @@ public class WelcomeActivity2Test {
 
 
 
-    @Test
+    //@Test
     public void ExistingAccountTest(){
         //onView(withId(R.id.fullnames)).perform(typeText("Julia"));
         onView(withId(R.id.fullnames)).perform(typeText("Julia"), closeSoftKeyboard());
