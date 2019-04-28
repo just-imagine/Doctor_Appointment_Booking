@@ -420,7 +420,7 @@ public class WelcomeActivity2Test {
 
     //checkcode for
 
-    @Test
+   // @Test
     public void checkPasswordMinIdOlder(){
         onView(withId(R.id.fullnames)).perform(typeText("Julia"));
         //close keyboard
