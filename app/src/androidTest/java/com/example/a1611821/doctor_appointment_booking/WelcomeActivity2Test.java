@@ -434,7 +434,7 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0862198754"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.identity_no)).perform(scrollTo(),typeText("0902035598082"));
+        onView(withId(R.id.identity_no)).perform(typeText("0902035598082"));
         //close keyboard
         Espresso.closeSoftKeyboard();
 
