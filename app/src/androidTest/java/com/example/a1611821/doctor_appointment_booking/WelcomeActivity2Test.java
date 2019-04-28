@@ -82,7 +82,7 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.confirmation)).check(matches(withHint("Confirm Password")));
 
     }*/
-    //@Test
+    @Test
     public void radioTestFeMaleChecked(){
         onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
@@ -420,7 +420,7 @@ public class WelcomeActivity2Test {
 
     //checkcode for
 
-   // @Test
+    @Test
     public void checkPasswordMinIdOlder(){
         onView(withId(R.id.fullnames)).perform(typeText("Julia"));
         //close keyboard
@@ -431,24 +431,24 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.mobile)).perform(typeText("0862198754"));
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0862198754"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.identity_no)).perform(typeText("0902035598082"));
+        onView(withId(R.id.identity_no)).perform(scrollTo(),typeText("0902035598082"));
         //close keyboard
         Espresso.closeSoftKeyboard();
 
-        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
-        onView(withId(R.id.password)).perform(typeText("1234"));
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("1234"));
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.confirmation)).perform(typeText("1234"));
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("1234"));
         //close keyboard
         Espresso.closeSoftKeyboard();
 
-        onView(withId(R.id.createAccount)).perform(click());
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
         onView(withId(R.id.password)).check(matches(hasErrorText("Password must at least be 6 characters")));
 
         WelcomeActivity2 activity = mActivityTestRule.getActivity();
