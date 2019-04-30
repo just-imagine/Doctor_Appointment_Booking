@@ -420,37 +420,44 @@ public class WelcomeActivity2Test {
 
     //checkcode for
 
-   // @Test
-    public void checkPasswordMinIdOlder(){
-        onView(withId(R.id.fullnames)).perform(typeText("Julia"));
+   @Test
+    public void check_passwordMinChar_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"),closeSoftKeyboard());
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"),closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.Surname)).perform(typeText("Matthews"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0862198754"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.identity_no)).perform(typeText("0902035598082"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("0902035598082"),closeSoftKeyboard());
 
         onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
-        onView(withId(R.id.password)).perform(scrollTo(),typeText("1234"));
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0862198754"),closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("1234"),closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("1234"));
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("1234"),closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
-
         onView(withId(R.id.createAccount)).perform(scrollTo(),click());
         onView(withId(R.id.password)).check(matches(hasErrorText("Password must at least be 6 characters")));
 
+    }
+
+    @Test
+    public void check_ageRestriction_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"),closeSoftKeyboard());
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
+
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"),closeSoftKeyboard());
+
+        onView(withId(R.id.identity_no)).perform(typeText("0302035598082"),closeSoftKeyboard());
+
+        onView(withId(R.id.female)).perform(scrollTo(),click());
+        onView(withId(R.id.female)).check(matches(isChecked()));
+
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0862198754"),closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("1234545ww"),closeSoftKeyboard());
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("1234545ww"),closeSoftKeyboard());
+
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
         WelcomeActivity2 activity = mActivityTestRule.getActivity();
         onView(withText("You must be 18 years or older to register")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
