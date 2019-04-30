@@ -90,6 +90,9 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
             }
         }
 
+
+        String l=gender;
+
         if(v.equals(CreateAccount)){
             final String name,surname,emailaddress,password,confirmpassword,identity,contact;
             name=Firstname.getText().toString();
@@ -205,7 +208,7 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
                 Params.put("CONTACT_NO",Integer.parseInt(contact));
                 Params.put("GENDER",gender);
                 Params.put("PASSWORD",password);
-                AsyncHTTPPost register=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CreateAccount.php",Params) {
+                AsyncHTTPPost register=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Account.php",Params) {
                     @Override
                     protected void onPostExecute(String output) {
                         String d="";

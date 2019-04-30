@@ -106,7 +106,7 @@ public class WelcomeActivity2Test {
 
 
 
-    //@Test
+    @Test
     public void ExistingAccountTest(){
         //onView(withId(R.id.fullnames)).perform(typeText("Julia"));
         onView(withId(R.id.fullnames)).perform(typeText("Julia"), closeSoftKeyboard());
@@ -143,7 +143,7 @@ public class WelcomeActivity2Test {
 
     }
 
-   // @Test
+   @Test
     public void radioTestOtherChecked(){
         onView(withId(R.id.other)).perform(click());
        // onView(withId(R.id.other)).check(matches(isChecked()));
@@ -152,13 +152,8 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.other)).check(matches(withText("Other"))).check(matches(isChecked()));
         //pressBack();
     }
-    /*
-    get around the button problem 90% visible problem
-       onView(withId(R.id.wv_login)).check(matches(isCompletelyDisplayed()));//check if completely visible;
 
-    onView(withId(R.id.wv_login)).perform(scrollTo(), click());*/
-
-   // @Test
+    @Test
     public void CreateAccountTest(){
 
         Random rand = new Random();
@@ -309,9 +304,9 @@ public class WelcomeActivity2Test {
 
     @Test
     public void checkEmptyFields(){
-        onView(withId(R.id.identity_no)).perform(scrollTo(),typeText(""));
+        //onView(withId(R.id.identity_no)).perform(scrollTo(),typeText(""));
         //close keyboard
-        Espresso.closeSoftKeyboard();
+        //Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
@@ -330,16 +325,15 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.password)).check(matches(hasErrorText("This field cannot be empty")));
 
 
-
     }
 
-   // @Test
+   @Test
     public void radioTestMaleChecked(){
-        onView(withId(R.id.male)).perform(scrollTo(),click());
-        onView(withId(R.id.male)).check(matches(isChecked()));
-        onView(withId(R.id.female)).check(matches(not(isChecked())));
-        onView(withId(R.id.other)).check(matches(not(isChecked())));
-        pressBack();
+       onView(withId(R.id.male)).perform(click());
+       // onView(withId(R.id.other)).check(matches(isChecked()));
+       onView(withId(R.id.female)).check(matches(not(isChecked())));
+       onView(withId(R.id.other)).check(matches(not(isChecked())));
+       onView(withId(R.id.male)).check(matches(withText("Male"))).check(matches(isChecked()));
     }
 
     @Test
@@ -377,7 +371,7 @@ public class WelcomeActivity2Test {
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
 
-        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
@@ -399,11 +393,10 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
         //close keyboard
         onView(withId(R.id.email)).perform(typeText("JuliaMatthewsgmailcom"),closeSoftKeyboard());
-        //close keyboard
-        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
 
-        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
@@ -427,10 +420,9 @@ public class WelcomeActivity2Test {
         //close keyboard
         onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmailcom"),closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
         onView(withId(R.id.identity_no)).perform(typeText("9002055598sss"),closeSoftKeyboard());
 
-        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
@@ -452,11 +444,10 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
         //close keyboard
         onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmailcom"),closeSoftKeyboard());
-        //close keyboard
-        Espresso.closeSoftKeyboard();
+
         onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
 
-        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("072845694d8"),closeSoftKeyboard());
@@ -470,7 +461,6 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.mobile)).check(matches(hasErrorText("Enter a valid phone number")));
 
     }
-    //checking minumums
 
 
    @Test
