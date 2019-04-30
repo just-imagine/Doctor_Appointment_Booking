@@ -342,83 +342,136 @@ public class WelcomeActivity2Test {
         pressBack();
     }
 
-   // @Test
-    public void checkEmptyIdentityNoPassword(){
-        onView(withId(R.id.fullnames)).perform(typeText("Julia"));
+    @Test
+    public void check_ValidName_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Ju"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmailcom"),closeSoftKeyboard());
+
+        onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
+
+        onView(withId(R.id.female)).perform(scrollTo(),click());
+        onView(withId(R.id.female)).check(matches(isChecked()));
+
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
+
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
+        //close keyboard
+         onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
+
+        onView(withId(R.id.fullnames)).check(matches(hasErrorText("Enter a valid first name")));
+    }
+
+    @Test
+    public void check_ValidSurName_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.Surname)).perform(typeText("Ma"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmailcom"),closeSoftKeyboard());
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.Surname)).perform(typeText("Matthews"));
-        //close keyboard
-         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmail.com"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.mobile)).perform(typeText("0862198754"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        //onView(withId(R.id.identity_no)).perform(typeText("9005125698085"));
-        //close keyboard
-        //Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
 
         onView(withId(R.id.female)).perform(click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
-      //  onView(withId(R.id.password)).perform(typeText("@Batman131410"));
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
+
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
         //close keyboard
-       // Espresso.closeSoftKeyboard();
-
-       // onView(withId(R.id.confirmation)).perform(typeText("@Batman131410"));
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
         //close keyboard
-       // Espresso.closeSoftKeyboard();
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
 
-        onView(withId(R.id.createAccount)).perform(click());
-
-        onView(withId(R.id.identity_no)).check(matches(hasErrorText("This field cannot be empty")));
-        onView(withId(R.id.password)).check(matches(hasErrorText("This field cannot be empty")));
+        onView(withId(R.id.Surname)).check(matches(hasErrorText("Enter a valid surname")));
 
     }
 
-    //@Test
-    public void checkMinimumInputs(){
-        onView(withId(R.id.fullnames)).perform(typeText("Ju"));
+    @Test
+    public void check_ValidEmail_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthewsgmailcom"),closeSoftKeyboard());
         //close keyboard
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.Surname)).perform(typeText("Ma"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.email)).perform(typeText("JuliaMatthewsgmailcom"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.mobile)).perform(typeText("8621m98754"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.identity_no)).perform(typeText("900512569808jm5"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
 
         onView(withId(R.id.female)).perform(click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
-          onView(withId(R.id.password)).perform(typeText("@Batman131410"));
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
+
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
         //close keyboard
-         Espresso.closeSoftKeyboard();
-
-         onView(withId(R.id.confirmation)).perform(typeText("@Batman131410"));
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
-
-        onView(withId(R.id.createAccount)).perform(click());
-
-        onView(withId(R.id.fullnames)).check(matches(hasErrorText("Enter a valid first name")));
-        onView(withId(R.id.Surname)).check(matches(hasErrorText("Enter a valid surname")));
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
 
         onView(withId(R.id.email)).check(matches(hasErrorText("Enter a valid email")));
+
+    }
+
+
+    @Test
+    public void check_ValidIdentity_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmailcom"),closeSoftKeyboard());
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("9002055598sss"),closeSoftKeyboard());
+
+        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).check(matches(isChecked()));
+
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0728456948"),closeSoftKeyboard());
+
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
+
         onView(withId(R.id.identity_no)).check(matches(hasErrorText("Enter a valid identity number")));
+
+    }
+
+    @Test
+    public void check_ValidMobile_pass(){
+        onView(withId(R.id.fullnames)).perform(typeText("Julia"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.Surname)).perform(typeText("Matthews"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.email)).perform(typeText("JuliaMatthews@gmailcom"),closeSoftKeyboard());
+        //close keyboard
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.identity_no)).perform(typeText("9002055598042"),closeSoftKeyboard());
+
+        onView(withId(R.id.female)).perform(click());
+        onView(withId(R.id.female)).check(matches(isChecked()));
+
+        onView(withId(R.id.mobile)).perform(scrollTo(),typeText("072845694d8"),closeSoftKeyboard());
+
+        onView(withId(R.id.password)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.confirmation)).perform(scrollTo(),typeText("@Batman131410"),closeSoftKeyboard());
+        //close keyboard
+        onView(withId(R.id.createAccount)).perform(scrollTo(),click());
+
         onView(withId(R.id.mobile)).check(matches(hasErrorText("Enter a valid phone number")));
 
     }
+    //checking minumums
 
-    //checkcode for
 
    @Test
     public void check_passwordMinChar_pass(){
