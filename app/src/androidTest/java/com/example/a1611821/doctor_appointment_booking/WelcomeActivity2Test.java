@@ -82,6 +82,7 @@ public class WelcomeActivity2Test {
         onView(withId(R.id.confirmation)).check(matches(withHint("Confirm Password")));
 
     }*/
+
     @Test
     public void radioTestFeMaleChecked(){
         onView(withId(R.id.female)).perform(scrollTo(),click());
@@ -93,7 +94,25 @@ public class WelcomeActivity2Test {
 
 
 
+    // @Test
+    public void radioTestMaleChecked(){
+        onView(withId(R.id.male)).perform(click());
+        // onView(withId(R.id.other)).check(matches(isChecked()));
+        onView(withId(R.id.female)).check(matches(not(isChecked())));
+        onView(withId(R.id.other)).check(matches(not(isChecked())));
+        onView(withId(R.id.male)).check(matches(withText("Male"))).check(matches(isChecked()));
+    }
 
+
+    // @Test
+    public void radioTestOtherChecked(){
+        onView(withId(R.id.other)).perform(click());
+        // onView(withId(R.id.other)).check(matches(isChecked()));
+        onView(withId(R.id.female)).check(matches(not(isChecked())));
+        onView(withId(R.id.male)).check(matches(not(isChecked())));
+        onView(withId(R.id.other)).check(matches(withText("Other"))).check(matches(isChecked()));
+        //pressBack();
+    }
 
     @Test
     public void TextViewTest(){
@@ -143,17 +162,8 @@ public class WelcomeActivity2Test {
 
     }
 
-   @Test
-    public void radioTestOtherChecked(){
-        onView(withId(R.id.other)).perform(click());
-       // onView(withId(R.id.other)).check(matches(isChecked()));
-        onView(withId(R.id.female)).check(matches(not(isChecked())));
-        onView(withId(R.id.male)).check(matches(not(isChecked())));
-        onView(withId(R.id.other)).check(matches(withText("Other"))).check(matches(isChecked()));
-        //pressBack();
-    }
 
-    @Test
+    //@Test
     public void CreateAccountTest(){
 
         Random rand = new Random();
@@ -304,16 +314,15 @@ public class WelcomeActivity2Test {
 
     @Test
     public void checkEmptyFields(){
-        //onView(withId(R.id.identity_no)).perform(scrollTo(),typeText(""));
+        //onView(withId(R.id.identity_no)).perform(typeText(""));
         //close keyboard
         //Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
 
-        onView(withId(R.id.password)).perform(scrollTo(),typeText(""));
+        onView(withId(R.id.password)).perform(scrollTo(),typeText(""),closeSoftKeyboard());
         //close keyboard
-        Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.createAccount)).perform(scrollTo(),click());
 
@@ -327,14 +336,6 @@ public class WelcomeActivity2Test {
 
     }
 
-   @Test
-    public void radioTestMaleChecked(){
-       onView(withId(R.id.male)).perform(click());
-       // onView(withId(R.id.other)).check(matches(isChecked()));
-       onView(withId(R.id.female)).check(matches(not(isChecked())));
-       onView(withId(R.id.other)).check(matches(not(isChecked())));
-       onView(withId(R.id.male)).check(matches(withText("Male"))).check(matches(isChecked()));
-    }
 
     @Test
     public void check_ValidName_pass(){
@@ -505,8 +506,7 @@ public class WelcomeActivity2Test {
         onView(withText("You must be 18 years or older to register")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
-
-
+    
 
     @After
     public void tearDown() throws Exception {
