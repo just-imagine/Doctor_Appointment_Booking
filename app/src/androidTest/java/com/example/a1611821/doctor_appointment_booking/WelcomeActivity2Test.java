@@ -22,6 +22,8 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.doubleClick;
+import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -94,23 +96,23 @@ public class WelcomeActivity2Test {
 
 
 
-    // @Test
+    @Test
     public void radioTestMaleChecked(){
-        onView(withId(R.id.male)).perform(click());
+        onView(withId(R.id.male)).perform(scrollTo(),doubleClick());
         // onView(withId(R.id.other)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.other)).check(matches(not(isChecked())));
-        onView(withId(R.id.male)).check(matches(withText("Male"))).check(matches(isChecked()));
+        onView(withId(R.id.male)).check(matches(isChecked()));
     }
 
 
-    // @Test
+    @Test
     public void radioTestOtherChecked(){
-        onView(withId(R.id.other)).perform(click());
+        onView(withId(R.id.other)).perform(scrollTo(), longClick());
         // onView(withId(R.id.other)).check(matches(isChecked()));
         onView(withId(R.id.female)).check(matches(not(isChecked())));
         onView(withId(R.id.male)).check(matches(not(isChecked())));
-        onView(withId(R.id.other)).check(matches(withText("Other"))).check(matches(isChecked()));
+        onView(withId(R.id.other)).check(matches(isChecked()));
         //pressBack();
     }
 
@@ -163,11 +165,10 @@ public class WelcomeActivity2Test {
     }
 
 
-    //@Test
+    @Test
     public void CreateAccountTest(){
 
         Random rand = new Random();
-
         int contactInt = rand.nextInt(900000000) + 100000000;
         String contactInFo = Integer.toString(contactInt);
         int lastSevenDigits = rand.nextInt(9000000) + 1000000;
@@ -177,10 +178,7 @@ public class WelcomeActivity2Test {
 
         String yearBorn=Integer.toString(year);
 
-
-
         int targetLengthPassword = rand.nextInt(9) + 9;
-
         //generate the strings
 
         int leftLimit = 97; // letter 'a'
@@ -217,42 +215,29 @@ public class WelcomeActivity2Test {
 
         String PasswordGen=password.toString();
 
+        onView(withId(R.id.fullnames)).perform(typeText(firstName),closeSoftKeyboard());
+        onView(withId(R.id.Surname)).perform(typeText(Surname),closeSoftKeyboard());
 
-
-
-        onView(withId(R.id.fullnames)).perform(typeText(firstName));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.Surname)).perform(typeText(Surname));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.email)).perform(typeText(firstName+Surname+"@gmail.com"),closeSoftKeyboard());
-        //close keyboard
+        onView(withId(R.id.email)).perform(typeText(firstName+"@gmail.com"),closeSoftKeyboard());
 
         //generate the first six numbers
-        onView(withId(R.id.identity_no)).perform(scrollTo(),typeText(yearBorn+"0420"+lastSevenDigitsString),closeSoftKeyboard());
+        onView(withId(R.id.identity_no)).perform(typeText(yearBorn+"0420"+lastSevenDigitsString),closeSoftKeyboard());
 
         onView(withId(R.id.female)).perform(scrollTo(),click());
-        //onView(withId(R.id.female)).check(matches(isChecked()));
+        onView(withId(R.id.female)).check(matches(isChecked()));
+
         onView(withId(R.id.mobile)).perform(scrollTo(),typeText("0"+contactInFo),closeSoftKeyboard());
 
         onView(withId(R.id.password)).perform(scrollTo(),typeText(PasswordGen),closeSoftKeyboard());
-        //close keyboard
         onView(withId(R.id.confirmation)).perform(scrollTo(),typeText(PasswordGen),closeSoftKeyboard());
-        //close keyboard
 
         onView(withId(R.id.createAccount)).perform(scrollTo(),click());
 
         WelcomeActivity2 activity = mActivityTestRule.getActivity();
-
-
-
-
-        Activity LoginActivity =getInstrumentation().waitForMonitorWithTimeout(monitorLogIn,5000);
-        assertNotNull(LoginActivity);
-
         onView(withText("You have been registered")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
+        Activity LoginActivity =getInstrumentation().waitForMonitorWithTimeout(monitorLogIn,3000);
+        assertNotNull(LoginActivity);
         LoginActivity.finish();
 
     }
@@ -506,7 +491,7 @@ public class WelcomeActivity2Test {
         onView(withText("You must be 18 years or older to register")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
-    
+
 
     @After
     public void tearDown() throws Exception {

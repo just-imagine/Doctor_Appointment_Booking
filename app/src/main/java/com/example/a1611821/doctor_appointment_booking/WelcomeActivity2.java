@@ -213,7 +213,7 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
                     protected void onPostExecute(String output) {
                         String d="";
                         if(output.equals("success")){
-                            Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_LONG).show();
                             Intent HomeActivity=new Intent(getApplicationContext(),HomeScreen.class);
                             HomeActivity.putExtra("Username",emailaddress);
                             HomeActivity.putExtra("Identity",identity);
