@@ -1,5 +1,6 @@
 package com.example.a1611821.doctor_appointment_booking;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
@@ -86,7 +87,6 @@ public class LoginActivityTest {
     public void testInternetConnectivity(){
         WifiManager wifi = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(false);
-
         onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
         //close keyboard
         Espresso.closeSoftKeyboard();
@@ -99,6 +99,7 @@ public class LoginActivityTest {
         onView(withText("connection error, check your internet connection")).
                 inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
         wifi.setWifiEnabled(true);
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

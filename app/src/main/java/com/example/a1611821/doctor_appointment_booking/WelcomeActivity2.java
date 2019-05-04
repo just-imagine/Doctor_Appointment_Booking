@@ -62,12 +62,20 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
             if(male.isChecked()){
                 male.setChecked(false);
             }
+            if(other.isChecked()){
+                other.setChecked(false);
+            }
+
+
         }
 
         if(v.equals(male)){
             gender="Male";
             if(female.isChecked()){
                 female.setChecked(false);
+            }
+            if(other.isChecked()){
+                other.setChecked(false);
             }
         }
 
@@ -82,8 +90,11 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
             }
         }
 
+
+        String l=gender;
+
         if(v.equals(CreateAccount)){
-            String name,surname,emailaddress,password,confirmpassword,identity,contact;
+            final String name,surname,emailaddress,password,confirmpassword,identity,contact;
             name=Firstname.getText().toString();
             surname=Surname.getText().toString();
             emailaddress=Email.getText().toString();
@@ -195,15 +206,18 @@ public class        WelcomeActivity2 extends AppCompatActivity  implements View.
                 Params.put("NAME", name);
                 Params.put("SURNAME", surname);
                 Params.put("CONTACT_NO",Integer.parseInt(contact));
-                Params.put("GENDER","male");
+                Params.put("GENDER",gender);
                 Params.put("PASSWORD",password);
-                AsyncHTTPPost register=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CreateAccount.php",Params) {
+                AsyncHTTPPost register=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Account.php",Params) {
                     @Override
                     protected void onPostExecute(String output) {
                         String d="";
                         if(output.equals("success")){
-                            Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_SHORT).show();
-                            finish();
+                            Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_LONG).show();
+                            Intent HomeActivity=new Intent(getApplicationContext(),HomeScreen.class);
+                            HomeActivity.putExtra("Username",emailaddress);
+                            HomeActivity.putExtra("Identity",identity);
+                            startActivity(HomeActivity);
                         }
                         else if(output.equals("Account already exist")){
                             Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
