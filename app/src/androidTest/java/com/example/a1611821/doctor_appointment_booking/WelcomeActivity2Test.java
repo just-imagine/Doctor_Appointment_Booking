@@ -2,6 +2,7 @@ package com.example.a1611821.doctor_appointment_booking;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.ContentValues;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.support.test.espresso.Espresso;
@@ -85,7 +86,7 @@ public class WelcomeActivity2Test {
 
     }*/
 
-    @Test
+   // @Test
     public void radioTestFeMaleChecked(){
         onView(withId(R.id.female)).perform(scrollTo(),click());
         onView(withId(R.id.female)).check(matches(isChecked()));
@@ -96,7 +97,7 @@ public class WelcomeActivity2Test {
 
 
 
-    @Test
+   // @Test
     public void radioTestMaleChecked(){
         onView(withId(R.id.male)).perform(scrollTo(),doubleClick());
         // onView(withId(R.id.other)).check(matches(isChecked()));
@@ -106,7 +107,7 @@ public class WelcomeActivity2Test {
     }
 
 
-    @Test
+    //@Test
     public void radioTestOtherChecked(){
         onView(withId(R.id.other)).perform(scrollTo(), longClick());
         // onView(withId(R.id.other)).check(matches(isChecked()));
@@ -165,7 +166,7 @@ public class WelcomeActivity2Test {
     }
 
 
-    @Test
+    //@Test
     public void CreateAccountTest(){
 
         Random rand = new Random();
@@ -265,8 +266,6 @@ public class WelcomeActivity2Test {
 
 
     }
-
-
     @Test
     public void checkMatchingPassword(){
         onView(withId(R.id.fullnames)).perform(typeText("Julia"));

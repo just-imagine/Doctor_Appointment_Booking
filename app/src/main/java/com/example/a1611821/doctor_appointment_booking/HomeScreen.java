@@ -311,7 +311,7 @@ public class HomeScreen extends AppCompatActivity
         }
 
         else if(x.equals("Jul")){
-            return  "Jul";
+            return  "July";
 
         }
 

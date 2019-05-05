@@ -1,16 +1,23 @@
 package com.example.a1611821.doctor_appointment_booking;
 
+import android.widget.TextView;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class BookingTest {
 
+    private ArrayList<TextView> SLots;
     Booking temp;
+
     @Before
     public void setUp() throws Exception {
+
 
     }
 
@@ -108,11 +115,25 @@ public class BookingTest {
         assertFalse(temp.Completed());
     }
 
+
+    @Test
+    public void setCurrentUser() {
+        temp=  new Booking("Tshifhiwa","Mavhona","","0659545378","tmavhona@gmail.com","2019-04-19","08:15",1);
+        temp.setCurrentUser("98126232089");
+        // assertEquals("98126232089",temp.currentUser);
+    }
+
+    @Test
+    public void myBooking() {
+    }
+
     @Test
     public void occupySlots() {
+
     }
 
     @After
     public void tearDown() throws Exception {
     }
+
 }

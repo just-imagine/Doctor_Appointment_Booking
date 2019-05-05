@@ -50,7 +50,6 @@ public class RadioTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
-        pressBack();
 
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.male), withText("Male"),

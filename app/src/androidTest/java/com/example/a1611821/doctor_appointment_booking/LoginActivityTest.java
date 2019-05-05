@@ -83,29 +83,6 @@ public class LoginActivityTest {
         onView(withText("Check your username and password")).inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
-    //@Test
-    public void testInternetConnectivity(){
-        WifiManager wifi = (WifiManager) mActivity.getSystemService(Context.WIFI_SERVICE);
-        wifi.setWifiEnabled(false);
-        onView(withId(R.id.username)).perform(typeText("tmavhona@gmail.com"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.password)).perform(typeText("afterlife"));
-        //close keyboard
-        Espresso.closeSoftKeyboard();
-        //perform button click
-        onView(withId(R.id.login)).perform(click());
-        LoginActivity activity = mActivityTestRule.getActivity();
-        onView(withText("connection error, check your internet connection")).
-                inRoot(withDecorView(CoreMatchers.not(CoreMatchers.is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
-        wifi.setWifiEnabled(true);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
     @Test
     public void RegisterPage(){
         View Reg= mActivity.findViewById(R.id.Registration);
