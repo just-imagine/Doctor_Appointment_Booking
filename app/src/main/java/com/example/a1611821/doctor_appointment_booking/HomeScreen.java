@@ -2,6 +2,7 @@ package com.example.a1611821.doctor_appointment_booking;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -35,23 +37,12 @@ public class HomeScreen extends AppCompatActivity
 
 
     MaterialCalendarView Calendar;
-    boolean FirstClick=false;
-    int HighlightYear=0,HighlightMonth=0,HighlightDay=0;
-
-    Date currentDate;
-    String current_date,checked_date;
-    String DayOfWeek;
-    String DayOfMonth;
-    String Year;
-    String MonthOfYear;
-    String globalDate;
-    String globalDateDay;
-    String Identity;
-    ImageView display;
-
+    Month calendarMonth;
+    ImageView monthTheme;
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
@@ -68,43 +59,40 @@ public class HomeScreen extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final Date FirstHighlight = java.util.Calendar.getInstance().getTime();
-        final SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        final String FormattedDate = df.format(FirstHighlight);
-        current_date=FormattedDate;
-        checked_date=current_date;
+        monthTheme=(ImageView)findViewById(R.id.display);
 
-        Calendar=(MaterialCalendarView) findViewById(R.id.thing);
-        display=(ImageView)findViewById(R.id.display);
         final Calendar calendar = java.util.Calendar.getInstance();
+
+        //initialize the material calendar to be used and give it the current date
+        Calendar = (MaterialCalendarView) findViewById(R.id.thing);
         Calendar.setDateSelected(calendar.getTime(), true);
         Calendar.setSelectionColor(Color.RED);
         Calendar.setCurrentDate(calendar);
-
         Calendar.addDecorator(new CurrentDateDecorator(this));
 
+        //now create a month object that will respond and make updates when date changes
+        calendarMonth=new Month();
+
+        //everytime we change the viewing date we need to update the viewed date for month object
         Calendar.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay, boolean b) {
-                int day=calendarDay.getDay();
-                String Long=""+calendarDay.getDate();
-                int month=calendarDay.getMonth()+1;
-                int year=calendarDay.getYear();
-                checked_date=AssignVariables(month,day,year,Long);
-                Calendar.setDateSelected(calendar.getTime(), true);
+               calendarMonth.setCheckedDate(calendarMonth.changeCheckedDate(calendarDay));
+               calendarMonth.setDate(calendarDay.getDate());
+               Calendar.setDateSelected(calendar.getTime(), true);
+
             }
         });
 
+        //everytime we change the month we need to change the month theme i.e the picture and the title on top
         Calendar.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
-                int day=calendarDay.getDay();
-                String Long=""+calendarDay.getDate();
-                int month=calendarDay.getMonth()+1;
-                int year=calendarDay.getYear();
-                Calendar.setDateSelected(calendar.getTime(), true);
-                checked_date=AssignVariables(month,day,year,Long);
-                Display(Long);
+                calendarMonth.setCheckedDate(calendarMonth.changeCheckedDate(calendarDay));
+                calendarMonth.setDate(calendarDay.getDate());
+                setTitle(calendarMonth.getMonthName(calendarMonth.getMonthIndex()));
+                changeTheme();
+
             }
         });
 
@@ -112,53 +100,26 @@ public class HomeScreen extends AppCompatActivity
             @Override
             public void onDateLongClick(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay) {
 
-
-                int day=calendarDay.getDay();
-                String Long=""+calendarDay.getDate();
-                int month=calendarDay.getMonth()+1;
-                int year=calendarDay.getYear();
-
-                checked_date=AssignVariables(month,day,year,Long);
-                Intent DailyView=new Intent(getApplicationContext(),DailyView.class);
-                DailyView.putExtra("WeekDay",Long.substring(0,4).trim());
-                DailyView.putExtra("Date",""+day);
-                DailyView.putExtra("Month",Long.substring(4,8).trim());
-                DailyView.putExtra("Current",current_date);
-                DailyView.putExtra("Checked",checked_date);
-                DailyView.putExtra("Identity",Identity);
-                startActivity(DailyView);
             }
         });
-       currentDate=java.util.Calendar.getInstance().getTime();
-        globalDate=df.format(currentDate);
-        Date date=null;
-        try {
-             date = df.parse(globalDate);
-             globalDateDay=""+date;
-             DayOfWeek=globalDateDay.substring(0,4).trim();
-             DayOfMonth=current_date.substring(6,8);
-            MonthOfYear=globalDateDay.substring(4,8).trim();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        Display(globalDateDay);
-
-
+        //this should rebase the calendar to the current date
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Calendar.setSelectedDate(FirstHighlight);
-                Calendar.setCurrentDate(FirstHighlight);
-                checked_date=current_date;
+                Calendar.setSelectedDate(calendar);
+                Calendar.setCurrentDate(calendar);
             }
         });
+
+        //toolbar should write in black
         toolbar.setTitleTextColor(Color.BLACK);
-        setTitle(Index(MonthOfYear)+" "+checked_date.substring(0,4));
-        Identity=getIntent().getStringExtra("Identity");
+
+        //set the title first time around
+        setTitle(calendarMonth.getMonthName(calendarMonth.getMonthIndex()));
     }
+
 
     @Override
     public void onBackPressed() {
@@ -179,16 +140,11 @@ public class HomeScreen extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -201,15 +157,6 @@ public class HomeScreen extends AppCompatActivity
         if (id == R.id.nav_schedule) {
             // Handle the camera action
         } else if (id == R.id.nav_day) {
-            Intent DailyView=new Intent(getApplicationContext(),DailyView.class);
-            DailyView.putExtra("WeekDay",DayOfWeek);
-            DailyView.putExtra("Date",DayOfMonth);
-            DailyView.putExtra("Month",MonthOfYear);
-            DailyView.putExtra("Current",current_date);
-            DailyView.putExtra("Checked",checked_date);
-            DailyView.putExtra("Identity",Identity);
-            startActivity(DailyView);
-
 
         } else if (id == R.id.nav_week) {
 
@@ -220,147 +167,46 @@ public class HomeScreen extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void  Display(String input){
-
-        if(!input.equals("")){
-            String  day=input.substring(0,4);
-            String Month=input.substring(4,8).trim();
-
-            if(Month.equals("Apr")){
-                display.setImageResource(R.drawable.april);
-            }
-
-            else if(Month.equals("Mar")){
-                display.setImageResource(R.drawable.march);
-            }
-
-            else if(Month.equals("Jan")){
-                display.setImageResource(R.drawable.january);
-            }
-
-            else if(Month.equals("Feb")){
-                display.setImageResource(R.drawable.february);
-            }
-
-            else if(Month.equals("May")){
-
-                display.setImageResource(R.drawable.may);
-            }
-
-            else if(Month.equals("Jun")){
-                display.setImageResource(R.drawable.june);
-            }
-
-            else if(Month.equals("Jul")){
-                display.setImageResource(R.drawable.july);
-
-            }
-
-
-            else if(Month.equals("Aug")){
-                display.setImageResource(R.drawable.august);
-            }
-
-            else if(Month.equals("Sep")){
-                display.setImageResource(R.drawable.september);}
-
-            else if(Month.equals("Oct")){
-                display.setImageResource(R.drawable.october);}
-
-            else if(Month.equals("Nov")){
-                    display.setImageResource(R.drawable.november);}
-
-            else{
-                display.setImageResource(R.drawable.december);}
-
-
-            }
-    }
-
-    public  String Index(String x){
-
-        if(x.equals("Apr")){
-            return  "April";
+    //Update image this is a ui update therefore must be done here
+    void changeTheme(){
+        String Month=calendarMonth.getMonthName(calendarMonth.getMonthIndex());
+        if(Month.equals("April")){
+            monthTheme.setImageResource(R.drawable.april);
         }
-
-        else if(x.equals("Mar")){
-            return  "March";
+        else if(Month.equals("March")){
+            monthTheme.setImageResource(R.drawable.march);
         }
-
-        else if(x.equals("Jan")){
-            return  "January";
+        else if(Month.equals("January")){
+            monthTheme.setImageResource(R.drawable.january);
         }
-
-        else if(x.equals("Feb")){
-            return  "February";
+        else if(Month.equals("February")){
+            monthTheme.setImageResource(R.drawable.february);
         }
-
-        else if(x.equals("May")){
-
-            return  "May";
+        else if(Month.equals("May")){
+            monthTheme.setImageResource(R.drawable.may);
         }
-
-        else if(x.equals("Jun")){
-            return "June";
+        else if(Month.equals("June")){
+            monthTheme.setImageResource(R.drawable.june);
         }
-
-        else if(x.equals("Jul")){
-            return  "Jul";
-
+        else if(Month.equals("July")){
+            monthTheme.setImageResource(R.drawable.july);
         }
-
-        else if(x.equals("Aug")){
-            return  "August";
+        else if(Month.equals("August")){
+            monthTheme.setImageResource(R.drawable.august);
         }
-
-        else if(x.equals("Sep")){
-            return  "September";}
-
-        else if(x.equals("Oct")){
-            return  "October";}
-
-        else if(x.equals("Nov")){
-            return  "November";}
-
+        else if(Month.equals("September")){
+            monthTheme.setImageResource(R.drawable.september);}
+        else if(Month.equals("October")){
+            monthTheme.setImageResource(R.drawable.october);}
+        else if(Month.equals("November")){
+            monthTheme.setImageResource(R.drawable.november);}
         else{
-            return  "December";}
-    }
-
-    public  String AssignVariables(int month,int day,int year,String LongDate){
-        String weekday=LongDate.substring(0,3);
-        String g="";
-        if(month<10){
-            if(day<10)
-                g=""+year+"0"+month+"0"+day;
-
-            else {
-                g=""+year+"0"+month+""+day;
-            }
+            monthTheme.setImageResource(R.drawable.december);}
         }
-
-
-        else{
-            if(day<10)
-                g=""+year+month+"0"+day;
-
-            else {
-                g=""+year+month+""+day;
-            }
-        }
-
-        checked_date=g;
-        DayOfMonth=""+day;
-        DayOfWeek=weekday;
-        MonthOfYear=LongDate.substring(4,8).trim();
-        Display(LongDate);
-        setTitle(Index(MonthOfYear)+" "+checked_date.substring(0,4));
-        return  g;
-    }
 
 }

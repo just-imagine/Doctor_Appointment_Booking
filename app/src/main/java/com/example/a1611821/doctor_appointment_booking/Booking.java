@@ -115,9 +115,16 @@ public class Booking {
                 String d=currentUser;
                 String v=Slot.getText().toString();
 
-                if(this.MyBooking()){
+                if(this.MyBooking() && !this.Completed()){
                     Slot.setBackgroundColor(Color.parseColor("#4eacc8"));
                     Slot.setText("Appointment");
+                    Slot.setTextColor(Color.WHITE);
+                }
+
+
+                else if(this.MyBooking() && this.Completed()){
+                    Slot.setBackgroundColor(Color.parseColor("#003366"));
+                    Slot.setText("Attended");
                     Slot.setTextColor(Color.WHITE);
                 }
 

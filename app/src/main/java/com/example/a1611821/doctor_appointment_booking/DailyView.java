@@ -518,7 +518,7 @@ public class DailyView extends AppCompatActivity
         clickedtime=((TextView) V).getHint().toString();
         int value=Integer.parseInt(clickedtime.substring(3,5))+15;
         timeDetails.setText(DayOfWeek+" , "+DayOfMonth+" "+MonthOfYear+"\n\nDuration "+clickedtime+"-"+clickedtime.substring(0,3)+""+value);
-        if(((TextView) V).getText().toString().equals("Appointment")){
+        if(((TextView) V).getText().toString().equals("Appointment") ||((TextView) V).getText().toString().equals("Attended")){
             String time=clickedtime;
             Booking viewing=FindBooking(time);
 

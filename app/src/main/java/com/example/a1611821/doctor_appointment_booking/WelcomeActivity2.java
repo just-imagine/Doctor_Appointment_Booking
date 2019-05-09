@@ -2,6 +2,7 @@ package com.example.a1611821.doctor_appointment_booking;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,209 +14,171 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class        WelcomeActivity2 extends AppCompatActivity  implements View.OnClickListener{
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class  WelcomeActivity2 extends AppCompatActivity{
     TextView CreateAccount;
-    EditText Firstname;
+    EditText Name;
     EditText Surname;
     EditText Email;
     EditText Contact;
     EditText Identity;
     EditText Password,ConfirmPassword;
-    RadioButton male,female,other;
-    String gender="";
-
-
+    RadioButton Male,Female;
+    RadioGroup Sex;
+    //local sqlite database to be used for testing
+    DatabaseHelper accountDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        accountDB=new DatabaseHelper(this, "app");
         setContentView(R.layout.activity_welcome2);
 
-        //edittext to collect information from
-        Firstname=(EditText)findViewById(R.id.fullnames);
+        //Edittexts to collect information from
+        Name=(EditText)findViewById(R.id.fullnames);
         Surname=(EditText)findViewById(R.id.Surname);
         Email=(EditText)findViewById(R.id.email);
         Contact=(EditText)findViewById(R.id.mobile);
         Identity=(EditText)findViewById(R.id.identity_no);
         Password=(EditText)findViewById(R.id.password);
         ConfirmPassword=(EditText)findViewById(R.id.confirmation);
-        male=(RadioButton)findViewById(R.id.male);
-        female=(RadioButton)findViewById(R.id.female);
-        other=(RadioButton)findViewById(R.id.other);
-        female.setOnClickListener(this);
-        male.setOnClickListener(this);
-        other.setOnClickListener(this);
+        Male=(RadioButton)findViewById(R.id.male);
+        Female=(RadioButton)findViewById(R.id.female);
 
+        Sex=(RadioGroup)findViewById(R.id.sex);
+
+        // CreateAccount will create a new User object and initialize all its fields when its clicked
         CreateAccount=(TextView) findViewById(R.id.createAccount);
-        CreateAccount.setOnClickListener(this);
+
+        selectFromAccountDb();
     }
 
-    public void close(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-    }
+    public void doRegistration(View v){
+        //get id of clicked radio button so we can initialize the gender accordingly
+        int Id=Sex.getCheckedRadioButtonId();
 
-    @Override
-    public void onClick(View v) {
+        //at least one radio button in radio group must have been checked
 
-        if(v.equals(female)){
-            gender="Female";
-            if(male.isChecked()){
-                male.setChecked(false);
-            }
+        final User user=new User();
+
+        if(Id!=-1){
+            //the radio button that has the gender
+            RadioButton checkedGender=(RadioButton)findViewById(Sex.getCheckedRadioButtonId());
+            user.setGender(checkedGender.getText().toString().trim());}
+
+        //create new user and set relevent details and validate then register
+        user.setName(Name.getText().toString().trim());
+        user.setSurname(Surname.getText().toString().trim());
+        user.setEmail(Email.getText().toString().trim());
+        user.setPassword(Password.getText().toString().trim());
+        user.setContact(Contact.getText().toString().trim());
+        user.setIdentity(Identity.getText().toString().trim());
+        user.setConfirmPassword(ConfirmPassword.getText().toString().trim());
+
+        //now check if the user entered details in expected format
+        if(user.validUser()){
+         //first insert the user into local database;
+            insertToAccountDB(user);
+         //launch async here that will add the user to the remote  database
+            ContentValues Params=new ContentValues();
+            Params.put("ID_NUMBER", user.getIdentity());
+            Params.put("EMAIL_ADDRESS", user.getEmail());
+            Params.put("NAME", user.getName());
+            Params.put("SURNAME", user.getSurname());
+            Params.put("CONTACT_NO",Integer.parseInt(user.getContact()));
+            Params.put("GENDER",user.getGender());
+            Params.put("PASSWORD",user.getPassword());
+
+            AsyncHTTPPost addUser=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Account.php",Params) {
+             @Override
+             protected void onPostExecute(String output) {
+                Intent HomeScreen=new Intent(getApplicationContext(),HomeScreen.class);
+                 HomeScreen.putExtra("USERNAME",user.getEmail());
+                 HomeScreen.putExtra("IDENTITY",user.getIdentity());
+                 HomeScreen.putExtra("NAME",user.getName());
+                 HomeScreen.putExtra("SURNAME",user.getSurname());
+                 startActivity(HomeScreen);
+                 finish();
+             }
+            };
+
+            addUser.execute();
         }
 
-        if(v.equals(male)){
-            gender="Male";
-            if(female.isChecked()){
-                female.setChecked(false);
-            }
-        }
-
-        if(v.equals(other)) {
-            gender="Other";
-            if (female.isChecked()) {
-                female.setChecked(false);
+        //if not valid user then use verify methods to set  relevent errors
+        else{
+            if(!user.validIdentity()){
+                Identity.setError("Enter a valid Identity");
             }
 
-            if(male.isChecked()){
-                male.setChecked(false);
-            }
-        }
-
-        if(v.equals(CreateAccount)){
-            String name,surname,emailaddress,password,confirmpassword,identity,contact;
-            name=Firstname.getText().toString();
-            surname=Surname.getText().toString();
-            emailaddress=Email.getText().toString();
-            password=Password.getText().toString();
-            confirmpassword=ConfirmPassword.getText().toString();
-            identity=Identity.getText().toString();
-            contact=Contact.getText().toString();
-
-            String emailPattern = "^[_A-Za-z0-9-]+" +
-                    "(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-            boolean format=true;
-
-            if(name.equals("")){
-                format=false;
-                Firstname.setError("This field cannot be empty");
+            if(!user.validEmail()){
+                Email.setError("This filed cannot be empty and it must be a valid email address");
             }
 
-            if(!name.equals("") && name.length()<3){
-                format=false;
-                Firstname.setError("Enter a valid first name");
+            if(!user.validName()){
+                Name.setError("This field cannot be empty and must not have special characters or numbers");
             }
 
-            if(surname.equals("")){
-                format=false;
-                Surname.setError("This field cannot be empty");
+            if(!user.validSurname()){
+                Surname.setError("This field cannot be empty and must and cannot not have special characters or numbers");
             }
 
-            if(surname.length()<3 && !surname.equals("")){
-                format=false;
-                Surname.setError("Enter a valid surname");
+            if(!user.validPassword()){
+                Password.setError("This field cannot be empty and must be of 6 characters or more");
             }
 
-            if(emailaddress.equals("")){
-                format=false;
-                Email.setError("This field cannot be empty");
-            }
-
-            if(!emailaddress.trim().matches(emailPattern) && !emailaddress.equals("")){
-                format=false;
-                Email.setError("Enter a valid email");
-            }
-
-            if(password.equals("")){
-                format=false;
-                Password.setError("This field cannot be empty");
-            }
-
-            if(password.length()<6 && !password.equals("")){
-                format=false;
-                Password.setError("Password must at least be 6 characters");
-            }
-
-            if(!confirmpassword.equals(password)){
-                format=false;
+            if(!user.confirmPassword()){
                 ConfirmPassword.setError("Passwords do not match");
             }
 
-            if(identity.equals("")){
-                format=false;
-                Identity.setError("This field cannot be empty");
+            if(!user.validGender()){
+                Toast.makeText(getApplicationContext(),"Pick a gender please",Toast.LENGTH_SHORT).show();
             }
-            if(!identity.equals("")){
-                if(identity.length()==13){
-                    String data=identity.substring(0,2);
-                    if(data.charAt(0)=='0'){
-                        data="20"+data;
-                    }
 
-                    else{
-                        data="19"+data;
-                    }
+            if(!user.validContact()){
+                Contact.setError("This field cannot be empty and must of the form 082....");
+            }
+                }
 
-                    if(2019-Integer.parseInt(data)<18){
-                        format=false;
-                        Toast.makeText(getApplicationContext(),"You must be 18 years or older to register",Toast.LENGTH_SHORT).show();
-                    }
+        }
 
+        //remove someone from the local accounts database to be used by testing team
+        public void deleteFromAccountDb(User user){
+            String vals[]={user.getIdentity()};
+            accountDB.doUpdate("delete from ACCOUNTS where ID_NUMBER=?;", vals);
+        }
+
+        public void insertToAccountDB(User user){
+            String[] vals = {user.getIdentity(),user.getEmail(),user.getName(),
+            user.getSurname(),user.getContact(),user.getGender(),user.getPassword()};
+            accountDB.doUpdate("Insert into ACCOUNTS(ID_NUMBER,EMAIL_ADDRESS,NAME,SURNAME,CONTACT_NO,GENDER,PASSWORD) values (?,?,?,?,?,?,?);", vals);
+        }
+
+        //gets stuff from local database and put it into a json array to be used by testing team
+        public  JSONArray selectFromAccountDb() {
+            Cursor c = accountDB.doQuery("SELECT* from ACCOUNTS");
+            JSONArray data=new JSONArray();
+            while (c.moveToNext()) {
+                JSONObject obj=new JSONObject();
+                data.put(obj);
+                try {
+                    obj.put("ID_NUMBER",c.getString(c.getColumnIndex("ID_NUMBER")));
+                    obj.put("EMAIL_ADDRESS",c.getString(c.getColumnIndex("EMAIL_ADDRESS")));
+                    obj.put("NAME",c.getString(c.getColumnIndex("NAME")));
+                    obj.put("SURNAME",c.getString(c.getColumnIndex("SURNAME")));
+                    obj.put("CONTACT_NO",c.getString(c.getColumnIndex("CONTACT_NO")));
+                    obj.put("GENDER",c.getString(c.getColumnIndex("GENDER")));
+                    obj.put("PASSWORD",c.getString(c.getColumnIndex("PASSWORD")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
 
-            if(!TextUtils.isDigitsOnly(identity) || identity.length()!=13 && !identity.equals("")){
-                format=false;
-                Identity.setError("Enter a valid identity number");
-            }
-
-            if(!contact.equals("")){
-                if(!TextUtils.isDigitsOnly(contact) || contact.charAt(0)!='0' ){
-                    format=false;
-                    Contact.setError("Enter a valid phone number");}
-            }
-
-            if(contact.equals("")){
-                format=false;
-                Contact.setError("This field cannot be empty");
-            }
-
-            if(gender.equals("")){
-                format=false;
-                Toast.makeText(getApplicationContext(), "Please select gender", Toast.LENGTH_LONG).show();
-            }
-
-
-            if(format){
-                ContentValues Params;
-                Params =new ContentValues();
-                Params.put("ID_NUMBER", identity);
-                Params.put("EMAIL_ADDRESS", emailaddress);
-                Params.put("NAME", name);
-                Params.put("SURNAME", surname);
-                Params.put("CONTACT_NO",Integer.parseInt(contact));
-                Params.put("GENDER","male");
-                Params.put("PASSWORD",password);
-                AsyncHTTPPost register=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CreateAccount.php",Params) {
-                    @Override
-                    protected void onPostExecute(String output) {
-                        String d="";
-                        if(output.equals("success")){
-                            Toast.makeText(getApplicationContext(), "You have been registered", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                        else if(output.equals("Account already exist")){
-                            Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                };
-
-                register.execute();
-            }
-
+            return  data;
         }
     }
-}
+
 
