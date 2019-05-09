@@ -35,10 +35,15 @@ import java.util.Date;
 public class HomeScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    Intent currentIntent;
     MaterialCalendarView Calendar;
     Month calendarMonth;
     ImageView monthTheme;
+    String Username;
+    String Identity;
+    String Name;
+    String Surname;
+
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -48,7 +53,6 @@ public class HomeScreen extends AppCompatActivity
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,6 +76,7 @@ public class HomeScreen extends AppCompatActivity
 
         //now create a month object that will respond and make updates when date changes
         calendarMonth=new Month();
+
 
         //everytime we change the viewing date we need to update the viewed date for month object
         Calendar.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -99,6 +104,17 @@ public class HomeScreen extends AppCompatActivity
         Calendar.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay) {
+                Intent DailyView=new Intent(getApplicationContext(),DailyView.class);
+                //pass data to next intent
+
+                DailyView.putExtra("USERNAME",Username);
+                DailyView.putExtra("IDENTITY",Identity);
+                DailyView.putExtra("NAME",Name);
+                DailyView.putExtra("SURNAME",Surname);
+                DailyView.putExtra("checkedDate",calendarMonth.getCheckedDate());
+
+
+                startActivity(DailyView);
 
             }
         });
@@ -118,6 +134,14 @@ public class HomeScreen extends AppCompatActivity
 
         //set the title first time around
         setTitle(calendarMonth.getMonthName(calendarMonth.getMonthIndex()));
+
+        //retrieve any data that was passed from previous intent
+        currentIntent=getIntent();
+       Username=currentIntent.getStringExtra("USERNAME");
+       Identity=currentIntent.getStringExtra("IDENTITY");
+       Name=currentIntent.getStringExtra("NAME");
+       Surname=currentIntent.getStringExtra("SURNAME");
+
     }
 
 

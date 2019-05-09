@@ -107,6 +107,23 @@ public class Booking {
         return  false;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(this==obj){
+            return  true;
+        }
+
+        else{
+            Booking temp=(Booking)obj;
+            if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate())){
+                return  true;
+            }
+
+            return  false;
+        }
+
+    }
+
     public void OccupySlots(ArrayList<TextView>SLots){
         for(int i=0;i< SLots.size();++i){
             TextView Slot=SLots.get(i);

@@ -9,15 +9,14 @@ import java.util.Date;
 public class Month {
 
     private  String currentDate,checkedDate;
-    private String  currentWeekDay,checkedWeekday;
+    private String  WeekDay;
     private Date date;
 
     public Month(){
         this.date= Calendar.getInstance().getTime();
         this.currentDate=databaseFormat(date);
         this.checkedDate=currentDate;
-        this.currentWeekDay=getWeekDay();
-        this.checkedWeekday=currentWeekDay;
+        this.WeekDay=getWeekDay();
     }
     //formats the date accordingly to put  it in database format
     String databaseFormat(Date date){
@@ -34,7 +33,8 @@ public class Month {
     }
 
     public String getWeekDay(){
-        return (""+date).substring(0,3);
+        WeekDay=(""+date).substring(0,3);
+        return WeekDay;
     }
 
     public String getCheckedDate(){

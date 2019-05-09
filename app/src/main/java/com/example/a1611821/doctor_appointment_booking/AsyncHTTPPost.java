@@ -55,7 +55,6 @@ public  abstract class AsyncHTTPPost extends AsyncTask<String, String,
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-
             return "";
         }
     }
