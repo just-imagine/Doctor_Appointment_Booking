@@ -95,7 +95,7 @@ public class HomeScreen extends AppCompatActivity
             public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
                 calendarMonth.setCheckedDate(calendarMonth.changeCheckedDate(calendarDay));
                 calendarMonth.setDate(calendarDay.getDate());
-                setTitle(calendarMonth.getMonthName(calendarMonth.getMonthIndex()));
+                setTitle(calendarMonth.getMonth()+" "+calendarMonth.getYear());
                 changeTheme();
 
             }
@@ -104,9 +104,10 @@ public class HomeScreen extends AppCompatActivity
         Calendar.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay) {
+                calendarMonth.setCheckedDate(calendarMonth.changeCheckedDate(calendarDay));
+                calendarMonth.setDate(calendarDay.getDate());
                 Intent DailyView=new Intent(getApplicationContext(),DailyView.class);
                 //pass data to next intent
-
                 DailyView.putExtra("USERNAME",Username);
                 DailyView.putExtra("IDENTITY",Identity);
                 DailyView.putExtra("NAME",Name);
@@ -133,7 +134,7 @@ public class HomeScreen extends AppCompatActivity
         toolbar.setTitleTextColor(Color.BLACK);
 
         //set the title first time around
-        setTitle(calendarMonth.getMonthName(calendarMonth.getMonthIndex()));
+        setTitle(calendarMonth.getMonth()+" "+calendarMonth.getYear());
 
         //retrieve any data that was passed from previous intent
         currentIntent=getIntent();
@@ -181,6 +182,15 @@ public class HomeScreen extends AppCompatActivity
         if (id == R.id.nav_schedule) {
             // Handle the camera action
         } else if (id == R.id.nav_day) {
+            Intent DailyView=new Intent(getApplicationContext(),DailyView.class);
+            //pass data to next intent
+            DailyView.putExtra("USERNAME",Username);
+            DailyView.putExtra("IDENTITY",Identity);
+            DailyView.putExtra("NAME",Name);
+            DailyView.putExtra("SURNAME",Surname);
+            DailyView.putExtra("checkedDate",calendarMonth.getCheckedDate());
+
+            startActivity(DailyView);
 
         } else if (id == R.id.nav_week) {
 

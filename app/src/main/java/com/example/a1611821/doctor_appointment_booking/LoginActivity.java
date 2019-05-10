@@ -65,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
                         //start the next intent
                         startActivity(HomeScreen);
                     }
+
+                    else{
+                        Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -24,6 +24,19 @@ public class Month {
         return df.format(date);
     }
 
+    public String getDay(){
+        return checkedDate.substring(6,8);
+    }
+
+    public String getYear(){
+        return checkedDate.substring(0,4);
+    }
+
+    public String getMonth(){
+        int i=Integer.parseInt(checkedDate.substring(4,6));
+        return  getMonthName(i);
+    }
+
     public void  setCheckedDate(String newMonthDate){
         checkedDate=newMonthDate;
     }

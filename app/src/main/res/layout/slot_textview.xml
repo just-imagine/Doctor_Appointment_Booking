@@ -40,6 +40,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
+
                 android:onClick="PopUp"
                 android:id="@+id/slot"
                 android:layout_width="match_parent"
@@ -49,10 +50,10 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginRight="6dp"
                 android:padding="12dp"
-                android:text="Slot"
-
+                android:text="Free"
+                android:background="#008577"
                 android:textAlignment="center"
-                android:textColor="#000"
+                android:textColor="#FFF"
                 android:textSize="18sp"
                  />
 

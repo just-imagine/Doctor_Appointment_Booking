@@ -52,6 +52,10 @@ public class DailyView extends AppCompatActivity
     Day thisDay;
     LinearLayout mainView;
     ArrayList<LinearLayout>slotCard;
+    ScrollView Update;
+    User user;
+    Dialog bookingDialog;
+    String clickedTime;
 
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -86,12 +90,19 @@ public class DailyView extends AppCompatActivity
         //we need the viewed weekday and date from previous intent they were passed
         currentIntent=getIntent();
 
-        //retrieve necessary variables such as username and identity and password for bookings to be made
+        //retrieve necessary variables such as username and identity and email to make a new user that can make bookings
         Username=currentIntent.getStringExtra("USERNAME");
         Identity=currentIntent.getStringExtra("IDENTITY");
         Name=currentIntent.getStringExtra("NAME");
         Surname=currentIntent.getStringExtra("SURNAME");
         checkedDate=currentIntent.getStringExtra("checkedDate");
+
+        //create the user
+        user=new User();
+        user.setEmail(Username);
+        user.setIdentity(Identity);
+        user.setName(Name);
+        user.setSurname(Surname);
 
         //hoder for cardview of slots
         slotCard=new ArrayList<>();
@@ -99,13 +110,40 @@ public class DailyView extends AppCompatActivity
         thisDay=new Day(this);
         thisDay.setDate(thisDay.toDate(checkedDate));
         thisDay.setCheckedDate(checkedDate);
+
+        //create the time slots for the day
         thisDay.expandSlots();
 
+        //populates the view with textviews representing time slots
         addSlots(thisDay);
 
 
+        thisDay.setUser(user);
+        thisDay.DailySchedule();
+
+        //make a scrollview which will update daily bookings
+        Update=(ScrollView)findViewById(R.id.Update);
+
+        Update.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                thisDay.DailySchedule();
+            }
+        });
 
 
+        //set the dialog for making and cancelling bookings
+        bookingDialog=new Dialog(this);
+        bookingDialog.setContentView(R.layout.dialog_booking);
+
+        thisDay.setBookingDialog(bookingDialog);
+
+        //set title
+        setTitle(thisDay.getMonth()+" "+thisDay.getYear());
+
+        //set date on on circular icon
+        TextView weekday=(TextView)findViewById(R.id.weekDay);
+        weekday.setText(thisDay.getWeekDay().substring(0,3));
     }
 
     @Override
@@ -163,31 +201,6 @@ public class DailyView extends AppCompatActivity
         return true;
     }
 
-    public ArrayList<TextView>expandSlots(Day d){
-        ArrayList<TextView>slots=new ArrayList<>();
-        int starthour=8;
-        int duration=0;
-        for(int i=0;i<=40;++i){
-            String time=d.toTime(starthour,duration);
-            LinearLayout card=new LinearLayout(this);
-            card=(LinearLayout) card.inflate(this,R.layout.slot_textview,null);
-            TextView timeIndicator=(TextView)card.findViewById(R.id.g);
-            TextView slotIndicator=(TextView)card.findViewById(R.id.slot);
-            timeIndicator.setText(time);
-            timeIndicator.setHint(time);
-
-            slots.add(slotIndicator);
-            slotCard.add(card);
-
-            if(duration==60){
-                duration=0;
-                starthour++;
-            }
-
-            duration+=15;
-        }
-        return slots;
-    }
 
     //update ui and add the time slots
     public void addSlots(Day d){
@@ -199,20 +212,57 @@ public class DailyView extends AppCompatActivity
 
     }
 
+    //initialy just retrieve slots and put them in the arraylist
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void DailySchedule(){
 
+
+    //just displays a popup when clicking a slot and assigns clicked time to that slots time show relevent popup depending
+    //on whether slot is booked or free
+    public void PopUp(View v){
+
+        TextView cancelSlot=(TextView)bookingDialog.findViewById(R.id.cancel);
+        TextView bookSlot=(TextView)bookingDialog.findViewById(R.id.bookslot) ;
+        //the event detail textview should be given relevent information
+        TextView timeDetails=(TextView)bookingDialog.findViewById(R.id.timedetails);
+        clickedTime=((TextView) v).getHint().toString();
+
+        cancelSlot.setVisibility(View.VISIBLE);
+        bookSlot.setVisibility(View.VISIBLE);
+
+        int value=Integer.parseInt(clickedTime.substring(3,5))+15;
+        String end=clickedTime.substring(0,3)+""+value;
+        if(value==60){
+            int l=Integer.parseInt(clickedTime.substring(0,2))+1;
+            end=""+l+":00";
+        }
+        timeDetails.setText(thisDay.getWeekDay()+" , "+thisDay.getDay()+" "+thisDay.getMonth()+" "+thisDay.getYear()+"\n\nDuration "+clickedTime+"-"+end);
+
+
+        if(((TextView) v).getText().toString().equals("Free")){
+            cancelSlot.setVisibility(View.INVISIBLE);
+            bookingDialog.show();
+        }
+
+        else if(((TextView) v).getText().toString().equals("Appointment")){
+            bookSlot.setVisibility(View.INVISIBLE);
+            bookingDialog.show();
+        }
     }
 
-    public void PopUp(View V){
-
-    }
-
+    //just makes a booking aobject and invokes bookslot in day class
     public void BookSlot(final View v){
+        Booking b=new Booking(thisDay.getCheckedDate(),clickedTime,user.getIdentity());
+        b.setCurrentUser(user.getIdentity());
+        thisDay.bookSlot(b,mainView);
 
     }
 
+    //makes a booking a object that will removed and invokes cancel booking in day class
     public void CancelSlot(final View v) {
-
+        Booking b=new Booking(thisDay.getCheckedDate(),clickedTime,user.getIdentity());
+        b.setCurrentUser(user.getIdentity());
+        thisDay.cancelBooking(b,mainView);
     }
+
+    
 }

@@ -101,6 +101,7 @@ public class  WelcomeActivity2 extends AppCompatActivity{
                  HomeScreen.putExtra("NAME",user.getName());
                  HomeScreen.putExtra("SURNAME",user.getSurname());
                  startActivity(HomeScreen);
+                 Toast.makeText(getApplicationContext(),"you have been registered",Toast.LENGTH_SHORT).show();
                  finish();
              }
             };
