@@ -3,10 +3,13 @@ package com.example.a1611821.doctor_appointment_booking;
 import android.support.test.internal.util.ReflectionUtil;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.annotation.meta.When;
 
@@ -296,6 +299,8 @@ public class UserTest {
         assertFalse(temp.validContact());
         field.set(temp,"7659545378");
         assertFalse(temp.validEmail());
+        field.set(temp,"765T545378");
+        assertFalse(temp.validEmail());
     }
 
     @Test
@@ -348,11 +353,10 @@ public class UserTest {
 
     @Test
     public void equals() throws NoSuchFieldException, IllegalAccessException {
-        User SpyUser= spy(User.class);
-        User SpyUser1=spy(User.class);
+
         final User temp= new User();
         final User temp2= new User();
-        assertTrue(SpyUser.equals(SpyUser));
+        assertTrue(temp.equals(temp));
         Field field= temp.getClass().getDeclaredField("Password");
         field.setAccessible(true);
         field.set(temp,"afterlife");
@@ -365,14 +369,31 @@ public class UserTest {
         field= temp2.getClass().getDeclaredField("Email");
         field.setAccessible(true);
         field.set(temp2,"tmavhona@gmail.com");
-        doReturn(true).when(SpyUser).validEmail();
-        doReturn(true).when(SpyUser).validPassword();
         assertTrue(temp.equals(temp2));
         field.set(temp2,"tmavhona@gmail.co.za");
         assertFalse(temp.equals(temp2));
     }
 
     @Test
-    public void getData() {
+    public void getData() throws NoSuchFieldException, IllegalAccessException {
+        final User temp= new User();
+        Field field = temp.getClass().getDeclaredField("Surname");
+        field.setAccessible(true);
+        field.set(temp, "Mavhona");
+        field= temp.getClass().getDeclaredField("Email");
+        field.setAccessible(true);
+        field.set(temp,"tmavhona@gmail.com");
+        field= temp.getClass().getDeclaredField("Identity");
+        field.setAccessible(true);
+        field.set(temp,"9812176232089");
+        field= temp.getClass().getDeclaredField("Name");
+        field.setAccessible(true);
+        field.set(temp,"Tshifhiwa");
+        ArrayList<String>results=temp.getData();
+        ArrayList<String>expected= new ArrayList<>();
+        Collections.addAll(expected,"9812176232089","tmavhona@gmail.com","Tshifhiwa","Mavhona");
+        assertEquals(expected,results);
+
+
     }
 }
