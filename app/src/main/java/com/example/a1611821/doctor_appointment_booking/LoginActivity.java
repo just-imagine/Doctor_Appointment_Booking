@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         Params.put("USERNAME",Patient.getEmail());
         Params.put("PASSWORD",Patient.getPassword());
        //still need to figure out a way to handle the threading in some other class this is a naive way of doing it
-       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Login.php",Params){
+       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/login.php",Params){
             @Override
             protected void onPostExecute(String output) {
                 try {
@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         };
         getAccount.execute();
     }
+
 
     }
 

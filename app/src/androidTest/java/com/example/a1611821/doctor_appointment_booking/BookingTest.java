@@ -214,6 +214,7 @@ public class BookingTest {
 
         final Booking temp1= new Booking("12/12/2019","12:30","9812176232089");
         final Booking temp2= new Booking("12/12/2019","12:30","9812176232089");
+        assertTrue(temp1.equals(temp1));
         assertTrue(temp1.equals(temp2));
         final Field field= temp1.getClass().getDeclaredField("Time");
         field.setAccessible(true);
