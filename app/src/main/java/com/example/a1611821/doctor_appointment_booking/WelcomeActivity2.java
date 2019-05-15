@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,12 +32,13 @@ public class  WelcomeActivity2 extends AppCompatActivity{
     //local sqlite database to be used for testing
     DatabaseHelper accountDB;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         accountDB=new DatabaseHelper(this, "app");
         setContentView(R.layout.activity_welcome2);
-
+      
         //Edittexts to collect information from
         Name=(EditText)findViewById(R.id.fullnames);
         Surname=(EditText)findViewById(R.id.Surname);
@@ -181,5 +183,3 @@ public class  WelcomeActivity2 extends AppCompatActivity{
             return  data;
         }
     }
-
-

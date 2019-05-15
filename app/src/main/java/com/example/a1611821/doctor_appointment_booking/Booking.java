@@ -143,9 +143,7 @@ public class Booking {
         for(int i=0;i< SLots.size();++i){
             TextView Slot=SLots.get(i);
             if(Slot.getHint().equals(Time)){
-                String s=Identity;
-                String d=currentUser;
-                String v=Slot.getText().toString();
+
 
                 if(this.MyBooking() && !this.Completed()){
                     Slot.setBackgroundColor(Color.parseColor("#4eacc8"));
