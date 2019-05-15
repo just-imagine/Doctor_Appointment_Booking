@@ -67,7 +67,7 @@ public class Booking {
     }
 
     public void setName(String name){
-        Name=Name;
+        Name=name;
     }
 
     public void setSurname(String surname) {
