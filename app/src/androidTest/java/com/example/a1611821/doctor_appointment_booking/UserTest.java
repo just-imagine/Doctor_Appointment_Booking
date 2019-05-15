@@ -1,12 +1,19 @@
 package com.example.a1611821.doctor_appointment_booking;
 
+import android.support.test.internal.util.ReflectionUtil;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
 
-import static org.junit.Assert.*;
+import javax.annotation.meta.When;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 
 public class UserTest {
 
@@ -154,7 +161,7 @@ public class UserTest {
     @Test
     public void setIdentity() throws NoSuchFieldException, IllegalAccessException {
         final User temp= new User();
-        temp.setIdentity("981216232089");
+        temp.setIdentity("9812176232089");
         final  Field field =temp.getClass().getDeclaredField("Identity");
         field.setAccessible(true);
         assertEquals("9812176232089",field.get(temp));
@@ -165,7 +172,7 @@ public class UserTest {
     @Test
     public void setGender() throws NoSuchFieldException, IllegalAccessException {
         final User temp= new User();
-        temp.setContact("Female");
+        temp.setGender("Female");
         final  Field field =temp.getClass().getDeclaredField("Gender");
         field.setAccessible(true);
         assertEquals("Female",field.get(temp));
@@ -203,6 +210,7 @@ public class UserTest {
     @Test
     public void validName() throws IllegalAccessException, NoSuchFieldException {
         final User temp= new User();
+        final User SpyUser= spy(temp);
         final Field field= temp.getClass().getDeclaredField("Name");
         field.setAccessible(true);
         field.set(temp,"Tshifhiwa");
@@ -281,11 +289,11 @@ public class UserTest {
         final Field field= temp.getClass().getDeclaredField("Contact");
         field.setAccessible(true);
         field.set(temp,"0659545378");
-        assertTrue(temp.validEmail());
+        assertTrue(temp.validContact());
         field.set(temp,"06595453");
-        assertFalse(temp.validEmail());
+        assertFalse(temp.validContact());
         field.set(temp,null);
-        assertFalse(temp.validEmail());
+        assertFalse(temp.validContact());
         field.set(temp,"7659545378");
         assertFalse(temp.validEmail());
     }
@@ -324,10 +332,44 @@ public class UserTest {
     @Test
     public void validUser() {
 
+         User SpyUser= spy(User.class);
+        doReturn(true).when(SpyUser).validEmail();
+        doReturn(true).when(SpyUser).validName();
+        doReturn(true).when(SpyUser).validSurname();
+        doReturn(true).when(SpyUser).validIdentity();
+        doReturn(true).when(SpyUser).validGender();
+        doReturn(true).when(SpyUser).validPassword();
+        doReturn(true).when(SpyUser).confirmPassword();
+        assertTrue(SpyUser.validUser());
+        doReturn(false).when(SpyUser).validPassword();
+        assertFalse(SpyUser.validUser());
+
     }
 
     @Test
-    public void equals() {
+    public void equals() throws NoSuchFieldException, IllegalAccessException {
+        User SpyUser= spy(User.class);
+        User SpyUser1=spy(User.class);
+        final User temp= new User();
+        final User temp2= new User();
+        assertTrue(SpyUser.equals(SpyUser));
+        Field field= temp.getClass().getDeclaredField("Password");
+        field.setAccessible(true);
+        field.set(temp,"afterlife");
+        field= temp.getClass().getDeclaredField("Email");
+        field.setAccessible(true);
+        field.set(temp,"tmavhona@gmail.com");
+        field= temp2.getClass().getDeclaredField("Password");
+        field.setAccessible(true);
+        field.set(temp2,"afterlife");
+        field= temp2.getClass().getDeclaredField("Email");
+        field.setAccessible(true);
+        field.set(temp2,"tmavhona@gmail.com");
+        doReturn(true).when(SpyUser).validEmail();
+        doReturn(true).when(SpyUser).validPassword();
+        assertTrue(temp.equals(temp2));
+        field.set(temp2,"tmavhona@gmail.co.za");
+        assertFalse(temp.equals(temp2));
     }
 
     @Test
