@@ -264,5 +264,7 @@ public class DailyView extends AppCompatActivity
         thisDay.cancelBooking(b,mainView);
     }
 
-    
+    //mysqli database
+
+
 }

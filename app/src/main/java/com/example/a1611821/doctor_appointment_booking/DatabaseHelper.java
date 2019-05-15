@@ -97,6 +97,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	   	db.execSQL("Create table ACCOUNTS(ID_NUMBER text PRIMARY KEY, EMAIL_ADDRESS text not null, NAME text,SURNAME text,CONTACT_NO text,GENDER text,PASSWORD text)");
+
+
 	}
 
 	public SQLiteDatabase getDB(){

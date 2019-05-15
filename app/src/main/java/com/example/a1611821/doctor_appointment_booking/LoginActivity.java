@@ -44,10 +44,13 @@ public class LoginActivity extends AppCompatActivity {
         ContentValues Params=new ContentValues();
         Params.put("USERNAME",Patient.getEmail());
         Params.put("PASSWORD",Patient.getPassword());
+
+        int x=1;
        //still need to figure out a way to handle the threading in some other class this is a naive way of doing it
-       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Login.php",Params){
+       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/newLogin.php",Params){
             @Override
             protected void onPostExecute(String output) {
+                int a=1;
                 try {
                     //only ever returns one user which we need to compare with the user we have to see if we can login
                     JSONArray dbInformation=new JSONArray(output);
