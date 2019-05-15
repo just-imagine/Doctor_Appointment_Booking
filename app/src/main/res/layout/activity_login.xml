@@ -74,6 +74,7 @@
 
 
             <Button
+                android:onClick="doLogin"
                 android:background="@drawable/button_drawable"
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
@@ -115,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="14dp"
                 android:clickable="true"
-                android:onClick="_register"
+                android:onClick="launchRegistration"
                 android:padding="2dp"
                 android:paddingLeft="3dp"
                 android:text="Register"

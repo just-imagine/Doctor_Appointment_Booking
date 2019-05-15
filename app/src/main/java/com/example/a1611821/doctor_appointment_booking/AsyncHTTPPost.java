@@ -3,6 +3,7 @@ package com.example.a1611821.doctor_appointment_booking;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,8 +17,6 @@ public  abstract class AsyncHTTPPost extends AsyncTask<String, String,
         String> {
     String address;
     ContentValues parameters;
-    String result="";
-
     public AsyncHTTPPost(String address, ContentValues parameters) {
         this.address = address;
         this.parameters = parameters;
@@ -53,20 +52,14 @@ public  abstract class AsyncHTTPPost extends AsyncTask<String, String,
                     new InputStreamReader(connection.getInputStream()));
             String response = br.readLine();
             br.close();
-            result=response;
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-
             return "";
         }
     }
-
+    
     @Override
     protected abstract void onPostExecute(String output);
-
-    public  String State (){
-        return result;
-    }
 
 }

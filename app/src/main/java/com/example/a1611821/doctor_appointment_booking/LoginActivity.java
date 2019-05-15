@@ -19,64 +19,64 @@ public class LoginActivity extends AppCompatActivity {
     Button Login;
     EditText Username;
     EditText Password;
+    User Patient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         Username=(EditText)findViewById(R.id.username);
         Password=(EditText)findViewById(R.id.password);
-
         Login=(Button)findViewById(R.id.login);
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String username=Username.getText().toString();
-                String password=Password.getText().toString();
-                ContentValues Params=new ContentValues();
-                Params.put("USERNAME",username);
-                Params.put("PASSWORD",password);
-
-                AsyncHTTPPost SignIn=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Login.php",Params) {
-                    @Override
-                    protected void onPostExecute(String output) {
-                        String form[]=output.split(",");
-                        String identity="";
-                        try {
-                            JSONArray result=new JSONArray(output);
-                            for(int i=0;i<result.length();++i){
-                                JSONObject obj=result.getJSONObject(i);
-                                identity=obj.getString("ID_NUMBER");
-                            }
-
-                            if(!identity.equals("")){
-                                Intent HomeActivity=new Intent(getApplicationContext(),HomeScreen.class);
-                                HomeActivity.putExtra("Username",username);
-                                HomeActivity.putExtra("Identity",identity);
-                                startActivity(HomeActivity);
-                            }
-                        } catch (JSONException e) {
-                             if(output.equals("unsuccessful")){
-                                Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();}
-
-                              else if(output.equals("")){
-                                     Toast.makeText(getApplicationContext(),"connection error, check your internet connection",Toast.LENGTH_SHORT).show();
-                                 }
-                                  e.printStackTrace();
-
-
-
-                        }
-
-                    }
-                };
-                SignIn.execute();
-            }
-        });
     }
 
-    public void _register(View view){
+    public void launchRegistration(View view){
         startActivity(new Intent(getApplicationContext(), WelcomeActivity2.class));
+    }
+
+    public void doLogin(View v){
+        Patient=new User();
+        Patient.setEmail(Username.getText().toString().trim());
+        Patient.setPassword(Password.getText().toString().trim());
+        //we want to launch an async and check that the account exist;
+        //the parameters passed are the username and password
+        ContentValues Params=new ContentValues();
+        Params.put("USERNAME",Patient.getEmail());
+        Params.put("PASSWORD",Patient.getPassword());
+       //still need to figure out a way to handle the threading in some other class this is a naive way of doing it
+       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/Login.php",Params){
+            @Override
+            protected void onPostExecute(String output) {
+                try {
+                    //only ever returns one user which we need to compare with the user we have to see if we can login
+                    JSONArray dbInformation=new JSONArray(output);
+                    JSONObject obj=dbInformation.getJSONObject(0);
+                    User dbUser=new User();
+                    dbUser.setEmail(obj.getString("EMAIL_ADDRESS"));
+                    dbUser.setPassword(obj.getString("PASSWORD"));
+                    if(Patient.equals(dbUser)){
+                        //take all the patient data and pass it to the next Intent
+                        Intent HomeScreen=new Intent(getApplicationContext(),HomeScreen.class);
+                        HomeScreen.putExtra("USERNAME",Patient.getEmail());
+                        HomeScreen.putExtra("IDENTITY",obj.getString("ID_NUMBER"));
+                        HomeScreen.putExtra("NAME",obj.getString("NAME"));
+                        HomeScreen.putExtra("SURNAME",obj.getString("SURNAME"));
+                        //start the next intent
+                        startActivity(HomeScreen);
+                    }
+
+                    else{
+                        Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        getAccount.execute();
+    }
 
     }
-   
-}
+
