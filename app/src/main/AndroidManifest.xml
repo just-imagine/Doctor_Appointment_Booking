@@ -24,10 +24,12 @@
         </activity>
 
         <activity
+            android:parentActivityName=".HomeScreen"
             android:name=".DailyView"
             android:label="@string/title_activity_daily_view"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:parentActivityName=".LoginActivity"
             android:name=".HomeScreen"
             android:theme="@style/AppTheme.NoActionBar">
 

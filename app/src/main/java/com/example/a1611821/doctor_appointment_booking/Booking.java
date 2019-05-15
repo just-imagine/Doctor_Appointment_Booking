@@ -20,18 +20,11 @@ public class Booking {
 
 
 
-    public Booking(String Name, String Surname, String Identity,String Contact,String Email, String Date, String Time,int state){
-        this.Name=Name;
-        this.Surname=Surname;
+    public Booking(String Date, String Time,String Identity){
         this.Identity=Identity;
-        this.Contact=Contact;
-        this.Email=Email;
         this.Date=Date;
         this.Time=Time;
-        this.state=state;
-
     }
-
 
     public String getName(){
         return  Name;
@@ -49,8 +42,16 @@ public class Booking {
         return Identity;
     }
 
-    public String getTime() {
-        return Time;
+    public String getTime(){
+        return  Time;
+    }
+    //return the time in the db format
+    public String getDbTime() {
+        String line="";
+        String data[]=Time.split(":");
+
+        line=data[0]+data[1]+"00";
+        return line;
     }
 
     public String getSurname() {
@@ -65,6 +66,25 @@ public class Booking {
         currentUser=user;
     }
 
+    public void setName(String name){
+        Name=Name;
+    }
+
+    public void setSurname(String surname) {
+        Surname = surname;
+    }
+
+    public void setContact(String contact) {
+        Contact = contact;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     boolean Empty(){
         if(Identity.equals("")){
@@ -78,7 +98,6 @@ public class Booking {
         if(Identity.equals("Admin")){
             return  true;
         }
-
         return  false;
     }
 
@@ -86,7 +105,6 @@ public class Booking {
         if(!Identity.equals("null") && !Blocked() && !Identity.equals(currentUser)){
             return  true;
         }
-
         return  false;
     }
 
@@ -94,28 +112,49 @@ public class Booking {
         if(state==1){
             return  true;
         }
-
         return  false;
     }
-
 
     boolean MyBooking(){
         if(currentUser.equals(Identity)){
             return  true;
         }
-
         return  false;
     }
 
-    public void OccupySlots(ArrayList<TextView>SLots){
+    @Override
+    public boolean equals(Object obj){
+        if(this==obj){
+            return  true;
+        }
+
+        else{
+            Booking temp=(Booking)obj;
+            if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate())){
+                return  true;
+            }
+
+            return  false;
+        }
+
+    }
+
+   /* public void OccupySlots(ArrayList<TextView>SLots){
         for(int i=0;i< SLots.size();++i){
             TextView Slot=SLots.get(i);
             if(Slot.getHint().equals(Time)){
 
 
-                if(this.MyBooking()){
+                if(this.MyBooking() && !this.Completed()){
                     Slot.setBackgroundColor(Color.parseColor("#4eacc8"));
                     Slot.setText("Appointment");
+                    Slot.setTextColor(Color.WHITE);
+                }
+
+
+                else if(this.MyBooking() && this.Completed()){
+                    Slot.setBackgroundColor(Color.parseColor("#003366"));
+                    Slot.setText("Attended");
                     Slot.setTextColor(Color.WHITE);
                 }
 
@@ -144,7 +183,7 @@ public class Booking {
                 break;
             }
         }
-    }
+    }*/
 
 
 }
