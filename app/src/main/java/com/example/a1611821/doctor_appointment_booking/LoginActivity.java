@@ -44,10 +44,13 @@ public class LoginActivity extends AppCompatActivity {
         ContentValues Params=new ContentValues();
         Params.put("USERNAME",Patient.getEmail());
         Params.put("PASSWORD",Patient.getPassword());
+      
        //still need to figure out a way to handle the threading in some other class this is a naive way of doing it
-       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/login.php",Params){
+       AsyncHTTPPost getAccount=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/newLogin.php",Params){
             @Override
             protected void onPostExecute(String output) {
+
+
                 try {
                     //only ever returns one user which we need to compare with the user we have to see if we can login
                     JSONArray dbInformation=new JSONArray(output);
@@ -66,10 +69,10 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(HomeScreen);
                     }
 
-                    else{
-                        Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();
-                    }
+
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();
+
                     e.printStackTrace();
                 }
 
@@ -77,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
         };
         getAccount.execute();
     }
-
-
+  
     }
 

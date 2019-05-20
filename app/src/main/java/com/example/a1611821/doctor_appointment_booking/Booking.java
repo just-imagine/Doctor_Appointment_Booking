@@ -49,7 +49,6 @@ public class Booking {
     public String getDbTime() {
         String line="";
         String data[]=Time.split(":");
-
         line=data[0]+data[1]+"00";
         return line;
     }
@@ -68,6 +67,7 @@ public class Booking {
 
     public void setName(String name){
         Name=name;
+
     }
 
     public void setSurname(String surname) {
@@ -85,7 +85,7 @@ public class Booking {
     public void setState(int state) {
         this.state = state;
     }
-
+    
     boolean Empty(){
         if(Identity.equals("")){
             return true;
@@ -130,7 +130,8 @@ public class Booking {
 
         else{
             Booking temp=(Booking)obj;
-            if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate())){
+            if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate()) && !temp.Blocked()){
+
                 return  true;
             }
 

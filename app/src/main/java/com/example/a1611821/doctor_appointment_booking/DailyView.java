@@ -56,6 +56,7 @@ public class DailyView extends AppCompatActivity
     User user;
     Dialog bookingDialog;
     String clickedTime;
+    ImageView monthTheme;
 
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -86,6 +87,8 @@ public class DailyView extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        monthTheme=(ImageView)findViewById(R.id.dayDisplay);
         mainView=(LinearLayout)findViewById(R.id.mainView);
         //we need the viewed weekday and date from previous intent they were passed
         currentIntent=getIntent();
@@ -144,6 +147,10 @@ public class DailyView extends AppCompatActivity
         //set date on on circular icon
         TextView weekday=(TextView)findViewById(R.id.weekDay);
         weekday.setText(thisDay.getWeekDay().substring(0,3));
+
+        //set picture
+        setTheme();
+
     }
 
     @Override
@@ -208,6 +215,7 @@ public class DailyView extends AppCompatActivity
         for(int i=0;i<cardSlots.size();++i){
             LinearLayout c=cardSlots.get(i);
             mainView.addView(c);
+
         }
 
     }
@@ -264,5 +272,39 @@ public class DailyView extends AppCompatActivity
         thisDay.cancelBooking(b,mainView);
     }
 
-    
+    public void setTheme(){
+        String Month=thisDay.getMonth();
+        if(Month.equals("April")){
+            monthTheme.setImageResource(R.drawable.april);
+        }
+        else if(Month.equals("March")){
+            monthTheme.setImageResource(R.drawable.march);
+        }
+        else if(Month.equals("January")){
+            monthTheme.setImageResource(R.drawable.january);
+        }
+        else if(Month.equals("February")){
+            monthTheme.setImageResource(R.drawable.february);
+        }
+        else if(Month.equals("May")){
+            monthTheme.setImageResource(R.drawable.may);
+        }
+        else if(Month.equals("June")){
+            monthTheme.setImageResource(R.drawable.june);
+        }
+        else if(Month.equals("July")){
+            monthTheme.setImageResource(R.drawable.july);
+        }
+        else if(Month.equals("August")){
+            monthTheme.setImageResource(R.drawable.august);
+        }
+        else if(Month.equals("September")){
+            monthTheme.setImageResource(R.drawable.september);}
+        else if(Month.equals("October")){
+            monthTheme.setImageResource(R.drawable.october);}
+        else if(Month.equals("November")){
+            monthTheme.setImageResource(R.drawable.november);}
+        else{
+            monthTheme.setImageResource(R.drawable.december);}
+    }
 }
