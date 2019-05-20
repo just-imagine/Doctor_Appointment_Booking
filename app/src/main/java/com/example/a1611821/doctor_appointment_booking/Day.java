@@ -159,7 +159,7 @@ public class Day extends Month {
     }
 
     //we want to retain any previous bookings we have and add new ones
-    public ArrayList<Booking> syncBookings(ArrayList<Booking>sync){
+    /*public ArrayList<Booking> syncBookings(ArrayList<Booking>sync){
 
         //return an empty arraylist
         if(sync.size()==0){
@@ -177,7 +177,7 @@ public class Day extends Month {
         temp.addAll(sync);
 
         return  temp;
-    }
+    }*/
 
     //cqueries database for daily schedule for the day
     public void DailySchedule(){
@@ -209,9 +209,13 @@ public class Day extends Month {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
-                    dailyBookings=syncBookings(sync);
+
+                    DailySchedule();
+                    dailyBookings=sync;
                     updateSlots();
+
 
             }
         };
@@ -225,6 +229,7 @@ public class Day extends Month {
             String actualtime=""+date;
             String sub=actualtime.substring(11,16);
             int currenttimevalue=timeValue(sub);
+
             for(int j=0;j<timeSlots.size();++j){
                 TextView slot=timeSlots.get(j);
                 String time=slot.getHint().toString();
@@ -381,5 +386,7 @@ public class Day extends Month {
         String val=""+subs[0]+subs[1];
         return  Integer.parseInt(val);
     }
+
+
 
 }
