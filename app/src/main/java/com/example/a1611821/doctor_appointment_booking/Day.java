@@ -206,7 +206,7 @@ public class Day extends Month {
 
                     }
 
-r
+
                     //if the info has changed update ui
 
                 } catch (JSONException e) {
