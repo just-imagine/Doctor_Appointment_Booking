@@ -87,8 +87,8 @@ public class DailyView extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        monthTheme=(ImageView)findViewById(R.id.dayDisplay);
 
+        monthTheme=(ImageView)findViewById(R.id.dayDisplay);
         mainView=(LinearLayout)findViewById(R.id.mainView);
         //we need the viewed weekday and date from previous intent they were passed
         currentIntent=getIntent();
@@ -150,6 +150,7 @@ public class DailyView extends AppCompatActivity
 
         //set picture
         setTheme();
+
     }
 
     @Override
@@ -214,6 +215,7 @@ public class DailyView extends AppCompatActivity
         for(int i=0;i<cardSlots.size();++i){
             LinearLayout c=cardSlots.get(i);
             mainView.addView(c);
+
         }
 
     }
@@ -305,5 +307,4 @@ public class DailyView extends AppCompatActivity
         else{
             monthTheme.setImageResource(R.drawable.december);}
     }
-
 }

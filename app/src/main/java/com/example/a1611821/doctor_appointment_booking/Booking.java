@@ -66,7 +66,8 @@ public class Booking {
     }
 
     public void setName(String name){
-        Name=Name;
+        Name=name;
+
     }
 
     public void setSurname(String surname) {
@@ -130,6 +131,7 @@ public class Booking {
         else{
             Booking temp=(Booking)obj;
             if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate()) && !temp.Blocked()){
+
                 return  true;
             }
 

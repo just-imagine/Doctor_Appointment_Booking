@@ -183,6 +183,7 @@ public class Day extends Month {
     public void DailySchedule(){
         ContentValues Params=new ContentValues();
         Params.put("DATE",getCheckedDate());
+
         AsyncHTTPPost getSchedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CSearches.php",Params) {
             @Override
             protected void onPostExecute(String output) {
@@ -205,11 +206,13 @@ public class Day extends Month {
 
                     }
 
+r
                     //if the info has changed update ui
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                     dailyBookings=syncBookings(sync);
                     updateSlots();
 
@@ -220,11 +223,12 @@ public class Day extends Month {
     }
 
     public void updateSlots(){
-
+      
             Date date=new Date();
             String actualtime=""+date;
             String sub=actualtime.substring(11,16);
             int currenttimevalue=timeValue(sub);
+
             for(int j=0;j<timeSlots.size();++j){
                 TextView slot=timeSlots.get(j);
                 String time=slot.getHint().toString();
@@ -234,6 +238,7 @@ public class Day extends Month {
                 if(Integer.parseInt(getCheckedDate())-Integer.parseInt(getCurrentDate())>=0){
                 if(b!=null){
                     if(b.Booked() || b.Blocked()){
+                      
                       slot.setBackgroundColor(Color.parseColor("#d13c04"));
                       slot.setText("Unavailable");}
 
@@ -272,6 +277,7 @@ public class Day extends Month {
 
             }
 
+
     }
 
     //for making a new booking
@@ -279,13 +285,16 @@ public class Day extends Month {
         //if the user does not have a booking for today they should be able to make a booking
             ContentValues Params=new ContentValues();
             Params.put("DATE",getCheckedDate());
+
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
             AsyncHTTPPost book=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
+
                     bookingUpdate(output,mainView);
+
                     DailySchedule();
                 }
             };
@@ -300,13 +309,16 @@ public class Day extends Month {
 
             ContentValues Params=new ContentValues();
             Params.put("DATE",getCheckedDate());
+
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
             AsyncHTTPPost cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
+
                     cancellationUpdate(output,mainView);
+
                     DailySchedule();
 
                 }
@@ -317,6 +329,7 @@ public class Day extends Month {
                     "Loading. Please wait...", true);
 
     }
+
 
     //updaets  ui accordingly depending on async result
     public void bookingUpdate(String output,LinearLayout mainView){
