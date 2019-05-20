@@ -271,7 +271,7 @@ public class DailyView extends AppCompatActivity
     }
 
     public void setTheme(){
-        String Month=thisDay.getMonthName(thisDay.getMonthIndex());
+        String Month=thisDay.getMonth();
         if(Month.equals("April")){
             monthTheme.setImageResource(R.drawable.april);
         }
