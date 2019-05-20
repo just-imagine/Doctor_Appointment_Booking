@@ -233,7 +233,7 @@ public class Day extends Month {
 
                 if(Integer.parseInt(getCheckedDate())-Integer.parseInt(getCurrentDate())>=0){
                 if(b!=null){
-                    if(b.Booked()){
+                    if(b.Booked() || b.Blocked()){
                       slot.setBackgroundColor(Color.parseColor("#d13c04"));
                       slot.setText("Unavailable");}
 

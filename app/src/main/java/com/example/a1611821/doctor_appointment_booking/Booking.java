@@ -129,7 +129,7 @@ public class Booking {
 
         else{
             Booking temp=(Booking)obj;
-            if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate())){
+            if(this.Time.equals(temp.getTime()) && this.Date.equals(temp.getDate()) && !temp.Blocked()){
                 return  true;
             }
 
