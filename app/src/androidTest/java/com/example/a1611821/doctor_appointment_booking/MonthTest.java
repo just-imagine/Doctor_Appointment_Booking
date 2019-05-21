@@ -95,7 +95,7 @@ public class MonthTest {
         assertEquals("20190929",results);
         field.set(temp,"20190404");
         final String newresult=temp.getCurrentDate();
-        assertEquals("20190404",results);
+        assertEquals("20190404",newresult);
     }
     @Test
     public void changeCheckedDate(){
