@@ -31,6 +31,7 @@ public class Day extends Month {
     User user;
     ProgressDialog Loading;
     Dialog bookingDialog;
+    AsyncHTTPPost getSchedule,book;
 
     public Day(Context context){
         super();
@@ -184,7 +185,7 @@ public class Day extends Month {
         ContentValues Params=new ContentValues();
         Params.put("DATE",getCheckedDate());
 
-        AsyncHTTPPost getSchedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CSearches.php",Params) {
+         getSchedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CSearches.php",Params) {
             @Override
             protected void onPostExecute(String output) {
                 ArrayList<Booking>sync=new ArrayList<>();
@@ -289,7 +290,7 @@ public class Day extends Month {
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
-            AsyncHTTPPost book=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
+             book=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
 

@@ -106,6 +106,9 @@ public class MonthTest {
         day=CalendarDay.from(2019,4,04);
         final String newresults=temp.changeCheckedDate(day);
         assertEquals("20190504",newresults);
+        day=CalendarDay.from(2019,11,10);
+        final String myresults=temp.changeCheckedDate(day);
+        assertEquals("20191210",myresults);
 
     }
     @Test
