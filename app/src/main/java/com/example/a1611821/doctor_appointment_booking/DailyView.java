@@ -146,9 +146,7 @@ public class DailyView extends AppCompatActivity
 
         //set date on on circular icon
         TextView weekday=(TextView)findViewById(R.id.weekDay);
-
-        weekday.setText(thisDay.getWeekDay().substring(0,3)+"\n"+thisDay.getDay());
-
+        weekday.setText(thisDay.getWeekDay().substring(0,3));
 
         //set picture
         setTheme();
