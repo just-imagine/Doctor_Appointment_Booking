@@ -93,6 +93,9 @@ public class MonthTest {
         field.set(temp,"20190929");
         final String results=temp.getCurrentDate();
         assertEquals("20190929",results);
+        field.set(temp,"20190404");
+        final String newresult=temp.getCurrentDate();
+        assertEquals("20190404",results);
     }
     @Test
     public void changeCheckedDate(){
@@ -100,6 +103,9 @@ public class MonthTest {
         CalendarDay day=CalendarDay.from(2019,9,29);
         final String results=temp.changeCheckedDate(day);
         assertEquals("20191029",results);
+        day=CalendarDay.from(2019,4,04);
+        final String newresults=temp.changeCheckedDate(day);
+        assertEquals("20190504",newresults);
 
     }
     @Test
@@ -107,6 +113,28 @@ public class MonthTest {
         final Month temp=new Month();
         final String results=temp.getMonthName(9);
         assertEquals("September",results);
+        final String results1=temp.getMonthName(1);
+        assertEquals("January",results1);
+        final String results2=temp.getMonthName(2);
+        assertEquals("February",results2);
+        final String results3=temp.getMonthName(3);
+        assertEquals("March",results3);
+        final String results4=temp.getMonthName(4);
+        assertEquals("April",results4);
+        final String results5=temp.getMonthName(5);
+        assertEquals("May",results5);
+        final String results6=temp.getMonthName(6);
+        assertEquals("June",results6);
+        final String results7=temp.getMonthName(7);
+        assertEquals("July",results7);
+        final String results8=temp.getMonthName(8);
+        assertEquals("August",results8);
+        final String results10=temp.getMonthName(10);
+        assertEquals("October",results10);
+        final String results11=temp.getMonthName(11);
+        assertEquals("November",results11);
+        final String results12=temp.getMonthName(12);
+        assertEquals("December",results12);
     }
     @Test
     public void getMonthIndex() throws NoSuchFieldException, IllegalAccessException{
