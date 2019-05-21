@@ -31,7 +31,7 @@ public class Day extends Month {
     User user;
     ProgressDialog Loading;
     Dialog bookingDialog;
-    AsyncHTTPPost getSchedule,book;
+    AsyncHTTPPost getSchedule,book,cancel;
 
     public Day(Context context){
         super();
@@ -39,7 +39,13 @@ public class Day extends Month {
         slotCards=new ArrayList<>();
         timeSlots=new ArrayList<TextView>();
         this.context=context;
-        Loading=new ProgressDialog(context);
+       // Loading=new ProgressDialog(context);
+    }
+
+
+
+    public void setLoading(ProgressDialog loading){
+        Loading=loading;
     }
 
     //set the current user
@@ -58,6 +64,7 @@ public class Day extends Month {
         try {
             date1 = new SimpleDateFormat("yyyyMMdd").parse(date);
         } catch (ParseException e) {
+
             e.printStackTrace();
         }
         return  date1;
@@ -314,7 +321,7 @@ public class Day extends Month {
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
-            AsyncHTTPPost cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
+             cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
 

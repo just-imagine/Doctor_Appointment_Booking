@@ -57,6 +57,7 @@ public class DailyView extends AppCompatActivity
     Dialog bookingDialog;
     String clickedTime;
     ImageView monthTheme;
+    ProgressDialog Loading;
 
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -123,7 +124,8 @@ public class DailyView extends AppCompatActivity
 
         thisDay.setUser(user);
         thisDay.DailySchedule();
-
+        Loading=new ProgressDialog(this);
+        thisDay.setLoading(Loading);
         //make a scrollview which will update daily bookings
         Update=(ScrollView)findViewById(R.id.Update);
 
