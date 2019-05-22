@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {

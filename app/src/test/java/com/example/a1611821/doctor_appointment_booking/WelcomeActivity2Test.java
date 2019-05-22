@@ -10,12 +10,12 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
 @RunWith(RobolectricTestRunner.class)
-@Config(constants =BuildConfig.class, sdk = 27)
 public class WelcomeActivity2Test {
 
     WelcomeActivity2 myReg;
     @Before
     public void setUp() throws Exception {
+        myReg= Robolectric.setupActivity(WelcomeActivity2.class);
 
     }
 
@@ -24,7 +24,7 @@ public class WelcomeActivity2Test {
     }
     @Test
     public void check(){
-        myReg= Robolectric.setupActivity(WelcomeActivity2.class);
+
         assertNotNull(myReg);
     }
 }
