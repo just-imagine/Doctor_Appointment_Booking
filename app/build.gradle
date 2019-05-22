@@ -1,9 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin:'jacoco'
 android {
-    jacoco {
-        version = '0.8.0'
-    }
+
     compileSdkVersion 28
     testOptions.unitTests.includeAndroidResources = true
     defaultConfig {
@@ -29,9 +27,16 @@ android {
                 }
     }
     testOptions {
-        unitTests {
-            includeAndroidResources = true
+
+        unitTests.all {
+
+            jacoco {
+                includeNoLocationClasses = true
+
+            }
+
         }
+
     }
 }
 
@@ -66,18 +71,9 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:4.2.1'
     testImplementation 'org.robolectric:shadows-support-v4:3.0'
 }
-android.testOptions {
 
-    unitTests.all {
-
-        jacoco {
-
-            includeNoLocationClasses = true
-
-        }
-
-    }
-
+jacoco {
+    version = '0.8.0'
 }
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
