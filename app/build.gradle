@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin:'jacoco'
 android {
+    jacoco {
+        version = '0.7.9'
+    }
     compileSdkVersion 28
     testOptions.unitTests.includeAndroidResources = true
     defaultConfig {
