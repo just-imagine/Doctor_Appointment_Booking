@@ -38,9 +38,14 @@ public class Day extends Month {
         slotCards=new ArrayList<>();
         timeSlots=new ArrayList<TextView>();
         this.context=context;
-        Loading=new ProgressDialog(context);
+       // Loading=new ProgressDialog(context);
     }
 
+
+    //set loading
+    public void setLoading(ProgressDialog loading){
+        Loading=loading;
+    }
     //set the current user
     public void setUser(User User){
         user=User;
