@@ -1,6 +1,9 @@
 package com.example.a1611821.doctor_appointment_booking;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +12,8 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 21)
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
