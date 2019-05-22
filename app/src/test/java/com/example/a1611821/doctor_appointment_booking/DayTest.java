@@ -16,13 +16,14 @@ import static org.junit.Assert.*;
 public class DayTest {
 
     DailyView myDialy;
+    Day myDay;
     @Before
     public void setUp() throws Exception {
         Intent intent = new Intent(RuntimeEnvironment.application,DailyView.class);
         intent.putExtra("checkedDate", "20190522");
 
         myDialy= Robolectric.buildActivity(DailyView.class,intent).setup().get();
-
+        myDay= new Day(myDialy.getApplicationContext());
     }
 
     @After
@@ -33,5 +34,11 @@ public class DayTest {
 
 
         assertNotNull(myDialy);
+    }
+    @Test
+    public void expand(){
+        assertEquals(0,myDay.timeSlots.size());
+        myDay.expandSlots();
+        assertEquals(41,myDay.timeSlots.size());
     }
 }
