@@ -49,6 +49,10 @@ public class WelcomeActivity2Test {
 
     }
     @Test
+    public void tryToRegister2() {
+        myReg.findViewById(R.id.createAccount).performClick();
+    }
+    @Test
     public void onKeyUp_callsOnBackPressedWhichFinishesTheActivity() throws Exception {
 
         boolean downConsumed =
