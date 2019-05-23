@@ -51,6 +51,10 @@ public class WelcomeActivity2Test {
     @Test
     public void tryToRegister2() {
         myReg.findViewById(R.id.createAccount).performClick();
+        myReg.ConfirmPassword.setText("afterlife");
+        myReg.Contact.setText("0891111111");
+        myReg.Password.setText("afterl12ife");
+        myReg.findViewById(R.id.createAccount).performClick();
     }
     @Test
     public void onKeyUp_callsOnBackPressedWhichFinishesTheActivity() throws Exception {
