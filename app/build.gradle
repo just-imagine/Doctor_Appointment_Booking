@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.github.prolificinteractive:material-calendarview:1.6.0'
     testImplementation 'org.robolectric:robolectric:4.2.1'
     testImplementation 'org.robolectric:shadows-support-v4:3.0'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
 
 jacoco {

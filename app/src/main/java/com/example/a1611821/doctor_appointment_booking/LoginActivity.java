@@ -50,14 +50,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String output) {
 
-
+                        int x=0;
                 try {
                     //only ever returns one user which we need to compare with the user we have to see if we can login
                     JSONArray dbInformation=new JSONArray(output);
                     JSONObject obj=dbInformation.getJSONObject(0);
                     User dbUser=new User();
-                    dbUser.setEmail(obj.getString("EMAIL_ADDRESS"));
-                    dbUser.setPassword(obj.getString("PASSWORD"));
+                    dbUser.setEmail(obj.getString("EMAIL_ADDRESS").trim());
+                    dbUser.setPassword(obj.getString("PASSWORD").trim());
                     if(Patient.equals(dbUser)){
                         //take all the patient data and pass it to the next Intent
                         Intent HomeScreen=new Intent(getApplicationContext(),HomeScreen.class);

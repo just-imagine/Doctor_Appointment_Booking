@@ -163,15 +163,11 @@ public class HomeScreen extends AppCompatActivity
         return true;
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -179,9 +175,7 @@ public class HomeScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_schedule) {
-            // Handle the camera action
-        } else if (id == R.id.nav_day) {
+        if (id == R.id.nav_day) {
             Intent DailyView=new Intent(getApplicationContext(),DailyView.class);
             //pass data to next intent
             DailyView.putExtra("USERNAME",Username);
@@ -189,18 +183,10 @@ public class HomeScreen extends AppCompatActivity
             DailyView.putExtra("NAME",Name);
             DailyView.putExtra("SURNAME",Surname);
             DailyView.putExtra("checkedDate",calendarMonth.getCheckedDate());
-
             startActivity(DailyView);
 
-        } else if (id == R.id.nav_week) {
-
-        } else if (id == R.id.nav_month) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
