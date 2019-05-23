@@ -210,20 +210,14 @@ public class Day extends Month {
 
                     }
 
-
                     //if the info has changed update ui
 
                 } catch (JSONException e) {
                     e.printStackTrace();
 
-
                 }
-
-                    DailySchedule();
                     dailyBookings=sync;
-
                     updateSlots();
-
 
             }
         };
@@ -247,7 +241,6 @@ public class Day extends Month {
                 if(Integer.parseInt(getCheckedDate())-Integer.parseInt(getCurrentDate())>=0){
                 if(b!=null){
                     if(b.Booked() || b.Blocked()){
-
                       slot.setBackgroundColor(Color.parseColor("#d13c04"));
                       slot.setText("Unavailable");}
 
@@ -284,7 +277,6 @@ public class Day extends Month {
                     slot.setText("Unavailable");
                 }
 
-
             }
 
     }
@@ -294,7 +286,6 @@ public class Day extends Month {
         //if the user does not have a booking for today they should be able to make a booking
             ContentValues Params=new ContentValues();
             Params.put("DATE",getCheckedDate());
-
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
@@ -302,7 +293,6 @@ public class Day extends Month {
                 @Override
                 protected void onPostExecute(String output) {
                     bookingUpdate(output,mainView);
-
                     DailySchedule();
                 }
             };
@@ -317,16 +307,13 @@ public class Day extends Month {
 
             ContentValues Params=new ContentValues();
             Params.put("DATE",getCheckedDate());
-
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
             AsyncHTTPPost cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
-
                     cancellationUpdate(output,mainView);
-
                     DailySchedule();
 
                 }
@@ -403,69 +390,5 @@ public class Day extends Month {
     }
 
 
-
-    //updaets  ui accordingly depending on async result
-    public void bookingUpdate(String output,LinearLayout mainView){
-        if(output.equals("success")){
-            bookingDialog.dismiss();
-            Loading.dismiss();
-
-            Snackbar success= Snackbar.make(mainView, "Booking successful", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = success.getView();
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            success.show();
-        }
-
-        else{
-            bookingDialog.dismiss();
-            Loading.dismiss();
-            Snackbar error=Snackbar.make(mainView, "Booking unsuccessful", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = error.getView();
-            snackBarView.setBackgroundColor(Color.RED);
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            error.show();
-        }
-
-    }
-
-    public void cancellationUpdate(String output,LinearLayout mainView){
-        if(output.equals("success")){
-            bookingDialog.dismiss();
-            Loading.dismiss();
-
-            Snackbar success= Snackbar.make(mainView, "Appointment cancelled", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = success.getView();
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            success.show();
-        }
-
-        else{
-            bookingDialog.dismiss();
-            Loading.dismiss();
-            Snackbar error=Snackbar.make(mainView, "Failed to cancel appointment", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = error.getView();
-            snackBarView.setBackgroundColor(Color.RED);
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            error.show();
-        }
-    }
-
-    public int timeValue(String time){
-        String subs[]=time.split(":");
-        String val=""+subs[0]+subs[1];
-        return  Integer.parseInt(val);
-    }
 
 }
