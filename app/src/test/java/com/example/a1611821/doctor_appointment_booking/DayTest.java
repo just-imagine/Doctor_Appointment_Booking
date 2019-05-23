@@ -1,6 +1,9 @@
 package com.example.a1611821.doctor_appointment_booking;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.widget.LinearLayout;
 
 import org.junit.After;
 import org.junit.Before;
@@ -40,5 +43,45 @@ public class DayTest {
         assertEquals(0,myDay.timeSlots.size());
         myDay.expandSlots();
         assertEquals(41,myDay.timeSlots.size());
+
+    }
+    @Test
+    public void bookingUpdateSuccess(){
+        LinearLayout mainView= myDialy.findViewById(R.id.mainView);
+        String success="success";
+        myDay.bookingDialog=new Dialog(myDialy.getApplicationContext());
+        myDay.Loading=new ProgressDialog(myDialy.getApplicationContext());
+        myDay.bookingUpdate(success,mainView);
+
+
+    }
+
+    @Test
+    public void bookingUpdateFail(){
+        LinearLayout mainView= myDialy.findViewById(R.id.mainView);
+        String success="fail";
+        myDay.bookingDialog=new Dialog(myDialy.getApplicationContext());
+        myDay.Loading=new ProgressDialog(myDialy.getApplicationContext());
+        myDay.bookingUpdate(success,mainView);
+    }
+
+    @Test
+    public void CancelUpdateSuccess(){
+        LinearLayout mainView= myDialy.findViewById(R.id.mainView);
+        String success="success";
+        myDay.bookingDialog=new Dialog(myDialy.getApplicationContext());
+        myDay.Loading=new ProgressDialog(myDialy.getApplicationContext());
+        myDay.cancellationUpdate(success,mainView);
+
+
+    }
+
+    @Test
+    public void CancelUpdateFail(){
+        LinearLayout mainView= myDialy.findViewById(R.id.mainView);
+        String success="fail";
+        myDay.bookingDialog=new Dialog(myDialy.getApplicationContext());
+        myDay.Loading=new ProgressDialog(myDialy.getApplicationContext());
+        myDay.cancellationUpdate(success,mainView);
     }
 }

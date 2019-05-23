@@ -293,7 +293,6 @@ public class Day extends Month {
         //if the user does not have a booking for today they should be able to make a booking
             ContentValues Params=new ContentValues();
             Params.put("DATE",getCheckedDate());
-
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
@@ -344,7 +343,6 @@ public class Day extends Month {
         if(output.equals("success")){
             bookingDialog.dismiss();
             Loading.dismiss();
-
             Snackbar success= Snackbar.make(mainView, "Booking successful", Snackbar.LENGTH_LONG)
                     .setAction("Action", null);
             View snackBarView = success.getView();
