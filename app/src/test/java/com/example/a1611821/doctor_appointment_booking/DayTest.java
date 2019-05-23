@@ -124,11 +124,13 @@ public class DayTest {
     public void updateSlotsSameDateBookedCompleted(){
         TextView t1=new TextView(myDialy.getApplicationContext());
         TextView t2=new TextView(myDialy.getApplicationContext());
+        TextView t3=new TextView(myDialy.getApplicationContext());
         t1.setHint("12:30");
         t2.setHint("12:45");
-
+        t3.setHint("134:454");
         myDay.timeSlots.add(t1);
         myDay.timeSlots.add(t2);
+        myDay.timeSlots.add(t3);
         myDay.setCheckedDate(myDay.getCurrentDate());
         Booking temp=new Booking("20190522","12:30","10");
         temp.setCurrentUser("10");

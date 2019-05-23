@@ -368,7 +368,10 @@ public class Day extends Month {
 
     public int timeValue(String time){
         String subs[]=time.split(":");
-        String val=""+subs[0]+subs[1];
+        String val="";
+        for(int i=0;i<subs.length;++i){
+         val=""+subs[i];}
+
         return  Integer.parseInt(val);
     }
 
