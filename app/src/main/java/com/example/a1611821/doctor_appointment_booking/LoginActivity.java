@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(),"Check your username and password",Toast.LENGTH_SHORT).show();
-
                     e.printStackTrace();
                 }
 

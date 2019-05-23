@@ -2,6 +2,7 @@ package com.example.a1611821.doctor_appointment_booking;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -17,6 +18,7 @@ public class BookingTest {
     @After
     public void tearDown() throws Exception {
     }
+
 
     @Test
     public void getName() throws NoSuchFieldException, IllegalAccessException {
