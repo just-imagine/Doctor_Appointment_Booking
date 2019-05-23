@@ -36,6 +36,17 @@ public class WelcomeActivity2Test {
     }
     @Test
     public void tryToRegister(){
+        myReg.Email.setText("tmavhona@gmail.com");
+        myReg.Surname.setText("Mavhona");
+        myReg.ConfirmPassword.setText("afterlife");
+        myReg.Contact.setText("0891111111");
+        myReg.Password.setText("afterlife");
+        myReg.Name.setText("Tshifhiwa");
+        myReg.Identity.setText("9812176232098");
+        myReg.findViewById(R.id.female).performClick();
+        myReg.findViewById(R.id.createAccount).performClick();
+
+
     }
     @Test
     public void onKeyUp_callsOnBackPressedWhichFinishesTheActivity() throws Exception {
