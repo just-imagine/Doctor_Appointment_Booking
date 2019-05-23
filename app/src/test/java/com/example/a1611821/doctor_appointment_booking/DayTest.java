@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -84,4 +85,75 @@ public class DayTest {
         myDay.Loading=new ProgressDialog(myDialy.getApplicationContext());
         myDay.cancellationUpdate(success,mainView);
     }
+
+    @Test
+    public void updateSlotsSameDate(){
+        TextView t1=new TextView(myDialy.getApplicationContext());
+        TextView t2=new TextView(myDialy.getApplicationContext());
+        t1.setHint("12:30");
+        t2.setHint("19:45");
+
+        myDay.timeSlots.add(t1);
+        myDay.timeSlots.add(t2);
+        myDay.setCheckedDate(myDay.getCurrentDate());
+        Booking temp=new Booking("20190522","12:30","");
+        myDay.dailyBookings.add(temp);
+
+        myDay.updateSlots();
+
+    }
+
+
+    @Test
+    public void updateSlotsPreviousDate(){
+        TextView t1=new TextView(myDialy.getApplicationContext());
+        TextView t2=new TextView(myDialy.getApplicationContext());
+        t1.setHint("12:30");
+        t2.setHint("12:45");
+
+        myDay.timeSlots.add(t1);
+        myDay.timeSlots.add(t2);
+        myDay.setCheckedDate("20190501");
+        Booking temp=new Booking("20190522","12:30","");
+        myDay.dailyBookings.add(temp);
+
+        myDay.updateSlots();
+
+    }
+    @Test
+    public void updateSlotsSameDateBookedCompleted(){
+        TextView t1=new TextView(myDialy.getApplicationContext());
+        TextView t2=new TextView(myDialy.getApplicationContext());
+        t1.setHint("12:30");
+        t2.setHint("12:45");
+
+        myDay.timeSlots.add(t1);
+        myDay.timeSlots.add(t2);
+        myDay.setCheckedDate(myDay.getCurrentDate());
+        Booking temp=new Booking("20190522","12:30","10");
+        temp.setCurrentUser("10");
+        temp.setState(1);
+        myDay.dailyBookings.add(temp);
+
+        myDay.updateSlots();
+    }
+
+    @Test
+    public void updateSlotsSameDateBookedNotCompleted(){
+        TextView t1=new TextView(myDialy.getApplicationContext());
+        TextView t2=new TextView(myDialy.getApplicationContext());
+        t1.setHint("12:30");
+        t2.setHint("12:45");
+
+        myDay.timeSlots.add(t1);
+        myDay.timeSlots.add(t2);
+        myDay.setCheckedDate(myDay.getCurrentDate());
+        Booking temp=new Booking("20190522","12:30","10");
+        temp.setCurrentUser("10");
+        temp.setState(0);
+        myDay.dailyBookings.add(temp);
+        myDay.updateSlots();
+    }
+
+
 }

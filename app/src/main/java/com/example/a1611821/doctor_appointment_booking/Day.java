@@ -88,11 +88,6 @@ public class Day extends Month {
         return slotCards;
     }
 
-    //set time slots
-    public void setTimeSlots(ArrayList<TextView> timeSlots) {
-        this.timeSlots = timeSlots;
-    }
-
     // used to obtain time slot labelling of slots
     public String toTime(int hour,int minutes){
         if(hour<10){
@@ -166,27 +161,6 @@ public class Day extends Month {
 
     }
 
-    //we want to retain any previous bookings we have and add new ones
-    public ArrayList<Booking> syncBookings(ArrayList<Booking>sync){
-
-        //return an empty arraylist
-        if(sync.size()==0){
-            return new ArrayList<Booking>();
-        }
-
-        //first retain any bookings that are still there in database
-        ArrayList<Booking>temp=new ArrayList<>();
-        temp.addAll(dailyBookings);
-        //any cancelled or deleted bookings removed
-        temp.retainAll(sync);
-        //now add new ones by removing common
-        sync.removeAll(dailyBookings);
-
-        temp.addAll(sync);
-
-        return  temp;
-    }
-
     //cqueries database for daily schedule for the day
     public void DailySchedule(){
         ContentValues Params=new ContentValues();
@@ -221,7 +195,7 @@ public class Day extends Month {
                     e.printStackTrace();
                 }
 
-                    dailyBookings=syncBookings(sync);
+                    dailyBookings=sync;
                     updateSlots();
 
             }
@@ -231,12 +205,10 @@ public class Day extends Month {
     }
 
     public void updateSlots(){
-      
             Date date=new Date();
             String actualtime=""+date;
             String sub=actualtime.substring(11,16);
             int currenttimevalue=timeValue(sub);
-
             for(int j=0;j<timeSlots.size();++j){
                 TextView slot=timeSlots.get(j);
                 String time=slot.getHint().toString();
@@ -284,7 +256,6 @@ public class Day extends Month {
                 }
 
             }
-
 
     }
 
