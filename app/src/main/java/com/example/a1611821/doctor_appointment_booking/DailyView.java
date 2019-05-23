@@ -123,12 +123,9 @@ public class DailyView extends AppCompatActivity
 
         thisDay.setUser(user);
         thisDay.DailySchedule();
-
         Loading=new ProgressDialog(this);
 
-        thisDay.setLoading(Loading);
-
-        //make a scrollview which will update daily bookings
+        thisDay.setLoading(Loading);        //make a scrollview which will update daily bookings
         Update=(ScrollView)findViewById(R.id.Update);
 
         Update.setOnScrollChangeListener(new View.OnScrollChangeListener() {
@@ -150,9 +147,7 @@ public class DailyView extends AppCompatActivity
 
         //set date on on circular icon
         TextView weekday=(TextView)findViewById(R.id.weekDay);
-
-        weekday.setText(thisDay.getWeekDay().substring(0,3)+"\n"+thisDay.getDay());
-
+        weekday.setText(thisDay.getWeekDay().substring(0,3));
 
         //set picture
         setTheme();

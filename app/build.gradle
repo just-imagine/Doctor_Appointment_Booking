@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin:'jacoco'
 android {
+
     compileSdkVersion 28
+    testOptions.unitTests.includeAndroidResources = true
     defaultConfig {
         applicationId "com.example.a1611821.doctor_appointment_booking"
         minSdkVersion 22
@@ -24,6 +26,18 @@ android {
                     testCoverageEnabled true
                 }
     }
+    testOptions {
+
+        unitTests.all {
+
+            jacoco {
+                includeNoLocationClasses = true
+
+            }
+
+        }
+
+    }
 }
 
 dependencies {
@@ -35,14 +49,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'org.mockito:mockito-android:2.27.0'
     androidTestImplementation 'org.mockito:mockito-core:2.7.22'
-    // required if you want to use Mockito for Android tests
     testImplementation  'org.mockito:mockito-android:2.7.22'
-    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    //androidTestImplementation 'androidx.test:runner:1.1.0'
-    //androidTestImplementation 'androidx.test:rules:1.1.0'
-    androidTestImplementation "com.android.support.test:runner:1.0.2"
-    androidTestImplementation "com.android.support.test:rules:1.0.2"
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.0.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -54,21 +61,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.github.prolificinteractive:material-calendarview:1.6.0'
-
+    testImplementation 'org.robolectric:robolectric:4.2.1'
+    testImplementation 'org.robolectric:shadows-support-v4:3.0'
 }
-android.testOptions {
 
-    unitTests.all {
-
-        jacoco {
-
-            includeNoLocationClasses = true
-
-        }
-
-    }
-
+jacoco {
+    version = '0.8.0'
 }
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
     reports {
@@ -77,17 +80,15 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
     }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
-    executionData = fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
+    executionData = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code_coverage/debugAndroidTest/connected/**/*.ec'
     ])
 }
-
 
 
 

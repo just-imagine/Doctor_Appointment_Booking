@@ -31,6 +31,7 @@ public class Day extends Month {
     User user;
     ProgressDialog Loading;
     Dialog bookingDialog;
+    AsyncHTTPPost getSchedule,book,cancel;
 
     public Day(Context context){
         super();
@@ -39,6 +40,7 @@ public class Day extends Month {
         timeSlots=new ArrayList<TextView>();
         this.context=context;
        // Loading=new ProgressDialog(context);
+
     }
 
 
@@ -62,6 +64,7 @@ public class Day extends Month {
         try {
             date1 = new SimpleDateFormat("yyyyMMdd").parse(date);
         } catch (ParseException e) {
+
             e.printStackTrace();
         }
         return  date1;
@@ -182,13 +185,14 @@ public class Day extends Month {
         temp.addAll(sync);
 
         return  temp;
-    }*/
-
+    }
+*/
     //cqueries database for daily schedule for the day
     public void DailySchedule(){
         ContentValues Params=new ContentValues();
         Params.put("DATE",getCheckedDate());
-        AsyncHTTPPost getSchedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CSearches.php",Params) {
+
+         getSchedule=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/CSearches.php",Params) {
             @Override
             protected void onPostExecute(String output) {
                 ArrayList<Booking>sync=new ArrayList<>();
@@ -215,8 +219,10 @@ public class Day extends Month {
                 } catch (JSONException e) {
                     e.printStackTrace();
 
+
                 }
                     dailyBookings=sync;
+
                     updateSlots();
 
             }
@@ -226,7 +232,7 @@ public class Day extends Month {
     }
 
     public void updateSlots(){
-
+      
             Date date=new Date();
             String actualtime=""+date;
             String sub=actualtime.substring(11,16);
@@ -279,6 +285,7 @@ public class Day extends Month {
 
             }
 
+
     }
 
     //for making a new booking
@@ -289,9 +296,10 @@ public class Day extends Month {
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
-            AsyncHTTPPost book=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
+             book=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsulationBooking.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
+
                     bookingUpdate(output,mainView);
                     DailySchedule();
                 }
@@ -310,7 +318,7 @@ public class Day extends Month {
             Params.put("TIME",b.getDbTime());
             Params.put("ID_NUMBER",b.getIdentity());
 
-            AsyncHTTPPost cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
+             cancel=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/ConsultationCancel.php",Params) {
                 @Override
                 protected void onPostExecute(String output) {
                     cancellationUpdate(output,mainView);
@@ -324,71 +332,6 @@ public class Day extends Month {
                     "Loading. Please wait...", true);
 
     }
-
-    //updaets  ui accordingly depending on async result
-    public void bookingUpdate(String output,LinearLayout mainView){
-        if(output.equals("success")){
-            bookingDialog.dismiss();
-            Loading.dismiss();
-
-            Snackbar success= Snackbar.make(mainView, "Booking successful", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = success.getView();
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            success.show();
-        }
-
-        else{
-            bookingDialog.dismiss();
-            Loading.dismiss();
-            Snackbar error=Snackbar.make(mainView, "Booking unsuccessful", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = error.getView();
-            snackBarView.setBackgroundColor(Color.RED);
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            error.show();
-        }
-
-    }
-
-    public void cancellationUpdate(String output,LinearLayout mainView){
-        if(output.equals("success")){
-            bookingDialog.dismiss();
-            Loading.dismiss();
-
-            Snackbar success= Snackbar.make(mainView, "Appointment cancelled", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = success.getView();
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            success.show();
-        }
-
-        else{
-            bookingDialog.dismiss();
-            Loading.dismiss();
-            Snackbar error=Snackbar.make(mainView, "Failed to cancel appointment", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null);
-            View snackBarView = error.getView();
-            snackBarView.setBackgroundColor(Color.RED);
-            TextView message = (TextView)snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            message.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            message.setTextSize(17);
-            error.show();
-        }
-    }
-
-    public int timeValue(String time){
-        String subs[]=time.split(":");
-        String val=""+subs[0]+subs[1];
-        return  Integer.parseInt(val);
-    }
-
 
 
 }
