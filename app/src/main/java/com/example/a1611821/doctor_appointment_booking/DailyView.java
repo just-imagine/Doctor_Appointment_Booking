@@ -193,7 +193,6 @@ public class DailyView extends AppCompatActivity
             mainView.addView(c);
 
         }
-
     }
 
     //initialy just retrieve slots and put them in the arraylist
