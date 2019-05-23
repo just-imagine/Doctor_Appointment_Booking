@@ -30,13 +30,13 @@ public class  WelcomeActivity2 extends AppCompatActivity{
     RadioButton Male,Female;
     RadioGroup Sex;
     //local sqlite database to be used for testing
-    DatabaseHelper accountDB;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        accountDB=new DatabaseHelper(this, "app");
+
         setContentView(R.layout.activity_welcome2);
       
         //Edittexts to collect information from
@@ -55,7 +55,7 @@ public class  WelcomeActivity2 extends AppCompatActivity{
         // CreateAccount will create a new User object and initialize all its fields when its clicked
         CreateAccount=(TextView) findViewById(R.id.createAccount);
 
-        selectFromAccountDb();
+
     }
 
     public void doRegistration(View v){
@@ -83,7 +83,7 @@ public class  WelcomeActivity2 extends AppCompatActivity{
         //now check if the user entered details in expected format
         if(user.validUser()){
          //first insert the user into local database;
-            insertToAccountDB(user);
+
          //launch async here that will add the user to the remote  database
             ContentValues Params=new ContentValues();
             Params.put("ID_NUMBER", user.getIdentity());
@@ -148,38 +148,5 @@ public class  WelcomeActivity2 extends AppCompatActivity{
 
         }
 
-        //remove someone from the local accounts database to be used by testing team
-        public void deleteFromAccountDb(User user){
-            String vals[]={user.getIdentity()};
-            accountDB.doUpdate("delete from ACCOUNTS where ID_NUMBER=?;", vals);
-        }
 
-        public void insertToAccountDB(User user){
-            String[] vals = {user.getIdentity(),user.getEmail(),user.getName(),
-            user.getSurname(),user.getContact(),user.getGender(),user.getPassword()};
-            accountDB.doUpdate("Insert into ACCOUNTS(ID_NUMBER,EMAIL_ADDRESS,NAME,SURNAME,CONTACT_NO,GENDER,PASSWORD) values (?,?,?,?,?,?,?);", vals);
-        }
-
-        //gets stuff from local database and put it into a json array to be used by testing team
-        public  JSONArray selectFromAccountDb() {
-            Cursor c = accountDB.doQuery("SELECT* from ACCOUNTS");
-            JSONArray data=new JSONArray();
-            while (c.moveToNext()) {
-                JSONObject obj=new JSONObject();
-                data.put(obj);
-                try {
-                    obj.put("ID_NUMBER",c.getString(c.getColumnIndex("ID_NUMBER")));
-                    obj.put("EMAIL_ADDRESS",c.getString(c.getColumnIndex("EMAIL_ADDRESS")));
-                    obj.put("NAME",c.getString(c.getColumnIndex("NAME")));
-                    obj.put("SURNAME",c.getString(c.getColumnIndex("SURNAME")));
-                    obj.put("CONTACT_NO",c.getString(c.getColumnIndex("CONTACT_NO")));
-                    obj.put("GENDER",c.getString(c.getColumnIndex("GENDER")));
-                    obj.put("PASSWORD",c.getString(c.getColumnIndex("PASSWORD")));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return  data;
-        }
     }
