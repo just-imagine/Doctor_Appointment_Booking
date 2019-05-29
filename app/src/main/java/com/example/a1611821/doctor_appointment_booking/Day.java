@@ -131,11 +131,10 @@ public class Day extends Month {
             String time=toTime(starthour,duration);
             LinearLayout card=new LinearLayout(context);
             card=(LinearLayout) card.inflate(context,R.layout.slot_textview,null);
-            card.setId(2000+i);
             TextView timeIndicator=(TextView)card.findViewById(R.id.g);
             TextView slotIndicator=(TextView)card.findViewById(R.id.slot);
             //the slots are given ids
-           // slotIndicator.setId(100+i);
+            slotIndicator.setId(100+i);
 
 
             //the time hint will be used to make a reference when clicked
