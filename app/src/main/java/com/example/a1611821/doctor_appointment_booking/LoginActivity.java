@@ -29,6 +29,17 @@ public class LoginActivity extends AppCompatActivity {
         Username=(EditText)findViewById(R.id.username);
         Password=(EditText)findViewById(R.id.password);
         Login=(Button)findViewById(R.id.login);
+
+        ContentValues Params=new ContentValues();
+        Params.put("","");
+        AsyncHTTPPost setConditions=new AsyncHTTPPost("http://lamp.ms.wits.ac.za/~s1611821/dtesting.php",Params) {
+            @Override
+            protected void onPostExecute(String output) {
+
+            }
+        };
+
+        setConditions.execute();
     }
 
     public void launchRegistration(View view){
