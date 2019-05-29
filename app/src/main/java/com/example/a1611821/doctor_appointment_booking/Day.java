@@ -208,7 +208,9 @@ public class Day extends Month {
             Date date=new Date();
             String actualtime=""+date;
             String sub=actualtime.substring(11,16);
+
             int currenttimevalue=timeValue(sub);
+
             for(int j=0;j<timeSlots.size();++j){
                 TextView slot=timeSlots.get(j);
                 String time=slot.getHint().toString();
@@ -370,7 +372,7 @@ public class Day extends Month {
         String subs[]=time.split(":");
         String val="";
         for(int i=0;i<subs.length;++i){
-         val=""+subs[i];}
+         val=val+subs[i];}
 
         return  Integer.parseInt(val);
     }
