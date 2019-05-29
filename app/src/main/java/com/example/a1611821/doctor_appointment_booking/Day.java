@@ -134,7 +134,7 @@ public class Day extends Month {
             TextView timeIndicator=(TextView)card.findViewById(R.id.g);
             TextView slotIndicator=(TextView)card.findViewById(R.id.slot);
             //the slots are given ids
-            slotIndicator.setId(100+i);
+           // slotIndicator.setId(100+i);
 
 
             //the time hint will be used to make a reference when clicked
