@@ -37,7 +37,7 @@ public class CancelTest {
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
-    //@Test
+    @Test
     public void cancelTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username),

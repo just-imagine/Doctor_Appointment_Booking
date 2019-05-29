@@ -36,7 +36,7 @@ public class MovingTest {
     @Rule
     public ActivityTestRule<HomeScreen> mActivityTestRule = new ActivityTestRule<>(HomeScreen.class);
 
-    @Test
+   // @Test
     public void movingTest() {
 
 

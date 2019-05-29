@@ -37,7 +37,7 @@ public class SuperLongTest {
     @Rule
     public ActivityTestRule<HomeScreen> mActivityTestRule = new ActivityTestRule<>(HomeScreen.class);
 
-    @Test
+   // @Test
     public void superLongTest() {
 
 

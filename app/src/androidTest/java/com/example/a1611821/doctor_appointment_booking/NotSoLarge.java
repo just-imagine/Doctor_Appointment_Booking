@@ -38,7 +38,7 @@ public class NotSoLarge {
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Test
+   // @Test
     public void notSoLarge() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username),
